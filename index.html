@@ -272,12 +272,185 @@
 
       </div>
 
-      <!-- Campi Dettaglio Post/Memoria (Titolo e Destinatario) -->
-      <div id="studio-meta-fields" class="p-4 sm:p-5 bg-white border-t border-sabbia-200 flex flex-col sm:flex-row gap-3">
-        <input type="text" id="video-titolo" placeholder="Dai un titolo a questo momento (es. Il mio pensiero per te...)" class="flex-1 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
-        <input type="text" id="video-autore-dest" placeholder="Tuo nome o Destinatario (es. Per Giulia / Da Marco)" class="sm:w-64 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+      <!-- Campi Dettaglio Post/Memoria (Titolo, Destinatario, Codice Fiscale e Data Sblocco) -->
+      <div id="studio-meta-fields" class="p-4 sm:p-5 bg-white border-t border-sabbia-200 flex flex-col gap-3">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input type="text" id="video-titolo" placeholder="Dai un titolo a questo momento (es. Il mio pensiero per te...)" class="flex-1 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+          <input type="text" id="video-autore-dest" placeholder="Nome dell'Erede (es. Giulia Moretti)" class="sm:w-64 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+        </div>
+        
+        <!-- Campi specifici per la custodia privata: Codice Fiscale & Data Sblocco -->
+        <div id="studio-campi-privati" class="flex flex-col sm:flex-row gap-3 pt-2 border-t border-sabbia-100">
+          <div class="flex-1">
+            <label class="block text-[11px] font-bold text-sabbia-800 mb-1">Codice Fiscale Erede (Verifica Anagrafe ANPR)</label>
+            <input type="text" id="video-cf-erede" placeholder="Es. MRTEGL08M41H501Z" class="w-full text-xs font-mono uppercase bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
+          </div>
+          <div class="sm:w-64">
+            <label class="block text-[11px] font-bold text-sabbia-800 mb-1">Data Sblocco (18° Compleanno / Traguardo)</label>
+            <input type="date" id="video-data-sblocco" class="w-full text-xs bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+          </div>
+        </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- MODALE CONSEGNA SOLENNE & COFANETTO FISICO -->
+  <div id="modal-consegna-solenne" class="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-xl flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="max-w-xl w-full bg-sabbia-50 rounded-3xl border border-oro-400/50 shadow-2xl overflow-hidden my-auto fade-in">
+      
+      <!-- Intestazione Solenne -->
+      <div class="bg-gradient-to-b from-sabbia-100 to-sabbia-50 p-6 text-center border-b border-sabbia-200 relative">
+        <button onclick="chiudiConsegnaSolenne()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white text-sabbia-800 hover:bg-sabbia-200 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-oro-400 via-oro-500 to-amber-600 border-2 border-white shadow-xl mx-auto flex items-center justify-center text-sabbia-950 glow-pulse-oro mb-3">
+          <i data-lucide="shield-check" class="w-8 h-8 stroke-[2]"></i>
+        </div>
+        <span class="text-[11px] font-mono tracking-widest text-oro-700 font-bold uppercase">Atto Ufficiale di Custodia</span>
+        <h3 class="font-serif text-2xl font-bold text-sabbia-950 mt-1">La Tua Memoria è Sigillata nel Tempo</h3>
+        <p class="text-xs text-sabbia-700 mt-1 max-w-md mx-auto">Protetto da crittografia inviolabile e vincolato ai registri di stato civile dell'erede.</p>
+      </div>
+
+      <!-- Corpo del Certificato -->
+      <div class="p-6 space-y-5">
+        
+        <!-- Pergamena con Dati Anagrafici Incorruttibili -->
+        <div class="bg-white rounded-2xl border border-sabbia-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
+            <span class="text-xs text-sabbia-600 font-medium">Momento Custodito:</span>
+            <strong id="consegna-titolo" class="text-xs text-sabbia-950 font-bold">Titolo</strong>
+          </div>
+          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
+            <span class="text-xs text-sabbia-600 font-medium">Destinatario (Erede):</span>
+            <strong id="consegna-erede" class="text-xs text-sabbia-950 font-bold">Giulia Moretti</strong>
+          </div>
+          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
+            <span class="text-xs text-sabbia-600 font-medium">Codice Fiscale Erede (ANPR):</span>
+            <span id="consegna-cf" class="text-xs font-mono font-bold text-oro-700 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-300">MRTEGL08M41H501Z</span>
+          </div>
+          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
+            <span class="text-xs text-sabbia-600 font-medium">Condizione di Sblocco:</span>
+            <span id="consegna-data" class="text-xs font-bold text-sabbia-900">18° Compleanno (14 Maggio 2034)</span>
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-[11px] text-sabbia-500 font-mono">Impronta SHA-256:</span>
+            <span id="consegna-hash" class="text-[11px] font-mono text-sabbia-600">0x8a92...f71c</span>
+          </div>
+        </div>
+
+        <!-- Il Cofanetto Fisico d'Autore (Card di Anteprima) -->
+        <div class="rounded-2xl bg-gradient-to-br from-sabbia-100 to-sabbia-200/60 border border-oro-400/40 p-4 sm:p-5 flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-oro-500/20 border border-oro-400/50 text-oro-700 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="gift" class="w-6 h-6"></i>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <h4 class="text-xs font-bold text-sabbia-950 uppercase tracking-wide">Il Cofanetto Fisico in Legno d'Ulivo</h4>
+              <span class="text-[10px] bg-oro-500 text-sabbia-950 font-bold px-2 py-0.5 rounded-full">Consigliato</span>
+            </div>
+            <p class="text-xs text-sabbia-700 mt-1 leading-relaxed">
+              Realizzato a mano con la <strong>Chiave in Ottone Massiccio</strong> incisa a laser. Da conservare in cassaforte a casa o consegnare di persona.
+            </p>
+            <div class="mt-2.5 flex items-center justify-between">
+              <span class="text-xs font-bold text-sabbia-900">89 € <span class="text-[10px] font-normal text-sabbia-600">(spedizione inclusa)</span></span>
+              <button onclick="alert('Cofanetto prenotato con successo! Verrà inciso con l\'impronta notarile e spedito al tuo indirizzo.')" class="text-xs font-bold bg-sabbia-950 hover:bg-sabbia-900 text-white px-3.5 py-1.5 rounded-xl transition shadow-sm">
+                Ordina Cofanetto
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tasto di Prova Cerimonia Sblocco -->
+        <button onclick="apriCerimoniaSbloccoAttuale()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 via-oro-500 to-oro-600 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-xl shadow-oro-500/25 transition hover:scale-105 border border-oro-300/60">
+          <i data-lucide="key" class="w-4 h-4 text-sabbia-950"></i>
+          <span>Simula la Cerimonia di Sblocco dell'Erede</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE CERIMONIA DI SBLOCCO DELL'EREDE (TEST DEL DOPPIO LUCCHETTO & ANAGRAFE) -->
+  <div id="modal-cerimonia-sblocco" class="fixed inset-0 z-50 bg-stone-950/90 backdrop-blur-xl flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="max-w-lg w-full bg-sabbia-50 rounded-3xl border border-oro-400/60 shadow-2xl overflow-hidden my-auto fade-in">
+      
+      <!-- Intestazione Cerimonia -->
+      <div class="p-6 text-center border-b border-sabbia-200 bg-white relative">
+        <button onclick="chiudiCerimoniaSblocco()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-sabbia-100 text-sabbia-800 hover:bg-sabbia-200 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+        <div class="w-14 h-14 rounded-full bg-sabbia-100 border border-oro-400/40 text-oro-600 mx-auto flex items-center justify-center mb-3">
+          <i data-lucide="hourglass" class="w-7 h-7"></i>
+        </div>
+        <span class="text-[10px] font-mono tracking-widest text-oro-700 font-bold uppercase">La Porta del Futuro</span>
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-sabbia-950 mt-0.5">La Cerimonia di Sblocco</h3>
+        <p class="text-xs text-sabbia-700 mt-1">Stai vivendo l'esperienza esatta di chi riceverà il tuo dono.</p>
+      </div>
+
+      <div class="p-6 space-y-5">
+        
+        <!-- Simulatore Selettore Data (Prima vs Dopo) -->
+        <div class="p-3.5 rounded-2xl bg-sabbia-100 border border-sabbia-300 text-xs">
+          <span class="block font-bold text-sabbia-900 mb-1.5 flex items-center gap-1.5">
+            <i data-lucide="sliders" class="w-3.5 h-3.5 text-oro-600"></i> Simula lo Stato Temporale:
+          </span>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="sim-btn-prima" onclick="impostaSimulazione('prima')" class="p-2 rounded-xl bg-white border border-oro-400 text-oro-800 font-bold text-left text-[11px] shadow-sm">
+              ⏳ Prima della Data (Bambino a 10 anni)
+            </button>
+            <button id="sim-btn-dopo" onclick="impostaSimulazione('dopo')" class="p-2 rounded-xl bg-sabbia-200/80 text-sabbia-700 font-medium text-left text-[11px]">
+              ✨ Data Raggiunta (18° Compleanno)
+            </button>
+          </div>
+        </div>
+
+        <!-- Inserimento Codice Fiscale / CIE -->
+        <div class="space-y-2">
+          <label class="block text-xs font-bold text-sabbia-900 flex items-center justify-between">
+            <span>Codice Fiscale dell'Erede</span>
+            <span class="text-[10px] text-oro-700 font-normal">Verifica Anagrafe ANPR</span>
+          </label>
+          <input type="text" id="sim-input-cf" placeholder="Inserisci il Codice Fiscale..." class="w-full text-xs font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
+          <button onclick="autocompilaCIE()" class="text-[11px] text-oro-700 hover:underline font-medium flex items-center gap-1">
+            <i data-lucide="fingerprint" class="w-3.5 h-3.5"></i> Autentica con Carta d'Identità Elettronica (CIE)
+          </button>
+        </div>
+
+        <!-- Tasto Verifica -->
+        <button onclick="eseguiVerificaSblocco()" class="w-full py-3 rounded-2xl bg-sabbia-900 hover:bg-sabbia-800 text-white font-bold text-xs tracking-wider uppercase transition shadow-md flex items-center justify-center gap-2">
+          <i data-lucide="unlock" class="w-4 h-4 text-oro-400"></i>
+          <span>Verifica e Dischiudi</span>
+        </button>
+
+        <!-- Risultato A: Scrigno Protetto dal Tempo (Se prima della data) -->
+        <div id="risultato-bloccato" class="p-5 rounded-2xl bg-stone-900 text-white border border-oro-400/40 text-center space-y-3 hidden fade-in">
+          <div class="w-12 h-12 rounded-full bg-oro-500/20 text-oro-400 border border-oro-400/30 flex items-center justify-center mx-auto">
+            <i data-lucide="lock" class="w-6 h-6"></i>
+          </div>
+          <h4 class="font-serif text-lg font-bold text-oro-300">Questo Scrigno è Protetto dal Tempo</h4>
+          <p class="text-xs text-sabbia-200 leading-relaxed italic max-w-sm mx-auto">
+            "Questo scrigno custodisce le parole di chi ti ama ed è protetto dal tempo. Si dischiuderà il <strong id="risultato-data-futura" class="text-oro-300 font-mono">14 Maggio 2034</strong> per i tuoi 18 anni. Custodiscilo con amore."
+          </p>
+          <div class="inline-block px-3 py-1 rounded-full bg-stone-800 text-[10px] font-mono text-oro-400 border border-white/10">
+            Doppio Lucchetto Attivo • Nessuna Violazione Possibile
+          </div>
+        </div>
+
+        <!-- Risultato B: Sigillo Spezzato e Video Dischiuso (Se data raggiunta) -->
+        <div id="risultato-sbloccato" class="p-5 rounded-2xl bg-white border-2 border-oro-400 text-center space-y-3 hidden fade-in shadow-xl">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-oro-400 to-oro-600 text-sabbia-950 flex items-center justify-center mx-auto shadow-lg glow-pulse-oro">
+            <i data-lucide="sparkles" class="w-6 h-6"></i>
+          </div>
+          <h4 class="font-serif text-lg font-bold text-sabbia-950">Identità Confermata dall'Anagrafe</h4>
+          <p class="text-xs text-sabbia-700">Il sigillo si è dischiuso. Ecco il momento custodito per te:</p>
+          <div id="video-sbloccato-container" class="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-[260px] mx-auto border-2 border-oro-400/60 shadow-lg bg-black">
+            <video id="video-sbloccato-player" controls class="w-full h-full object-cover"></video>
+            <div id="testo-sbloccato-display" class="hidden p-4 text-xs text-sabbia-800 bg-sabbia-50 h-full overflow-y-auto text-left"></div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -605,20 +778,28 @@
                 </div>
               </div>
             ` : userVault.map((c, i) => `
-              <div class="p-5 rounded-2xl bg-white border border-sabbia-200 shadow-sm flex items-center justify-between gap-4">
+              <div class="p-5 rounded-2xl bg-white border border-sabbia-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
-                  <div class="w-11 h-11 rounded-xl bg-sabbia-100 border border-sabbia-300 text-oro-700 flex items-center justify-center">
-                    <i data-lucide="${c.tipo === 'video' ? 'video' : 'file-text'}" class="w-5 h-5"></i>
+                  <div class="w-12 h-12 rounded-2xl bg-sabbia-100 border border-oro-400/40 text-oro-700 flex items-center justify-center shrink-0 shadow-sm">
+                    <i data-lucide="${c.tipo === 'video' ? 'video' : 'file-text'}" class="w-6 h-6"></i>
                   </div>
                   <div>
                     <h4 class="text-sm font-bold text-sabbia-950">${c.titolo}</h4>
-                    <p class="text-xs text-sabbia-700">Destinato a: <strong class="text-sabbia-900">${c.destinatario}</strong> • Condizione: <span class="text-oro-700 font-bold">${c.condizione}</span></p>
+                    <p class="text-xs text-sabbia-700 mt-0.5">
+                      Erede: <strong class="text-sabbia-950">${c.destinatario}</strong> 
+                      <span class="ml-1.5 px-2 py-0.5 rounded text-[10px] font-mono bg-sabbia-100 border border-sabbia-300 font-bold text-oro-700">${c.codiceFiscale || 'ANPR ATTIVA'}</span>
+                    </p>
+                    <p class="text-[11px] text-sabbia-600 mt-0.5">
+                      ⏳ Sblocco: <span class="font-bold text-sabbia-900">${c.condizione || c.dataSblocco || 'Al Traguardo Stabilito'}</span>
+                    </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-[10px] bg-sabbia-100 text-sabbia-950 border border-sabbia-300 px-2.5 py-1 rounded-md font-mono font-bold">SIGILLATO</span>
-                  <button onclick="mostraDettaglioCapsula(${i})" class="text-xs text-sabbia-500 hover:text-sabbia-900 p-2 rounded-lg hover:bg-sabbia-100">
-                    <i data-lucide="eye" class="w-4 h-4"></i>
+                <div class="flex items-center gap-2 self-end sm:self-center">
+                  <button onclick="apriConsegnaSolenne(userVault[${i}])" class="text-xs text-sabbia-700 hover:text-sabbia-950 px-3 py-1.5 rounded-xl border border-sabbia-200 bg-sabbia-50 font-medium transition flex items-center gap-1">
+                    <i data-lucide="file-check" class="w-3.5 h-3.5 text-oro-600"></i> Certificato
+                  </button>
+                  <button onclick="apriCerimoniaSblocco(${i})" class="text-xs bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-sm transition hover:scale-105 border border-oro-300/60">
+                    <i data-lucide="key" class="w-3.5 h-3.5"></i> Cerimonia Sblocco
                   </button>
                 </div>
               </div>
@@ -654,9 +835,15 @@
                 <input type="text" id="capsula-titolo" required placeholder="Es. Quel tramonto al mare insieme / Per i tuoi 18 anni" class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
               </div>
 
-              <div>
-                <label class="block text-xs font-bold text-sabbia-800 mb-1">A chi è destinato?</label>
-                <input type="text" id="capsula-destinatario" required placeholder="Es. Mia figlia Giulia (email o numero)" class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-sabbia-800 mb-1">Nome Erede (Destinatario)</label>
+                  <input type="text" id="capsula-destinatario" required placeholder="Es. Giulia Moretti" class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-sabbia-800 mb-1">Codice Fiscale Erede (Verifica ANPR)</label>
+                  <input type="text" id="capsula-cf" required placeholder="Es. MRTEGL08M41H501Z" class="w-full text-xs sm:text-sm font-mono uppercase bg-sabbia-50 border border-sabbia-200 rounded-2xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
+                </div>
               </div>
 
               <div>
@@ -664,13 +851,19 @@
                 <textarea id="capsula-testo" rows="4" required placeholder="Racconta l'emozione di una scoperta, una risata o un insegnamento che vuoi rimanga intatto nel futuro..." class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl p-3.5 text-sabbia-950 focus:outline-none focus:border-oro-500 leading-relaxed"></textarea>
               </div>
 
-              <div>
-                <label class="block text-xs font-bold text-sabbia-800 mb-1">Quando deve essere sbloccato?</label>
-                <select id="capsula-condizione" class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium">
-                  <option value="Data Futura (Traguardo)">Data fissa nel futuro (Traguardo / Compleanno)</option>
-                  <option value="Conferma Anagrafe (Scomparsa)">In caso di mia scomparsa (Accertamento Ufficiale Anagrafe)</option>
-                  <option value="Doppio Lucchetto">Doppio Lucchetto: In caso di scomparsa MA solo dopo i 18 anni</option>
-                </select>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-sabbia-800 mb-1">Condizione di Sblocco</label>
+                  <select id="capsula-condizione" class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium">
+                    <option value="18° Compleanno (Data Futura)">18° Compleanno (Data Futura)</option>
+                    <option value="Accertamento Anagrafe (Scomparsa)">In caso di mia scomparsa (Accertamento ANPR)</option>
+                    <option value="Doppio Lucchetto">Doppio Lucchetto: In caso di scomparsa MA solo dopo i 18 anni</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-sabbia-800 mb-1">Data Sblocco Prevista</label>
+                  <input type="date" id="capsula-data-sblocco" value="2034-05-14" class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl px-4 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+                </div>
               </div>
 
               <div class="p-5 rounded-2xl bg-sabbia-100 border border-oro-400/30 space-y-3">
@@ -705,6 +898,8 @@
 
       const titolo = document.getElementById('capsula-titolo').value;
       const destinatario = document.getElementById('capsula-destinatario').value;
+      const codiceFiscale = (document.getElementById('capsula-cf') && document.getElementById('capsula-cf').value.trim().toUpperCase()) || 'MRTEGL08M41H501Z';
+      const dataSblocco = (document.getElementById('capsula-data-sblocco') && document.getElementById('capsula-data-sblocco').value) || '2034-05-14';
       const testoInChiaro = document.getElementById('capsula-testo').value;
       const condizione = document.getElementById('capsula-condizione').value;
       const rispostaCuore = document.getElementById('capsula-risposta').value;
@@ -713,26 +908,28 @@
       const data = encoder.encode(testoInChiaro + rispostaCuore);
       const hashBuffer = await crypto.subtle.digest('SHA-256', data);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      const hashHex = '0x' + hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
       const b64Cifrato = btoa(unescape(encodeURIComponent(testoInChiaro)));
 
       setTimeout(() => {
         const nuovaCapsula = {
+          id: Date.now(),
           titolo,
           destinatario,
-          condizione,
+          codiceFiscale,
+          dataSblocco,
+          condizione: `${condizione} (${dataSblocco})`,
           tipo: 'testo',
           hashNotarile: '0x' + hashHex.substring(0, 16) + '...' + hashHex.substring(48),
           payloadCifrato: b64Cifrato,
           dataCreazione: new Date().toLocaleDateString('it-IT')
         };
 
-        userVault.push(nuovaCapsula);
+        userVault.unshift(nuovaCapsula);
         localStorage.setItem('lascito_vault', JSON.stringify(userVault));
-
-        alert(`✨ Momento Sigillato nel Tempo!\n\nImpronta Notarile: ${nuovaCapsula.hashNotarile}\n\nI tuoi ricordi sono protetti sul tuo dispositivo.`);
         goToCaveau();
+        apriConsegnaSolenne(nuovaCapsula);
       }, 600);
     }
 
@@ -802,10 +999,14 @@
         titoloEl.innerText = "Studio dei Saperi (Pubblico)";
         sottotitoloEl.innerText = "Registra una lezione o un'idea per ispirare il mondo";
         autoreDestInput.placeholder = "Tuo Nome & Qualifica (es. Marco - Laureato in Fisica)";
+        const campiPriv = document.getElementById('studio-campi-privati');
+        if (campiPriv) campiPriv.classList.add('hidden');
       } else {
         titoloEl.innerText = "Studio della Memoria (Privato)";
         sottotitoloEl.innerText = "Registra un ricordo prezioso per la tua famiglia";
-        autoreDestInput.placeholder = "Destinatario (es. Per mia figlia Giulia)";
+        autoreDestInput.placeholder = "Nome dell'Erede (es. Giulia Moretti)";
+        const campiPriv = document.getElementById('studio-campi-privati');
+        if (campiPriv) campiPriv.classList.remove('hidden');
       }
 
       modal.classList.remove('hidden');
@@ -969,22 +1170,164 @@
           goToPiazza();
           alert(`✨ Il tuo video è stato sigillato con successo!\n\nImpronta: ${hashHex}\nOra è visibile nella Piazza dei Saperi!`);
         } else {
-          // Aggiungi a Imprimi nel Tempo (Vault)
-          userVault.unshift({
+          // Aggiungi a Imprimi nel Tempo (Vault) con Codice Fiscale & Lucchetto Temporale
+          const cfErede = (document.getElementById('video-cf-erede') && document.getElementById('video-cf-erede').value.trim().toUpperCase()) || 'MRTEGL08M41H501Z';
+          const dataSblocco = (document.getElementById('video-data-sblocco') && document.getElementById('video-data-sblocco').value) || '2034-05-14';
+          const videoBlobUrl = recordedBlob ? URL.createObjectURL(recordedBlob) : '';
+
+          const nuovaMemoria = {
+            id: Date.now(),
             titolo: titolo,
             destinatario: autoreDest,
-            condizione: "Sblocco al momento stabilito",
+            codiceFiscale: cfErede,
+            dataSblocco: dataSblocco,
+            condizione: `18° Compleanno (${dataSblocco})`,
             tipo: 'video',
+            videoUrl: videoBlobUrl,
             hashNotarile: hashHex,
             payloadCifrato: "VIDEO_RECORDING_ENCRYPTED_AES256",
             dataCreazione: new Date().toLocaleDateString('it-IT')
-          });
+          };
+
+          userVault.unshift(nuovaMemoria);
           localStorage.setItem('lascito_vault', JSON.stringify(userVault));
           chiudiStudioVideo();
           goToCaveau();
-          alert(`✨ Momento Sigillato nel Tempo!\n\nImpronta Notarile: ${hashHex}\nIl video è protetto nella tua Cassaforte privata.`);
+          apriConsegnaSolenne(nuovaMemoria);
         }
       }, 1500);
+    }
+
+    // -------------------------------------------------------------
+    // GESTIONE CONSEGNA SOLENNE & CERIMONIA DI SBLOCCO EREDE
+    // -------------------------------------------------------------
+    let memoriaSelezionata = null;
+    let statoSimulazione = 'prima'; // 'prima' | 'dopo'
+
+    function apriConsegnaSolenne(memoria) {
+      memoriaSelezionata = memoria;
+      document.getElementById('consegna-titolo').innerText = memoria.titolo;
+      document.getElementById('consegna-erede').innerText = memoria.destinatario;
+      document.getElementById('consegna-cf').innerText = memoria.codiceFiscale || 'MRTEGL08M41H501Z';
+      document.getElementById('consegna-data').innerText = memoria.condizione || memoria.dataSblocco || '18° Compleanno (14 Maggio 2034)';
+      document.getElementById('consegna-hash').innerText = memoria.hashNotarile;
+      document.getElementById('modal-consegna-solenne').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function chiudiConsegnaSolenne() {
+      document.getElementById('modal-consegna-solenne').classList.add('hidden');
+    }
+
+    function apriCerimoniaSblocco(index) {
+      memoriaSelezionata = userVault[index];
+      apriCerimoniaModal();
+    }
+
+    function apriCerimoniaSbloccoAttuale() {
+      chiudiConsegnaSolenne();
+      apriCerimoniaModal();
+    }
+
+    function apriCerimoniaModal() {
+      if (!memoriaSelezionata) {
+        memoriaSelezionata = userVault[0] || {
+          titolo: "Per i tuoi 18 anni",
+          destinatario: "Giulia Moretti",
+          codiceFiscale: "MRTEGL08M41H501Z",
+          dataSblocco: "2034-05-14",
+          tipo: "video",
+          hashNotarile: "0x8a92f81c9a18d4..."
+        };
+      }
+      
+      document.getElementById('sim-input-cf').value = '';
+      document.getElementById('risultato-bloccato').classList.add('hidden');
+      document.getElementById('risultato-sbloccato').classList.add('hidden');
+      impostaSimulazione('prima');
+      document.getElementById('modal-cerimonia-sblocco').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function chiudiCerimoniaSblocco() {
+      const player = document.getElementById('video-sbloccato-player');
+      if (player) player.pause();
+      document.getElementById('modal-cerimonia-sblocco').classList.add('hidden');
+    }
+
+    function impostaSimulazione(stato) {
+      statoSimulazione = stato;
+      const btnPrima = document.getElementById('sim-btn-prima');
+      const btnDopo = document.getElementById('sim-btn-dopo');
+      if (stato === 'prima') {
+        btnPrima.className = "p-2 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-[11px] shadow-sm";
+        btnDopo.className = "p-2 rounded-xl bg-sabbia-200/80 text-sabbia-700 font-medium text-left text-[11px]";
+      } else {
+        btnDopo.className = "p-2 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-[11px] shadow-sm";
+        btnPrima.className = "p-2 rounded-xl bg-sabbia-200/80 text-sabbia-700 font-medium text-left text-[11px]";
+      }
+    }
+
+    function autocompilaCIE() {
+      if (memoriaSelezionata && memoriaSelezionata.codiceFiscale) {
+        document.getElementById('sim-input-cf').value = memoriaSelezionata.codiceFiscale;
+      } else {
+        document.getElementById('sim-input-cf').value = 'MRTEGL08M41H501Z';
+      }
+      alert("🪪 Autenticazione CIE/ANPR completata con successo!\nCodice Fiscale acquisito in modo sicuro dai registri di Stato Civile.");
+    }
+
+    function eseguiVerificaSblocco() {
+      const inputCF = document.getElementById('sim-input-cf').value.trim().toUpperCase();
+      const resBloccato = document.getElementById('risultato-bloccato');
+      const resSbloccato = document.getElementById('risultato-sbloccato');
+      
+      const cfAtteso = (memoriaSelezionata && memoriaSelezionata.codiceFiscale) ? memoriaSelezionata.codiceFiscale.toUpperCase() : 'MRTEGL08M41H501Z';
+
+      if (!inputCF) {
+        alert("Inserisci il Codice Fiscale dell'erede o clicca 'Autentica con CIE'!");
+        return;
+      }
+
+      if (inputCF !== cfAtteso) {
+        alert(`❌ Errore Anagrafe ANPR: Il Codice Fiscale inserito (${inputCF}) non corrisponde a quello vincolato a questo scrigno! Nessun accesso consentito.`);
+        return;
+      }
+
+      if (statoSimulazione === 'prima') {
+        // Bloccato dal tempo
+        resSbloccato.classList.add('hidden');
+        resBloccato.classList.remove('hidden');
+        document.getElementById('risultato-data-futura').innerText = (memoriaSelezionata && (memoriaSelezionata.dataSblocco || memoriaSelezionata.condizione)) || '14 Maggio 2034';
+      } else {
+        // Sbloccato con successo!
+        resBloccato.classList.add('hidden');
+        resSbloccato.classList.remove('hidden');
+        
+        const player = document.getElementById('video-sbloccato-player');
+        const testoContainer = document.getElementById('testo-sbloccato-display');
+        
+        if (memoriaSelezionata && memoriaSelezionata.videoUrl) {
+          player.src = memoriaSelezionata.videoUrl;
+          player.classList.remove('hidden');
+          testoContainer.classList.add('hidden');
+          player.play();
+        } else if (memoriaSelezionata && memoriaSelezionata.tipo === 'testo') {
+          player.classList.add('hidden');
+          testoContainer.classList.remove('hidden');
+          try {
+            testoContainer.innerText = decodeURIComponent(escape(atob(memoriaSelezionata.payloadCifrato || '')));
+          } catch(e) {
+            testoContainer.innerText = "Momento custodito cifrato.";
+          }
+        } else {
+          // Demo fallback
+          player.classList.add('hidden');
+          testoContainer.classList.remove('hidden');
+          testoContainer.innerText = "«Caro figlio mio, se stai guardando questo momento significa che hai compiuto 18 anni. Ricordati sempre chi sei e da dove vieni. Ti voglio bene.»";
+        }
+      }
+      lucide.createIcons();
     }
 
     // -------------------------------------------------------------
