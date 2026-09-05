@@ -666,9 +666,9 @@
         <div class="w-14 h-14 rounded-full bg-sabbia-100 border border-oro-400/40 text-oro-600 mx-auto flex items-center justify-center mb-2.5">
           <i data-lucide="key" class="w-7 h-7 text-oro-600"></i>
         </div>
-        <span class="text-[10px] font-mono tracking-widest text-oro-700 font-bold uppercase">Cerimonia di Apertura</span>
-        <h3 id="cerimonia-modal-titolo" class="font-serif text-xl sm:text-2xl font-bold text-sabbia-950 mt-0.5">Apri lo Scrigno della Memoria</h3>
-        <p id="cerimonia-modal-sub" class="text-xs text-sabbia-700 mt-1 max-w-sm mx-auto">Questo ricordo è protetto nel tempo. Fai una prova per vedere cosa succederà al momento dello sblocco.</p>
+        <span class="text-[10px] font-mono tracking-widest text-oro-700 font-bold uppercase">Custodia della Memoria</span>
+        <h3 id="cerimonia-modal-titolo" class="font-serif text-xl sm:text-2xl font-bold text-sabbia-950 mt-0.5">Accedi al Ricordo Custodito</h3>
+        <p id="cerimonia-modal-sub" class="text-xs text-sabbia-700 mt-1 max-w-sm mx-auto">Questo ricordo è protetto nel tempo. Fai una prova per verificare cosa accadrà al momento stabilito.</p>
       </div>
 
       <div class="p-5 sm:p-6 space-y-4">
@@ -686,21 +686,21 @@
         <!-- Selettore della Prova (Oggi vs Giorno Scelto) -->
         <div class="p-4 rounded-2xl bg-white border border-sabbia-300 text-xs shadow-sm">
           <span class="block font-bold text-sabbia-900 mb-2.5 flex items-center gap-1.5">
-            <i data-lucide="play-circle" class="w-4 h-4 text-oro-600"></i> Fai una prova prima di consegnarlo:
+            <i data-lucide="play-circle" class="w-4 h-4 text-oro-600"></i> Fai una prova prima della consegna:
           </span>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <button id="sim-btn-prima" onclick="impostaSimulazione('prima')" class="p-3 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-xs shadow-sm flex items-center gap-2">
               <span class="text-base">🔒</span>
               <div>
-                <span class="block">Se provi ad aprirlo OGGI</span>
-                <span class="text-[10px] text-sabbia-600 font-normal">Lo scrigno è ancora chiuso</span>
+                <span class="block">Se provi ad accedere OGGI</span>
+                <span class="text-[10px] text-sabbia-600 font-normal">Il ricordo è ancora protetto</span>
               </div>
             </button>
             <button id="sim-btn-dopo" onclick="impostaSimulazione('dopo')" class="p-3 rounded-xl bg-sabbia-100 text-sabbia-700 font-medium text-left text-xs flex items-center gap-2">
               <span class="text-base">✨</span>
               <div>
-                <span class="block">Nel GIORNO SCELTO</span>
-                <span class="text-[10px] text-sabbia-600 font-normal">Lo scrigno si apre e mostra il video</span>
+                <span class="block">Nel GIORNO STABILITO</span>
+                <span class="text-[10px] text-sabbia-600 font-normal">Il ricordo si dischiude</span>
               </div>
             </button>
           </div>
@@ -709,7 +709,7 @@
         <!-- Didascalia Chiara e Umana -->
         <div id="box-spiegazione-dinamica" class="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs text-sabbia-800 flex items-start gap-2.5">
           <i data-lucide="info" class="w-4 h-4 text-oro-600 shrink-0 mt-0.5"></i>
-          <span id="testo-spiegazione-dinamica">Lo scrigno è ancora sigillato. Nessuno può sbirciare o aprire il tuo ricordo prima della data prestabilita.</span>
+          <span id="testo-spiegazione-dinamica">Il ricordo è ancora protetto nel tempo. Nessuno può accedervi prima del giorno stabilito.</span>
         </div>
 
         <!-- Inserimento Codice Fiscale / CIE (Visibile solo se Riservato a Persona) -->
@@ -718,7 +718,7 @@
             <span id="sim-label-cf">Conferma Identità dell'Erede</span>
             <span class="text-[10px] text-oro-700 font-mono">CIE / ANPR</span>
           </label>
-          <p class="text-[11px] text-sabbia-600 leading-tight">Per aprire questo archivio riservato, l'erede deve inserire il proprio Codice Fiscale per confermare che è proprio lui.</p>
+          <p class="text-[11px] text-sabbia-600 leading-tight">Per aprire questo archivio riservato, l'erede deve inserire il proprio Codice Fiscale per confermare la propria identità.</p>
           <input type="text" id="sim-input-cf" placeholder="Inserisci il Codice Fiscale..." class="w-full text-xs font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
           <button onclick="autocompilaCIE()" class="text-[11px] text-oro-700 hover:underline font-medium flex items-center gap-1">
             <i data-lucide="fingerprint" class="w-3.5 h-3.5"></i> Autentica con Carta d'Identità Elettronica (CIE)
@@ -728,20 +728,20 @@
         <!-- Tasto Apertura -->
         <button onclick="eseguiVerificaSblocco()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase transition shadow-lg shadow-oro-500/20 flex items-center justify-center gap-2 border border-oro-400/50 hover:scale-102">
           <i data-lucide="unlock" class="w-4 h-4 text-sabbia-950"></i>
-          <span>Prova l'Apertura dello Scrigno</span>
+          <span>Accedi al Ricordo</span>
         </button>
 
-        <!-- Risultato A: Scrigno Protetto dal Tempo (Se prima della data) -->
+        <!-- Risultato A: Ricordo Protetto dal Tempo (Se prima della data) -->
         <div id="risultato-bloccato" class="p-5 rounded-2xl bg-stone-900 text-white border border-oro-400/40 text-center space-y-3 hidden fade-in">
           <div class="w-12 h-12 rounded-full bg-oro-500/20 text-oro-400 border border-oro-400/30 flex items-center justify-center mx-auto">
             <i data-lucide="lock" class="w-6 h-6"></i>
           </div>
-          <h4 class="font-serif text-lg font-bold text-oro-300">Lo Scrigno è Sigillato nel Tempo</h4>
+          <h4 class="font-serif text-lg font-bold text-oro-300">Il Ricordo è Protetto nel Tempo</h4>
           <p class="text-xs text-sabbia-200 leading-relaxed max-w-sm mx-auto">
-            Questo ricordo non può essere aperto oggi. Si aprirà automaticamente il <strong id="risultato-data-futura" class="text-oro-300 font-mono">14 Maggio 2034</strong>.
+            Questo ricordo non può essere aperto oggi. Sarà accessibile il <strong id="risultato-data-futura" class="text-oro-300 font-mono">14 Maggio 2034</strong>.
           </p>
           <div class="inline-block px-3 py-1 rounded-full bg-stone-800 text-[10px] font-mono text-oro-400 border border-white/10">
-            Crittografia Inviolabile • Nessuno può aprirlo prima della data
+            Crittografia Inviolabile • Nessuno può accedervi prima del giorno stabilito
           </div>
         </div>
 
@@ -1276,21 +1276,63 @@
     function renderCaveau() {
       return `
         <div class="fade-in max-w-4xl mx-auto w-full py-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sabbia-200 pb-6 mb-6">
-            <div>
-              <div class="flex items-center gap-2 text-oro-700 text-xs font-bold uppercase tracking-wider">
-                <i data-lucide="hourglass" class="w-4 h-4 text-oro-600"></i> La Tua Cassaforte di Famiglia
+          <div class="border-b border-sabbia-200 pb-6 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2 text-oro-700 text-xs font-bold uppercase tracking-wider">
+                  <i data-lucide="hourglass" class="w-4 h-4 text-oro-600"></i> La Tua Cassaforte di Famiglia
+                </div>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-sabbia-950 mt-1">Imprimi nel Tempo i tuoi Ricordi</h2>
+                <p class="text-sabbia-700 text-xs sm:text-sm mt-1">Conserva i tuoi momenti felici, al sicuro per sempre per le persone che ami.</p>
               </div>
-              <h2 class="font-serif text-2xl sm:text-3xl font-bold text-sabbia-950 mt-1">Imprimi nel Tempo i tuoi Ricordi</h2>
-              <p class="text-sabbia-700 text-xs sm:text-sm mt-1">Conserva i tuoi momenti felici, al sicuro per sempre per le persone che ami.</p>
             </div>
-            <div class="flex items-center gap-2">
-              <button onclick="apriStudioVideo('privato')" class="inline-flex items-center gap-2 bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 text-xs font-bold px-4 py-2.5 rounded-2xl shadow-md transition hover:scale-105 border border-oro-400/40">
-                <i data-lucide="video" class="w-4 h-4"></i> Registra Video
-              </button>
-              <button onclick="goToNuovaCapsula()" class="inline-flex items-center gap-2 bg-white hover:bg-sabbia-100 text-sabbia-800 text-xs font-bold px-4 py-2.5 rounded-2xl border border-sabbia-200 transition">
-                <i data-lucide="edit-3" class="w-4 h-4 text-oro-600"></i> Lettera Scritta
-              </button>
+
+            <!-- SELETTORE A 5 SCELTE IMMEDIATE -->
+            <div class="mt-5 p-4 sm:p-5 rounded-3xl bg-white border border-sabbia-300 shadow-sm">
+              <span class="block text-xs font-bold text-sabbia-900 mb-3 flex items-center gap-1.5 uppercase tracking-wider">
+                <i data-lucide="sparkles" class="w-4 h-4 text-oro-600"></i> Cosa vuoi imprimere oggi?
+              </span>
+              <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                <button onclick="apriStudioVideo('privato', 'video')" class="p-3 rounded-2xl bg-sabbia-50 hover:bg-oro-50/70 border border-sabbia-200 hover:border-oro-400 text-center transition hover:scale-102 group">
+                  <div class="w-10 h-10 rounded-xl bg-oro-500/15 group-hover:bg-oro-500 text-oro-800 group-hover:text-sabbia-950 mx-auto flex items-center justify-center mb-1.5 transition">
+                    <i data-lucide="video" class="w-5 h-5"></i>
+                  </div>
+                  <span class="block text-xs font-bold text-sabbia-950">Video</span>
+                  <span class="text-[10px] text-sabbia-600 block">Dal vivo o file</span>
+                </button>
+
+                <button onclick="apriStudioVideo('privato', 'audio')" class="p-3 rounded-2xl bg-sabbia-50 hover:bg-oro-50/70 border border-sabbia-200 hover:border-oro-400 text-center transition hover:scale-102 group">
+                  <div class="w-10 h-10 rounded-xl bg-oro-500/15 group-hover:bg-oro-500 text-oro-800 group-hover:text-sabbia-950 mx-auto flex items-center justify-center mb-1.5 transition">
+                    <i data-lucide="mic" class="w-5 h-5"></i>
+                  </div>
+                  <span class="block text-xs font-bold text-sabbia-950">Voce / Audio</span>
+                  <span class="text-[10px] text-sabbia-600 block">La tua voce</span>
+                </button>
+
+                <button onclick="apriStudioVideo('privato', 'testo')" class="p-3 rounded-2xl bg-sabbia-50 hover:bg-oro-50/70 border border-sabbia-200 hover:border-oro-400 text-center transition hover:scale-102 group">
+                  <div class="w-10 h-10 rounded-xl bg-oro-500/15 group-hover:bg-oro-500 text-oro-800 group-hover:text-sabbia-950 mx-auto flex items-center justify-center mb-1.5 transition">
+                    <i data-lucide="edit-3" class="w-5 h-5"></i>
+                  </div>
+                  <span class="block text-xs font-bold text-sabbia-950">Lettera</span>
+                  <span class="text-[10px] text-sabbia-600 block">Pensiero scritto</span>
+                </button>
+
+                <button onclick="apriStudioVideo('privato', 'foto')" class="p-3 rounded-2xl bg-sabbia-50 hover:bg-oro-50/70 border border-sabbia-200 hover:border-oro-400 text-center transition hover:scale-102 group">
+                  <div class="w-10 h-10 rounded-xl bg-oro-500/15 group-hover:bg-oro-500 text-oro-800 group-hover:text-sabbia-950 mx-auto flex items-center justify-center mb-1.5 transition">
+                    <i data-lucide="image" class="w-5 h-5"></i>
+                  </div>
+                  <span class="block text-xs font-bold text-sabbia-950">Foto</span>
+                  <span class="text-[10px] text-sabbia-600 block">Momento in foto</span>
+                </button>
+
+                <button onclick="apriStudioVideo('privato', 'doc')" class="p-3 rounded-2xl bg-sabbia-50 hover:bg-oro-50/70 border border-sabbia-200 hover:border-oro-400 text-center transition hover:scale-102 group col-span-2 sm:col-span-1">
+                  <div class="w-10 h-10 rounded-xl bg-oro-500/15 group-hover:bg-oro-500 text-oro-800 group-hover:text-sabbia-950 mx-auto flex items-center justify-center mb-1.5 transition">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                  </div>
+                  <span class="block text-xs font-bold text-sabbia-950">Documento</span>
+                  <span class="text-[10px] text-sabbia-600 block">Fascicolo o PDF</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -1304,7 +1346,9 @@
                 <p class="text-[11px] text-sabbia-700">Protetto dal tuo ricordo del cuore e dal tuo numero telefonico.</p>
               </div>
             </div>
-            <span class="text-xs font-mono text-sabbia-950 bg-white px-3 py-1 rounded-xl border border-sabbia-200 font-bold">AES-256 ZERO-KNOWLEDGE</span>
+            <span class="text-xs font-medium text-sabbia-950 bg-white px-3 py-1 rounded-xl border border-sabbia-200 flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-oro-600"></i> Massima Riservatezza
+            </span>
           </div>
 
           <div class="space-y-4">
@@ -1316,14 +1360,23 @@
                 </div>
                 <h4 class="text-sm font-bold text-sabbia-950">Nessun momento ancora sigillato</h4>
                 <p class="text-xs text-sabbia-700 max-w-sm mt-1.5 leading-relaxed">
-                  Hai a disposizione la tua <strong>1ª Memoria Gratuita per sempre</strong>. Salva un video, una lettera o il racconto di una passeggiata felice per i tuoi figli.
+                  Hai a disposizione la tua <strong>1ª Memoria Gratuita per sempre</strong>. Salva un video, un audio, una lettera, una foto o un documento per i tuoi cari.
                 </p>
-                <div class="flex gap-3 mt-5">
-                  <button onclick="apriStudioVideo('privato')" class="text-xs font-bold bg-oro-500 text-sabbia-950 px-4 py-2 rounded-xl shadow-sm hover:scale-105 transition">
-                    📹 Registra il tuo primo Video &rarr;
+                <div class="flex flex-wrap justify-center gap-2.5 mt-5">
+                  <button onclick="apriStudioVideo('privato', 'video')" class="text-xs font-bold bg-oro-500 text-sabbia-950 px-4 py-2 rounded-xl shadow-sm hover:scale-105 transition flex items-center gap-1.5">
+                    <i data-lucide="video" class="w-3.5 h-3.5"></i> Video
                   </button>
-                  <button onclick="goToNuovaCapsula()" class="text-xs font-bold text-sabbia-700 hover:text-sabbia-950 px-4 py-2 underline">
-                    o Scrivi una lettera
+                  <button onclick="apriStudioVideo('privato', 'audio')" class="text-xs font-bold bg-white text-sabbia-800 border border-sabbia-300 px-4 py-2 rounded-xl hover:bg-sabbia-100 transition flex items-center gap-1.5">
+                    <i data-lucide="mic" class="w-3.5 h-3.5"></i> Audio
+                  </button>
+                  <button onclick="apriStudioVideo('privato', 'testo')" class="text-xs font-bold bg-white text-sabbia-800 border border-sabbia-300 px-4 py-2 rounded-xl hover:bg-sabbia-100 transition flex items-center gap-1.5">
+                    <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Lettera
+                  </button>
+                  <button onclick="apriStudioVideo('privato', 'foto')" class="text-xs font-bold bg-white text-sabbia-800 border border-sabbia-300 px-4 py-2 rounded-xl hover:bg-sabbia-100 transition flex items-center gap-1.5">
+                    <i data-lucide="image" class="w-3.5 h-3.5"></i> Foto
+                  </button>
+                  <button onclick="apriStudioVideo('privato', 'doc')" class="text-xs font-bold bg-white text-sabbia-800 border border-sabbia-300 px-4 py-2 rounded-xl hover:bg-sabbia-100 transition flex items-center gap-1.5">
+                    <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Documento
                   </button>
                 </div>
               </div>
@@ -1354,7 +1407,7 @@
                     <i data-lucide="file-check" class="w-3.5 h-3.5 text-oro-600"></i> Certificato
                   </button>
                   <button onclick="apriCerimoniaSblocco(${i})" class="text-xs bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-sm transition hover:scale-105 border border-oro-300/60">
-                    <i data-lucide="key" class="w-3.5 h-3.5"></i> Cerimonia Sblocco
+                    <i data-lucide="key" class="w-3.5 h-3.5"></i> Accedi al Ricordo
                   </button>
                 </div>
               </div>
@@ -2007,7 +2060,7 @@
       lucide.createIcons();
     }
 
-    async function apriStudioVideo(destinazione = 'privato') {
+    async function apriStudioVideo(destinazione = 'privato', formatoIniziale = 'video') {
       studioDestinazione = destinazione;
       const modal = document.getElementById('studio-video-modal');
       const titoloEl = document.getElementById('studio-titolo');
@@ -2019,18 +2072,20 @@
       }
 
       modal.classList.remove('hidden');
-      resetStudioUI();
+      resetStudioUI(formatoIniziale);
 
-      // Webcam reale se formato video
-      const liveVideo = document.getElementById('live-video');
-      try {
-        mediaStream = await navigator.mediaDevices.getUserMedia({
-          video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" },
-          audio: true
-        });
-        liveVideo.srcObject = mediaStream;
-      } catch (err) {
-        console.warn("Fotocamera non disponibile o permesso negato:", err);
+      // Webcam reale solo se formato video
+      if (formatoIniziale === 'video') {
+        const liveVideo = document.getElementById('live-video');
+        try {
+          mediaStream = await navigator.mediaDevices.getUserMedia({
+            video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" },
+            audio: true
+          });
+          liveVideo.srcObject = mediaStream;
+        } catch (err) {
+          console.warn("Fotocamera non disponibile o permesso negato:", err);
+        }
       }
 
       lucide.createIcons();
@@ -2050,14 +2105,14 @@
       document.getElementById('studio-video-modal').classList.add('hidden');
     }
 
-    function resetStudioUI() {
+    function resetStudioUI(formatoIniziale = 'video') {
       studioPasso = 1;
       document.getElementById('studio-passo-1').classList.remove('hidden');
       document.getElementById('studio-passo-2').classList.add('hidden');
       document.getElementById('studio-selettore-formati').classList.remove('hidden');
-      document.getElementById('studio-sottotitolo').innerText = "Passo 1 di 2: Registra o carica il contenuto da custodire";
+      document.getElementById('studio-sottotitolo').innerText = "Passo 1 di 2: Prepara il contenuto da custodire";
 
-      selezionaFormatoStudio('video');
+      selezionaFormatoStudio(formatoIniziale);
       selezionaRegolaCustodia('tempo');
 
       document.getElementById('live-video').classList.remove('hidden');
@@ -2354,16 +2409,16 @@
         if (btnPrima) btnPrima.className = "p-3 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-xs shadow-sm flex items-center gap-2";
         if (btnDopo) btnDopo.className = "p-3 rounded-xl bg-sabbia-100 text-sabbia-700 font-medium text-left text-xs flex items-center gap-2";
         if (txtSpiegazione) {
-          txtSpiegazione.innerText = "Lo scrigno è ancora sigillato. Nessuno può sbirciare o aprire il tuo ricordo prima della data prestabilita.";
+          txtSpiegazione.innerText = "Il ricordo è ancora protetto nel tempo. Nessuno può accedervi prima della data prestabilita.";
         }
       } else {
         if (btnDopo) btnDopo.className = "p-3 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-xs shadow-sm flex items-center gap-2";
         if (btnPrima) btnPrima.className = "p-3 rounded-xl bg-sabbia-100 text-sabbia-700 font-medium text-left text-xs flex items-center gap-2";
         if (txtSpiegazione) {
           if (isSoloTempo) {
-            txtSpiegazione.innerText = "Il tempo è scaduto: lo scrigno si apre da solo con 1 click, senza dover mostrare documenti o codici fiscali.";
+            txtSpiegazione.innerText = "La data stabilita è arrivata: puoi accedere direttamente al ricordo con 1 click, senza mostrare documenti o codici fiscali.";
           } else {
-            txtSpiegazione.innerText = `Questo ricordo è riservato solo a ${dest}. Nel giorno stabilito, basterà confermare il Codice Fiscale per aprire lo scrigno.`;
+            txtSpiegazione.innerText = `Questo ricordo è riservato solo a ${dest}. Nel giorno stabilito, basterà confermare il Codice Fiscale per accedere al contenuto.`;
           }
         }
       }
@@ -2390,12 +2445,12 @@
         const cfAtteso = (memoriaSelezionata && memoriaSelezionata.codiceFiscale) ? memoriaSelezionata.codiceFiscale.toUpperCase() : 'MRTEGL08M41H501Z';
 
         if (!inputCF) {
-          alert("Per aprire questo scrigno riservato, inserisci il Codice Fiscale o clicca 'Autentica con CIE'!");
+          alert("Per accedere a questo ricordo riservato, inserisci il Codice Fiscale o clicca 'Autentica con CIE'!");
           return;
         }
 
         if (inputCF !== cfAtteso) {
-          alert(`❌ Questo scrigno è riservato a una persona specifica. Il Codice Fiscale inserito non corrisponde a quello scelto da chi ha creato il ricordo.`);
+          alert(`❌ Questo ricordo è riservato a una persona specifica. Il Codice Fiscale inserito non corrisponde a quello stabilito da chi lo ha creato.`);
           return;
         }
       }
