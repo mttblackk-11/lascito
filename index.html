@@ -449,13 +449,205 @@
             <div id="testo-sbloccato-display" class="hidden p-4 text-xs text-sabbia-800 bg-sabbia-50 h-full overflow-y-auto text-left"></div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
+  <!-- MODALE PRENOTAZIONE LEZIONE PRIVATA (SPLIT ETICO 90/10) -->
+  <div id="modal-prenota-lezione" class="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-xl flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="max-w-lg w-full bg-sabbia-50 rounded-3xl border border-oro-400/60 shadow-2xl overflow-hidden my-auto fade-in">
+      
+      <!-- Intestazione Mentore -->
+      <div class="p-5 sm:p-6 bg-white border-b border-sabbia-200 relative flex items-start justify-between">
+        <div class="flex items-center gap-3.5">
+          <img id="prenota-mentor-avatar" src="" alt="Mentor" class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl object-cover border-2 border-oro-400 shadow-sm" />
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h3 id="prenota-mentor-nome" class="font-serif text-lg sm:text-xl font-bold text-sabbia-950">Nome Mentore</h3>
+              <i data-lucide="check-circle" class="w-4 h-4 text-oro-600"></i>
+            </div>
+            <p id="prenota-mentor-ruolo" class="text-xs text-sabbia-700 font-medium">Laurea & Specializzazione</p>
+            <span class="inline-block text-[10px] bg-sabbia-100 text-oro-800 font-mono font-bold px-2 py-0.5 rounded-full border border-sabbia-200 mt-1">
+              Docente / Mentore Verificato
+            </span>
+          </div>
+        </div>
+        <button onclick="chiudiPrenotazioneLezione()" class="w-8 h-8 rounded-full bg-sabbia-100 text-sabbia-800 hover:bg-sabbia-200 flex items-center justify-center transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Corpo Prenotazione Form -->
+      <div id="prenota-form-view" class="p-5 sm:p-6 space-y-4">
+        
+        <!-- Scelta Sessione & Tariffa -->
+        <div>
+          <label class="block text-xs font-bold text-sabbia-900 mb-1.5">Scegli la Durata dell'Incontro:</label>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button type="button" id="btn-tariffa-1" onclick="selezionaTariffa(15, 1)" class="p-3 rounded-2xl border-2 border-oro-500 bg-white text-left shadow-sm transition">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-sabbia-950">1 Ora Singola</span>
+                <span class="text-xs font-mono font-bold text-oro-700">15 €</span>
+              </div>
+              <p class="text-[11px] text-sabbia-600 mt-0.5">Lezione mirata o chiarimento tesi</p>
+            </button>
+            <button type="button" id="btn-tariffa-3" onclick="selezionaTariffa(40, 3)" class="p-3 rounded-2xl border border-sabbia-200 bg-sabbia-100/70 text-left transition hover:bg-white">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-sabbia-950">Pacchetto 3 Ore</span>
+                <span class="text-xs font-mono font-bold text-oro-700">40 €</span>
+              </div>
+              <p class="text-[11px] text-sabbia-600 mt-0.5">Percorso completo di maestria</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Box Trasparenza Etica 90/10 (Il nostro pilastro morale) -->
+        <div class="rounded-2xl bg-gradient-to-br from-amber-50 to-sabbia-100 border border-oro-400/40 p-3.5 space-y-2 text-xs">
+          <div class="flex items-center justify-between text-sabbia-900 font-bold">
+            <span class="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-oro-800">
+              <i data-lucide="scale" class="w-3.5 h-3.5 text-oro-600"></i> Ripartizione Etica Lascito (90/10)
+            </span>
+            <span id="label-totale-split" class="font-mono text-sabbia-950">Totale: 15,00 €</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <div class="bg-white/80 rounded-xl p-2 border border-oro-300/40">
+              <span class="text-sabbia-600 block">Al Mentore (90%):</span>
+              <strong id="split-docente" class="text-emerald-700 font-mono text-xs">13,50 €</strong>
+              <span class="text-[10px] text-sabbia-500 block">Compenso diretto al laureato</span>
+            </div>
+            <div class="bg-white/80 rounded-xl p-2 border border-oro-300/40">
+              <span class="text-sabbia-600 block">A Lascito (10%):</span>
+              <strong id="split-piattaforma" class="text-sabbia-900 font-mono text-xs">1,50 €</strong>
+              <span class="text-[10px] text-sabbia-500 block">Server, crittografia & custodia</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selezione Data & Fascia Oraria -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-bold text-sabbia-800 mb-1">Giorno dell'Incontro:</label>
+            <input type="date" id="prenota-data" class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-sabbia-800 mb-1">Fascia Oraria:</label>
+            <select id="prenota-orario" class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium">
+              <option value="17:00 - 18:00">17:00 - 18:00</option>
+              <option value="18:30 - 19:30">18:30 - 19:30</option>
+              <option value="20:30 - 21:30">20:30 - 21:30</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Argomento / Domanda per il Mentore -->
+        <div>
+          <label class="block text-[11px] font-bold text-sabbia-800 mb-1">Di cosa vorresti parlare con il mentore?</label>
+          <input type="text" id="prenota-argomento" placeholder="Es. Chiarimenti sul metodo di studio / Consigli sul restauro legno..." class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3.5 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+        </div>
+
+        <!-- Tasto Conferma -->
+        <button type="button" onclick="confermaPrenotazioneLezione()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 via-oro-500 to-oro-600 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-xl shadow-oro-500/25 transition hover:scale-[1.02] border border-oro-300/60">
+          <i data-lucide="check-circle-2" class="w-4 h-4 text-sabbia-950"></i>
+          <span id="btn-conferma-testo">Conferma Prenotazione (15 €)</span>
+        </button>
+
+      </div>
+
+      <!-- Schermata Conferma Avvenuta (Ricevuta & Stanza Video) -->
+      <div id="prenota-success-view" class="p-6 text-center space-y-4 hidden fade-in">
+        <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto shadow-sm">
+          <i data-lucide="check-check" class="w-7 h-7"></i>
+        </div>
+        <h4 class="font-serif text-xl font-bold text-sabbia-950">Sessione di Sapere Confermata!</h4>
+        <p class="text-xs text-sabbia-700 max-w-sm mx-auto">
+          Il mentore ha ricevuto la tua richiesta. È stata generata la stanza protetta e la ricevuta etica del 90/10.
+        </p>
+
+        <div class="bg-white rounded-2xl border border-sabbia-200 p-4 text-left space-y-2 text-xs">
+          <div class="flex justify-between border-b border-sabbia-100 pb-1.5">
+            <span class="text-sabbia-500">Codice Prenotazione:</span>
+            <strong id="success-codice" class="font-mono text-oro-700">#SAPERE-2026-891</strong>
+          </div>
+          <div class="flex justify-between border-b border-sabbia-100 pb-1.5">
+            <span class="text-sabbia-500">Mentore:</span>
+            <strong id="success-mentore" class="text-sabbia-900">Marco Moretti</strong>
+          </div>
+          <div class="flex justify-between border-b border-sabbia-100 pb-1.5">
+            <span class="text-sabbia-500">Data e Orario:</span>
+            <span id="success-data-ora" class="font-bold text-sabbia-900">Domani ore 17:00</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-sabbia-500">Ripartizione:</span>
+            <span id="success-split" class="text-emerald-700 font-bold">13,50 € al mentore • 1,50 € Lascito</span>
+          </div>
+        </div>
+
+        <button onclick="chiudiPrenotazioneLezione()" class="w-full py-3 rounded-2xl bg-sabbia-950 hover:bg-sabbia-900 text-white font-bold text-xs tracking-wide transition shadow-sm">
+          Chiudi e Torna ai Saperi
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODALE OFFRI UN CAFFE DI SOSTEGNO (MICRO-DONAZIONE ETICA) -->
+  <div id="modal-lascia-offerta" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-xl flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="max-w-md w-full bg-sabbia-50 rounded-3xl border border-oro-400/50 shadow-2xl overflow-hidden my-auto fade-in">
+      
+      <div class="p-5 bg-white border-b border-sabbia-200 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-sabbia-100 text-oro-700 flex items-center justify-center font-bold">
+            <i data-lucide="coffee" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-sabbia-950">Dona un Caffè di Sostegno</h4>
+            <p id="offerta-destinatario" class="text-[11px] text-sabbia-600">A Marco Moretti</p>
+          </div>
+        </div>
+        <button onclick="chiudiModalOfferta()" class="w-8 h-8 rounded-full bg-sabbia-100 text-sabbia-800 hover:bg-sabbia-200 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-sabbia-800 mb-2">Scegli quanto donare:</label>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <button type="button" id="btn-tip-2" onclick="selezionaTip(2)" class="p-2.5 rounded-2xl border-2 border-oro-500 bg-white font-bold text-sabbia-950 shadow-sm">
+              <span class="block text-base font-serif font-bold text-oro-700">2 €</span>
+              <span class="text-[10px] text-sabbia-500">Un Caffè</span>
+            </button>
+            <button type="button" id="btn-tip-5" onclick="selezionaTip(5)" class="p-2.5 rounded-2xl border border-sabbia-200 bg-sabbia-100 font-medium text-sabbia-800 hover:bg-white">
+              <span class="block text-base font-serif font-bold text-oro-700">5 €</span>
+              <span class="text-[10px] text-sabbia-500">Un Libro</span>
+            </button>
+            <button type="button" id="btn-tip-10" onclick="selezionaTip(10)" class="p-2.5 rounded-2xl border border-sabbia-200 bg-sabbia-100 font-medium text-sabbia-800 hover:bg-white">
+              <span class="block text-base font-serif font-bold text-oro-700">10 €</span>
+              <span class="text-[10px] text-sabbia-500">Borsa Studio</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-sabbia-100 border border-sabbia-200 text-[11px] flex justify-between items-center text-sabbia-800">
+          <span>Ripartizione Etica:</span>
+          <strong id="tip-split-text" class="text-emerald-700 font-mono">1,80 € all'autore (90%) • 0,20 € a Lascito</strong>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-sabbia-800 mb-1">Lascia un messaggio di stima (facoltativo):</label>
+          <input type="text" id="tip-messaggio" placeholder="Es. Grazie per la chiarezza e la passione!" class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+        </div>
+
+        <button type="button" onclick="confermaTip()" class="w-full py-3 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase transition shadow-md flex items-center justify-center gap-1.5">
+          <i data-lucide="heart" class="w-3.5 h-3.5 fill-current"></i>
+          <span id="btn-tip-label">Dona 2 € con Gratitudine</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <script>
-    let currentView = 'bivio';
     let userVault = JSON.parse(localStorage.getItem('lascito_vault') || '[]');
     let elevenLabsAudio = new Audio('welcome.mp3?v=' + Date.now());
 
@@ -933,15 +1125,140 @@
       }, 600);
     }
 
-    function lasciaOfferta(id) {
-      const tipSpan = document.getElementById(`tips-${id}`);
-      let current = parseInt(tipSpan.innerText);
-      tipSpan.innerText = current + 1;
-      alert("☕ Grazie! Hai donato 2€ di ringraziamento. L'autore riceverà il 90% direttamente, Lascito trattiene il 10% etico.");
-    }
+    // -------------------------------------------------------------
+    // GESTIONE PRENOTAZIONE LEZIONE ETICA (90/10) & MICRO-DONAZIONI
+    // -------------------------------------------------------------
+    let mentoreSelezionato = null;
+    let tariffaSelezionata = 15;
+    let oreSelezionate = 1;
+    let postOffertaSelezionato = null;
+    let tipSelezionato = 2;
 
     function prenotaLezione(autore) {
-      alert(`🤝 Vuoi concordare una lezione privata con ${autore}?\n\nSi aprirà la stanza protetta per definire orario e tariffa etica.`);
+      const post = postsSegno.find(p => p.author === autore) || postsSegno[0];
+      mentoreSelezionato = post;
+
+      document.getElementById('prenota-mentor-avatar').src = post.avatar;
+      document.getElementById('prenota-mentor-nome').innerText = post.author;
+      document.getElementById('prenota-mentor-ruolo').innerText = post.role;
+
+      // Imposta data di domani come default
+      const domani = new Date();
+      domani.setDate(domani.getDate() + 1);
+      const dataStr = domani.toISOString().split('T')[0];
+      document.getElementById('prenota-data').value = dataStr;
+      document.getElementById('prenota-argomento').value = '';
+
+      selezionaTariffa(15, 1);
+
+      document.getElementById('prenota-form-view').classList.remove('hidden');
+      document.getElementById('prenota-success-view').classList.add('hidden');
+      document.getElementById('modal-prenota-lezione').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function chiudiPrenotazioneLezione() {
+      document.getElementById('modal-prenota-lezione').classList.add('hidden');
+    }
+
+    function selezionaTariffa(prezzo, ore) {
+      tariffaSelezionata = prezzo;
+      oreSelezionate = ore;
+
+      const btn1 = document.getElementById('btn-tariffa-1');
+      const btn3 = document.getElementById('btn-tariffa-3');
+
+      if (ore === 1) {
+        btn1.className = "p-3 rounded-2xl border-2 border-oro-500 bg-white text-left shadow-sm transition";
+        btn3.className = "p-3 rounded-2xl border border-sabbia-200 bg-sabbia-100/70 text-left transition hover:bg-white";
+      } else {
+        btn3.className = "p-3 rounded-2xl border-2 border-oro-500 bg-white text-left shadow-sm transition";
+        btn1.className = "p-3 rounded-2xl border border-sabbia-200 bg-sabbia-100/70 text-left transition hover:bg-white";
+      }
+
+      // Calcolo matematico rigoroso del 90/10
+      const quotaDocente = (prezzo * 0.90).toFixed(2).replace('.', ',');
+      const quotaLascito = (prezzo * 0.10).toFixed(2).replace('.', ',');
+
+      document.getElementById('label-totale-split').innerText = `Totale: ${prezzo},00 €`;
+      document.getElementById('split-docente').innerText = `${quotaDocente} €`;
+      document.getElementById('split-piattaforma').innerText = `${quotaLascito} €`;
+      document.getElementById('btn-conferma-testo').innerText = `Conferma Prenotazione (${prezzo} €)`;
+    }
+
+    function confermaPrenotazioneLezione() {
+      const dataScelta = document.getElementById('prenota-data').value;
+      const orarioScelto = document.getElementById('prenota-orario').value;
+      const argomento = document.getElementById('prenota-argomento').value.trim() || "Chiarimento e confronto di metodo";
+
+      if (!dataScelta) {
+        alert("Scegli un giorno per l'incontro con il mentore!");
+        return;
+      }
+
+      const codiceRandom = '#SAPERE-2026-' + Math.floor(100 + Math.random() * 900);
+      const quotaDocente = (tariffaSelezionata * 0.90).toFixed(2).replace('.', ',');
+      const quotaLascito = (tariffaSelezionata * 0.10).toFixed(2).replace('.', ',');
+
+      document.getElementById('success-codice').innerText = codiceRandom;
+      document.getElementById('success-mentore').innerText = mentoreSelezionato.author;
+      document.getElementById('success-data-ora').innerText = `${dataScelta} • Ore ${orarioScelto}`;
+      document.getElementById('success-split').innerText = `${quotaDocente} € al mentore (90%) • ${quotaLascito} € Lascito (10%)`;
+
+      document.getElementById('prenota-form-view').classList.add('hidden');
+      document.getElementById('prenota-success-view').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    // Gestione Dono / Caffè Sospeso
+    function lasciaOfferta(id) {
+      postOffertaSelezionato = postsSegno.find(p => p.id === id);
+      if (!postOffertaSelezionato) return;
+
+      document.getElementById('offerta-destinatario').innerText = `A ${postOffertaSelezionato.author} (${postOffertaSelezionato.role})`;
+      document.getElementById('tip-messaggio').value = '';
+      selezionaTip(2);
+
+      document.getElementById('modal-lascia-offerta').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function chiudiModalOfferta() {
+      document.getElementById('modal-lascia-offerta').classList.add('hidden');
+    }
+
+    function selezionaTip(importo) {
+      tipSelezionato = importo;
+      const btn2 = document.getElementById('btn-tip-2');
+      const btn5 = document.getElementById('btn-tip-5');
+      const btn10 = document.getElementById('btn-tip-10');
+
+      btn2.className = `p-2.5 rounded-2xl transition ${importo === 2 ? 'border-2 border-oro-500 bg-white font-bold shadow-sm' : 'border border-sabbia-200 bg-sabbia-100 font-medium'}`;
+      btn5.className = `p-2.5 rounded-2xl transition ${importo === 5 ? 'border-2 border-oro-500 bg-white font-bold shadow-sm' : 'border border-sabbia-200 bg-sabbia-100 font-medium'}`;
+      btn10.className = `p-2.5 rounded-2xl transition ${importo === 10 ? 'border-2 border-oro-500 bg-white font-bold shadow-sm' : 'border border-sabbia-200 bg-sabbia-100 font-medium'}`;
+
+      const quotaAutore = (importo * 0.90).toFixed(2).replace('.', ',');
+      const quotaLascito = (importo * 0.10).toFixed(2).replace('.', ',');
+
+      document.getElementById('tip-split-text').innerText = `${quotaAutore} € all'autore (90%) • ${quotaLascito} € a Lascito`;
+      document.getElementById('btn-tip-label').innerText = `Dona ${importo} € con Gratitudine`;
+    }
+
+    function confermaTip() {
+      if (!postOffertaSelezionato) return;
+      postOffertaSelezionato.tipsReceived += 1;
+      
+      const msg = document.getElementById('tip-messaggio').value.trim();
+      if (msg) {
+        postOffertaSelezionato.discussions.push({
+          name: "Tu (Sostenitore)",
+          text: `☕ Ha donato ${tipSelezionato} €: "${msg}"`
+        });
+      }
+
+      chiudiModalOfferta();
+      render();
+      alert(`✨ Grazie di cuore! Il tuo dono etico di ${tipSelezionato} € è stato registrato.\n${(tipSelezionato * 0.9).toFixed(2)} € accreditati a ${postOffertaSelezionato.author}!`);
     }
 
     function toggleDiscussione(id) {
