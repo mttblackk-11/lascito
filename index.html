@@ -659,63 +659,76 @@
     <div class="max-w-lg w-full bg-sabbia-50 rounded-3xl border border-oro-400/60 shadow-2xl overflow-hidden my-auto fade-in">
       
       <!-- Intestazione Cerimonia -->
-      <div class="p-6 text-center border-b border-sabbia-200 bg-white relative">
+      <div class="p-5 sm:p-6 text-center border-b border-sabbia-200 bg-white relative">
         <button onclick="chiudiCerimoniaSblocco()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-sabbia-100 text-sabbia-800 hover:bg-sabbia-200 flex items-center justify-center">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
-        <div class="w-14 h-14 rounded-full bg-sabbia-100 border border-oro-400/40 text-oro-600 mx-auto flex items-center justify-center mb-3">
-          <i data-lucide="hourglass" class="w-7 h-7"></i>
+        <div class="w-14 h-14 rounded-full bg-sabbia-100 border border-oro-400/40 text-oro-600 mx-auto flex items-center justify-center mb-2.5">
+          <i data-lucide="key" class="w-7 h-7 text-oro-600"></i>
         </div>
-        <span class="text-[10px] font-mono tracking-widest text-oro-700 font-bold uppercase">Verifica di Sicurezza</span>
-        <h3 id="cerimonia-modal-titolo" class="font-serif text-xl sm:text-2xl font-bold text-sabbia-950 mt-0.5">Protocollo di Sblocco</h3>
-        <p id="cerimonia-modal-sub" class="text-xs text-sabbia-700 mt-1">Simulazione della procedura di decrittazione e accesso ai dati custoditi.</p>
+        <span class="text-[10px] font-mono tracking-widest text-oro-700 font-bold uppercase">Cerimonia di Apertura</span>
+        <h3 id="cerimonia-modal-titolo" class="font-serif text-xl sm:text-2xl font-bold text-sabbia-950 mt-0.5">Apri lo Scrigno della Memoria</h3>
+        <p id="cerimonia-modal-sub" class="text-xs text-sabbia-700 mt-1 max-w-sm mx-auto">Questo ricordo è protetto nel tempo. Fai una prova per vedere cosa succederà al momento dello sblocco.</p>
       </div>
 
-      <div class="p-6 space-y-5">
+      <div class="p-5 sm:p-6 space-y-4">
         
-        <!-- Indicatore Modalità Vincolo -->
-        <div id="sim-badge-modalita" class="flex items-center justify-between p-3 rounded-2xl bg-sabbia-100 border border-sabbia-200 text-xs">
-          <span class="text-sabbia-700 font-medium">Condizione di Custodia:</span>
-          <span id="sim-txt-modalita" class="font-bold text-sabbia-950 px-2.5 py-0.5 rounded bg-white border border-sabbia-300 shadow-sm">Solo Data e Ora</span>
+        <!-- Scheda Riepilogo del Ricordo -->
+        <div class="p-3.5 rounded-2xl bg-sabbia-100 border border-sabbia-200 text-xs">
+          <span class="text-sabbia-600 text-[11px] block">Ricordo Custodito:</span>
+          <h4 id="sim-titolo-memoria" class="font-bold text-sabbia-950 text-sm mt-0.5">Disposizione Personale</h4>
+          <p id="sim-txt-modalita" class="text-xs text-oro-800 font-medium mt-1 flex items-center gap-1.5">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-oro-600"></i>
+            <span>Programmato per il 14 Maggio 2034 alle ore 12:00</span>
+          </p>
         </div>
 
-        <!-- Simulatore Selettore Data (Prima vs Dopo) -->
-        <div class="p-3.5 rounded-2xl bg-sabbia-100 border border-sabbia-300 text-xs">
-          <span class="block font-bold text-sabbia-900 mb-1.5 flex items-center gap-1.5">
-            <i data-lucide="sliders" class="w-3.5 h-3.5 text-oro-600"></i> Simula lo Stato Temporale:
+        <!-- Selettore della Prova (Oggi vs Giorno Scelto) -->
+        <div class="p-4 rounded-2xl bg-white border border-sabbia-300 text-xs shadow-sm">
+          <span class="block font-bold text-sabbia-900 mb-2.5 flex items-center gap-1.5">
+            <i data-lucide="play-circle" class="w-4 h-4 text-oro-600"></i> Fai una prova prima di consegnarlo:
           </span>
-          <div class="grid grid-cols-2 gap-2">
-            <button id="sim-btn-prima" onclick="impostaSimulazione('prima')" class="p-2 rounded-xl bg-white border border-oro-400 text-oro-800 font-bold text-left text-[11px] shadow-sm">
-              ⏳ Prima della Scadenza (Accesso Negato)
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <button id="sim-btn-prima" onclick="impostaSimulazione('prima')" class="p-3 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-xs shadow-sm flex items-center gap-2">
+              <span class="text-base">🔒</span>
+              <div>
+                <span class="block">Se provi ad aprirlo OGGI</span>
+                <span class="text-[10px] text-sabbia-600 font-normal">Lo scrigno è ancora chiuso</span>
+              </div>
             </button>
-            <button id="sim-btn-dopo" onclick="impostaSimulazione('dopo')" class="p-2 rounded-xl bg-sabbia-200/80 text-sabbia-700 font-medium text-left text-[11px]">
-              ✨ Scadenza Raggiunta (Data e Ora Maturate)
+            <button id="sim-btn-dopo" onclick="impostaSimulazione('dopo')" class="p-3 rounded-xl bg-sabbia-100 text-sabbia-700 font-medium text-left text-xs flex items-center gap-2">
+              <span class="text-base">✨</span>
+              <div>
+                <span class="block">Nel GIORNO SCELTO</span>
+                <span class="text-[10px] text-sabbia-600 font-normal">Lo scrigno si apre e mostra il video</span>
+              </div>
             </button>
           </div>
         </div>
 
-        <!-- Inserimento Codice Fiscale / CIE (Visibile solo se Doppio Fattore) -->
-        <div id="sim-box-cf" class="space-y-2">
+        <!-- Didascalia Chiara e Umana -->
+        <div id="box-spiegazione-dinamica" class="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs text-sabbia-800 flex items-start gap-2.5">
+          <i data-lucide="info" class="w-4 h-4 text-oro-600 shrink-0 mt-0.5"></i>
+          <span id="testo-spiegazione-dinamica">Lo scrigno è ancora sigillato. Nessuno può sbirciare o aprire il tuo ricordo prima della data prestabilita.</span>
+        </div>
+
+        <!-- Inserimento Codice Fiscale / CIE (Visibile solo se Riservato a Persona) -->
+        <div id="sim-box-cf" class="hidden p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
           <label class="block text-xs font-bold text-sabbia-900 flex items-center justify-between">
-            <span>Codice Fiscale dell'Avente Diritto</span>
-            <span class="text-[10px] text-oro-700 font-normal">Autenticazione ANPR / CIE</span>
+            <span id="sim-label-cf">Conferma Identità dell'Erede</span>
+            <span class="text-[10px] text-oro-700 font-mono">CIE / ANPR</span>
           </label>
+          <p class="text-[11px] text-sabbia-600 leading-tight">Per aprire questo archivio riservato, l'erede deve inserire il proprio Codice Fiscale per confermare che è proprio lui.</p>
           <input type="text" id="sim-input-cf" placeholder="Inserisci il Codice Fiscale..." class="w-full text-xs font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
           <button onclick="autocompilaCIE()" class="text-[11px] text-oro-700 hover:underline font-medium flex items-center gap-1">
             <i data-lucide="fingerprint" class="w-3.5 h-3.5"></i> Autentica con Carta d'Identità Elettronica (CIE)
           </button>
         </div>
 
-        <!-- Nota informativa per Solo Data e Ora -->
-        <div id="sim-nota-tempo" class="hidden p-3 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs text-sabbia-800 flex items-start gap-2">
-          <i data-lucide="info" class="w-4 h-4 text-amber-700 shrink-0 mt-0.5"></i>
-          <span><strong>Nessun codice fiscale richiesto:</strong> Questa memoria è vincolata unicamente al raggiungimento della data e ora prestabilita.</span>
-        </div>
-
-        <!-- Tasto Verifica -->
-        <button onclick="eseguiVerificaSblocco()" class="w-full py-3 rounded-2xl bg-sabbia-900 hover:bg-sabbia-800 text-white font-bold text-xs tracking-wider uppercase transition shadow-md flex items-center justify-center gap-2">
-          <i data-lucide="unlock" class="w-4 h-4 text-oro-400"></i>
-          <span>Verifica e Decritta</span>
+        <!-- Tasto Apertura -->
+        <button onclick="eseguiVerificaSblocco()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase transition shadow-lg shadow-oro-500/20 flex items-center justify-center gap-2 border border-oro-400/50 hover:scale-102">
+          <i data-lucide="unlock" class="w-4 h-4 text-sabbia-950"></i>
+          <span>Prova l'Apertura dello Scrigno</span>
         </button>
 
         <!-- Risultato A: Scrigno Protetto dal Tempo (Se prima della data) -->
@@ -723,12 +736,12 @@
           <div class="w-12 h-12 rounded-full bg-oro-500/20 text-oro-400 border border-oro-400/30 flex items-center justify-center mx-auto">
             <i data-lucide="lock" class="w-6 h-6"></i>
           </div>
-          <h4 class="font-serif text-lg font-bold text-oro-300">Vincolo Temporale Attivo</h4>
+          <h4 class="font-serif text-lg font-bold text-oro-300">Lo Scrigno è Sigillato nel Tempo</h4>
           <p class="text-xs text-sabbia-200 leading-relaxed max-w-sm mx-auto">
-            Questo archivio è protetto da un blocco temporale irrevocabile. Sarà decrittabile a partire dal <strong id="risultato-data-futura" class="text-oro-300 font-mono">14 Maggio 2034</strong>, esclusivamente previa verifica dell'identità con Carta d'Identità (CIE).
+            Questo ricordo non può essere aperto oggi. Si aprirà automaticamente il <strong id="risultato-data-futura" class="text-oro-300 font-mono">14 Maggio 2034</strong>.
           </p>
           <div class="inline-block px-3 py-1 rounded-full bg-stone-800 text-[10px] font-mono text-oro-400 border border-white/10">
-            Crittografia a Chiave Cifrata • Decrittazione Impossibile prima della Data
+            Crittografia Inviolabile • Nessuno può aprirlo prima della data
           </div>
         </div>
 
@@ -737,8 +750,8 @@
           <div class="w-12 h-12 rounded-full bg-gradient-to-br from-oro-400 to-oro-600 text-sabbia-950 flex items-center justify-center mx-auto shadow-lg glow-pulse-oro">
             <i data-lucide="check-check" class="w-6 h-6"></i>
           </div>
-          <h4 class="font-serif text-lg font-bold text-sabbia-950">Autenticazione e Vincolo Convalidati</h4>
-          <p class="text-xs text-sabbia-700">Contenuto decrittato con successo dalla crittografia locale:</p>
+          <h4 class="font-serif text-lg font-bold text-sabbia-950">Lo Scrigno è Aperto!</h4>
+          <p class="text-xs text-sabbia-700">Ecco il ricordo custodito nel tempo che si dischiude:</p>
           
           <div id="contenuto-sbloccato-box" class="relative rounded-2xl overflow-hidden max-w-[340px] mx-auto border-2 border-oro-400/60 shadow-lg bg-black">
             <!-- 1. Video -->
@@ -749,7 +762,7 @@
               <div class="w-14 h-14 rounded-full bg-oro-500/20 text-oro-400 border border-oro-500/40 flex items-center justify-center">
                 <i data-lucide="volume-2" class="w-7 h-7"></i>
               </div>
-              <span class="text-xs font-mono text-sabbia-300">Messaggio Vocale Decrittato</span>
+              <span class="text-xs font-mono text-sabbia-300">Messaggio Vocale Custodito</span>
               <audio id="audio-sbloccato-player" controls class="w-full mt-2"></audio>
             </div>
 
@@ -758,7 +771,7 @@
 
             <!-- 4. Foto / Immagine -->
             <div id="foto-sbloccata-container" class="hidden bg-stone-900 p-2 text-center">
-              <img id="foto-sbloccata-img" src="" alt="Foto Decrittata" class="w-full rounded-xl object-contain max-h-72 mx-auto" />
+              <img id="foto-sbloccata-img" src="" alt="Foto Custodita" class="w-full rounded-xl object-contain max-h-72 mx-auto" />
               <p id="foto-sbloccata-caption" class="text-xs text-sabbia-200 mt-2 p-1 italic"></p>
             </div>
 
@@ -768,9 +781,9 @@
                 <i data-lucide="file-check" class="w-7 h-7"></i>
               </div>
               <h5 id="doc-sbloccato-nome" class="text-xs font-bold font-mono">documento.pdf</h5>
-              <p id="doc-sbloccato-info" class="text-[11px] text-sabbia-600 font-mono">Fascicolo Integro • Impronta SHA-256 Valida</p>
+              <p id="doc-sbloccato-info" class="text-[11px] text-sabbia-600 font-mono">Fascicolo Integro • Sigillo Originale</p>
               <a id="doc-sbloccato-link" href="#" download="documento_custodito" class="inline-flex items-center gap-2 bg-oro-500 hover:bg-oro-600 text-sabbia-950 text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm">
-                <i data-lucide="download" class="w-4 h-4"></i> Scarica File Decrittato
+                <i data-lucide="download" class="w-4 h-4"></i> Scarica File Custodito
               </a>
             </div>
           </div>
@@ -2285,18 +2298,32 @@
       }
 
       const isSoloTempo = (memoriaSelezionata.regola === 'tempo' || !memoriaSelezionata.codiceFiscale);
+      const titMemoria = document.getElementById('sim-titolo-memoria');
       const txtModalita = document.getElementById('sim-txt-modalita');
       const boxCf = document.getElementById('sim-box-cf');
-      const notaTempo = document.getElementById('sim-nota-tempo');
+      const labelCf = document.getElementById('sim-label-cf');
+
+      if (titMemoria) {
+        titMemoria.innerText = memoriaSelezionata.titolo || "Ricordo Custodito";
+      }
+
+      const dataStr = memoriaSelezionata.dataSblocco || '14 Maggio 2034';
+      const oraStr = memoriaSelezionata.oraSblocco || '12:00';
 
       if (isSoloTempo) {
-        if (txtModalita) txtModalita.innerText = "Solo Data e Ora (Sblocco Libero)";
+        if (txtModalita) {
+          txtModalita.innerHTML = `<i data-lucide="calendar" class="w-3.5 h-3.5 text-oro-600"></i><span>Sblocco per tutti il <strong>${dataStr}</strong> alle ore <strong>${oraStr}</strong></span>`;
+        }
         if (boxCf) boxCf.classList.add('hidden');
-        if (notaTempo) notaTempo.classList.remove('hidden');
       } else {
-        if (txtModalita) txtModalita.innerText = "Riservato a Persona: Data + CIE";
+        const dest = memoriaSelezionata.destinatario || 'Persona designata';
+        if (txtModalita) {
+          txtModalita.innerHTML = `<i data-lucide="shield" class="w-3.5 h-3.5 text-oro-600"></i><span>Riservato solo a <strong>${dest}</strong> • Sblocco il <strong>${dataStr}</strong> alle ore <strong>${oraStr}</strong></span>`;
+        }
+        if (labelCf) {
+          labelCf.innerText = `Conferma Identità di ${dest}`;
+        }
         if (boxCf) boxCf.classList.remove('hidden');
-        if (notaTempo) notaTempo.classList.add('hidden');
       }
 
       document.getElementById('sim-input-cf').value = '';
@@ -2319,12 +2346,26 @@
       statoSimulazione = stato;
       const btnPrima = document.getElementById('sim-btn-prima');
       const btnDopo = document.getElementById('sim-btn-dopo');
+      const txtSpiegazione = document.getElementById('testo-spiegazione-dinamica');
+      const isSoloTempo = (memoriaSelezionata && (memoriaSelezionata.regola === 'tempo' || !memoriaSelezionata.codiceFiscale));
+      const dest = (memoriaSelezionata && memoriaSelezionata.destinatario) || 'la persona indicata';
+
       if (stato === 'prima') {
-        btnPrima.className = "p-2 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-[11px] shadow-sm";
-        btnDopo.className = "p-2 rounded-xl bg-sabbia-200/80 text-sabbia-700 font-medium text-left text-[11px]";
+        if (btnPrima) btnPrima.className = "p-3 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-xs shadow-sm flex items-center gap-2";
+        if (btnDopo) btnDopo.className = "p-3 rounded-xl bg-sabbia-100 text-sabbia-700 font-medium text-left text-xs flex items-center gap-2";
+        if (txtSpiegazione) {
+          txtSpiegazione.innerText = "Lo scrigno è ancora sigillato. Nessuno può sbirciare o aprire il tuo ricordo prima della data prestabilita.";
+        }
       } else {
-        btnDopo.className = "p-2 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-[11px] shadow-sm";
-        btnPrima.className = "p-2 rounded-xl bg-sabbia-200/80 text-sabbia-700 font-medium text-left text-[11px]";
+        if (btnDopo) btnDopo.className = "p-3 rounded-xl bg-white border-2 border-oro-500 text-oro-900 font-bold text-left text-xs shadow-sm flex items-center gap-2";
+        if (btnPrima) btnPrima.className = "p-3 rounded-xl bg-sabbia-100 text-sabbia-700 font-medium text-left text-xs flex items-center gap-2";
+        if (txtSpiegazione) {
+          if (isSoloTempo) {
+            txtSpiegazione.innerText = "Il tempo è scaduto: lo scrigno si apre da solo con 1 click, senza dover mostrare documenti o codici fiscali.";
+          } else {
+            txtSpiegazione.innerText = `Questo ricordo è riservato solo a ${dest}. Nel giorno stabilito, basterà confermare il Codice Fiscale per aprire lo scrigno.`;
+          }
+        }
       }
     }
 
@@ -2334,7 +2375,7 @@
       } else {
         document.getElementById('sim-input-cf').value = 'MRTEGL08M41H501Z';
       }
-      alert("🪪 Autenticazione CIE/ANPR completata con successo!\nCodice Fiscale acquisito in modo sicuro dai registri di Stato Civile.");
+      alert("🪪 Documento confermato con successo!\nCodice Fiscale acquisito in modo sicuro.");
     }
 
     function eseguiVerificaSblocco() {
@@ -2349,12 +2390,12 @@
         const cfAtteso = (memoriaSelezionata && memoriaSelezionata.codiceFiscale) ? memoriaSelezionata.codiceFiscale.toUpperCase() : 'MRTEGL08M41H501Z';
 
         if (!inputCF) {
-          alert("Inserisci il Codice Fiscale dell'erede o clicca 'Autentica con CIE'!");
+          alert("Per aprire questo scrigno riservato, inserisci il Codice Fiscale o clicca 'Autentica con CIE'!");
           return;
         }
 
         if (inputCF !== cfAtteso) {
-          alert(`❌ Errore Anagrafe ANPR: Il Codice Fiscale inserito (${inputCF}) non corrisponde a quello vincolato a questo archivio! Nessun accesso consentito.`);
+          alert(`❌ Questo scrigno è riservato a una persona specifica. Il Codice Fiscale inserito non corrisponde a quello scelto da chi ha creato il ricordo.`);
           return;
         }
       }
