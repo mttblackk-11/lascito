@@ -164,11 +164,23 @@
 
   <!-- FOOTER -->
   <footer class="border-t border-sabbia-200 py-6 text-xs text-sabbia-700 bg-[#f7f2ea] z-10 relative">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p>© 2026 <strong>Lascito</strong> — "Custodi della Memoria dell'Umanità"</p>
-      <div class="flex items-center gap-4 text-oro-700 font-medium">
-        <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-oro-600"></i> Massima Riservatezza Privata</span>
-        <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-3.5 h-3.5 text-oro-600"></i> 1 Memoria Gratuita per Tutti</span>
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p>© 2026 <strong>Lascito</strong> — "Custodi della Memoria dell'Umanità"</p>
+        <p class="text-[11px] text-sabbia-500 mt-0.5">Custodia protetta per il Lascito Morale, Affettivo ed Eredità di Vita</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3.5 text-xs text-oro-800 font-medium">
+        <button onclick="apriNoteLegaliModal('natura')" class="hover:underline flex items-center gap-1.5 transition">
+          <i data-lucide="scale" class="w-3.5 h-3.5 text-oro-600"></i> Conformità & Codice Civile
+        </button>
+        <span class="text-sabbia-300">|</span>
+        <button onclick="apriNoteLegaliModal('privacy')" class="hover:underline flex items-center gap-1.5 transition">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-oro-600"></i> Privacy GDPR & Sicurezza
+        </button>
+        <span class="text-sabbia-300">|</span>
+        <span class="flex items-center gap-1.5 text-sabbia-600">
+          <i data-lucide="heart" class="w-3.5 h-3.5 text-oro-600"></i> 1 Memoria Gratuita per Tutti
+        </span>
       </div>
     </div>
   </footer>
@@ -644,10 +656,18 @@
           </div>
         </div>
 
-        <!-- Tasto di Prova Cerimonia Sblocco -->
+        <!-- Nota di Conformità Giuridica (Art. 458 C.C.) -->
+        <div class="p-3.5 rounded-2xl bg-sabbia-100/80 border border-sabbia-200 text-[11px] text-sabbia-700 leading-relaxed">
+          <span class="font-bold text-sabbia-900 block mb-0.5 flex items-center gap-1.5">
+            <i data-lucide="scale" class="w-3.5 h-3.5 text-oro-600"></i> Validità Giuridica & Conformità al Codice Civile
+          </span>
+          Il presente certificato attesta la custodia del <strong>Lascito Morale, Affettivo e Testimoniale</strong>. Per disposizioni su beni patrimoniali, economici o immobiliari, si raccomanda l'adozione delle forme testamentarie previste dal Codice Civile (Art. 587 c.c.) o l'assistenza di un Notaio.
+        </div>
+
+        <!-- Tasto di Prova Sblocco -->
         <button onclick="apriCerimoniaSbloccoAttuale()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 via-oro-500 to-oro-600 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-xl shadow-oro-500/25 transition hover:scale-105 border border-oro-300/60">
           <i data-lucide="key" class="w-4 h-4 text-sabbia-950"></i>
-          <span>Simula Protocollo di Sblocco dell'Erede</span>
+          <span>Accedi al Ricordo (Fai una Prova)</span>
         </button>
 
       </div>
@@ -852,6 +872,127 @@
           </button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- MODALE CONFORMITÀ GIURIDICA, CODICE CIVILE & PRIVACY GDPR -->
+  <div id="modal-note-legali" class="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-4 hidden overflow-y-auto">
+    <div class="max-w-2xl w-full bg-sabbia-50 rounded-3xl border border-oro-400/50 shadow-2xl overflow-hidden my-auto fade-in max-h-[92vh] flex flex-col">
+      
+      <!-- Intestazione Modale -->
+      <div class="p-5 sm:p-6 bg-white border-b border-sabbia-200 relative flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-oro-500/15 border border-oro-400 text-oro-700 flex items-center justify-center">
+            <i data-lucide="scale" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-[10px] font-mono tracking-widest text-oro-700 font-bold uppercase">Quadro Istituzionale & Normativo</span>
+            <h3 class="font-serif text-xl sm:text-2xl font-bold text-sabbia-950">Note Legali & Riservatezza</h3>
+          </div>
+        </div>
+        <button onclick="chiudiNoteLegaliModal()" class="w-8 h-8 rounded-full bg-sabbia-100 text-sabbia-800 hover:bg-sabbia-200 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Barra dei Tab Legali -->
+      <div class="p-3 bg-sabbia-100 border-b border-sabbia-200 flex gap-2 overflow-x-auto shrink-0">
+        <button id="tab-legale-natura" onclick="cambiaTabLegale('natura')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-oro-400/60 flex items-center gap-1.5 shrink-0">
+          <i data-lucide="scale" class="w-3.5 h-3.5 text-oro-600"></i> Codice Civile (Art. 458)
+        </button>
+        <button id="tab-legale-privacy" onclick="cambiaTabLegale('privacy')" class="px-3 py-1.5 rounded-xl text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition border border-transparent flex items-center gap-1.5 shrink-0">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-oro-600"></i> Privacy GDPR & Oblio
+        </button>
+        <button id="tab-legale-chiavi" onclick="cambiaTabLegale('chiavi')" class="px-3 py-1.5 rounded-xl text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition border border-transparent flex items-center gap-1.5 shrink-0">
+          <i data-lucide="key" class="w-3.5 h-3.5 text-oro-600"></i> Responsabilità Chiavi
+        </button>
+      </div>
+
+      <!-- Contenuti delle Schede (Scorrevole) -->
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs text-sabbia-800 leading-relaxed">
+        
+        <!-- SEZIONE 1: CODICE CIVILE & PATTI SUCCESSORI -->
+        <div id="sezione-legale-natura" class="space-y-4">
+          <div class="p-4 rounded-2xl bg-white border border-sabbia-200 space-y-2.5">
+            <h4 class="font-serif text-sm font-bold text-sabbia-950 flex items-center gap-2">
+              <i data-lucide="book-open" class="w-4 h-4 text-oro-600"></i> Natura del Servizio: Il Lascito Morale ed Emotivo
+            </h4>
+            <p>
+              Lascito è una piattaforma etica e tecnologica concepita per la custodia, conservazione e trasmissione di <strong>memorie autobiografiche, lettere intime, testimonianze di vita, consigli genitoriali, lasciti affettivi ed eredità morali</strong>.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
+            <h4 class="font-serif text-sm font-bold text-amber-950 flex items-center gap-2">
+              <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600"></i> Distinzione dal Testamento Patrimoniale (Art. 458 C.C.)
+            </h4>
+            <p class="text-amber-900 leading-relaxed">
+              In ottemperanza alla legge italiana e in particolare al <strong>divieto dei patti successori di cui all'Art. 458 del Codice Civile</strong>, si dichiara espressamente che i contenuti custoditi su Lascito <strong>non costituiscono e non possono sostituire un testamento patrimoniale</strong> per la disposizione o divisione di beni immobili, denaro, conti correnti o quote societarie.
+            </p>
+            <p class="text-amber-900 font-medium pt-1">
+              Per qualsiasi disposizione economica o patrimoniale per il tempo successivo alla morte, l'utente è tenuto ad avvalersi degli strumenti formali previsti dalla legge: il testamento (olografo, pubblico o segreto ex Art. 587 e segg. c.c.) o la consulenza diretta di un <strong>Notaio</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- SEZIONE 2: PRIVACY GDPR & DIRITTO ALL'OBLIO -->
+        <div id="sezione-legale-privacy" class="hidden space-y-4">
+          <div class="p-4 rounded-2xl bg-white border border-sabbia-200 space-y-2.5">
+            <h4 class="font-serif text-sm font-bold text-sabbia-950 flex items-center gap-2">
+              <i data-lucide="shield" class="w-4 h-4 text-oro-600"></i> Privacy by Design & Zero-Knowledge (Regolamento UE 2016/679)
+            </h4>
+            <p>
+              Lascito adotta standard rigorosi di <em>Privacy by Design e by Default</em> (Art. 25 GDPR). La protezione viene generata direttamente dal dispositivo dell'utente: <strong>nessun operatore, server o intermediario ha mai accesso in chiaro ai tuoi video, messaggi vocali o lettere</strong>.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white border border-sabbia-200 space-y-2.5">
+            <h4 class="font-serif text-sm font-bold text-sabbia-950 flex items-center gap-2">
+              <i data-lucide="trash-2" class="w-4 h-4 text-oro-600"></i> Diritto all'Oblio e Cancellazione (Art. 17 GDPR)
+            </h4>
+            <p>
+              In ogni momento antecedente alla data stabilita, l'autore ha il diritto inalienabile di <strong>eliminare definitivamente il proprio ricordo</strong> tramite il comando protetto dal proprio "Ricordo del Cuore".
+            </p>
+            <p class="text-[11px] text-sabbia-600 italic">
+              L'eliminazione distrugge istantaneamente la chiave di sblocco (*Crypto-Shredding*), rendendo matematicamente impossibile a chiunque ripristinare o leggere il dato.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white border border-sabbia-200 space-y-2">
+            <h4 class="font-serif text-sm font-bold text-sabbia-950 flex items-center gap-2">
+              <i data-lucide="cookie" class="w-4 h-4 text-oro-600"></i> Zero Cookie di Profilazione Commerciale
+            </h4>
+            <p>
+              La piattaforma è interamente esente da cookie pubblicitari di terze parti. Vengono utilizzate unicamente memorie tecniche temporanee essenziali al funzionamento del servizio.
+            </p>
+          </div>
+        </div>
+
+        <!-- SEZIONE 3: RESPONSABILITÀ DELLE CHIAVI -->
+        <div id="sezione-legale-chiavi" class="hidden space-y-4">
+          <div class="p-4 rounded-2xl bg-stone-900 text-white border border-oro-400/40 space-y-2.5">
+            <h4 class="font-serif text-sm font-bold text-oro-300 flex items-center gap-2">
+              <i data-lucide="key" class="w-4 h-4 text-oro-400"></i> Sovranità dell'Utente sulle Chiavi
+            </h4>
+            <p class="text-sabbia-200 leading-relaxed">
+              La garanzia di massima riservatezza comporta che <strong>Lascito non conserva copie di riserva della tua chiave segreta né del tuo Ricordo del Cuore</strong>.
+            </p>
+            <p class="text-sabbia-300 text-[11px] leading-relaxed">
+              L'utente è l'unico ed esclusivo custode del proprio accesso. In caso di smarrimento del Ricordo del Cuore e delle credenziali, nessun operatore tecnico potrà forzare o recuperare i contenuti custoditi, garantendo l'inviolabilità assoluta del sistema.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Modale -->
+      <div class="p-4 bg-white border-t border-sabbia-200 flex items-center justify-between shrink-0">
+        <span class="text-[10px] text-sabbia-500 font-mono">Lascito — Standard di Tutela Etica e Giuridica 2026</span>
+        <button onclick="chiudiNoteLegaliModal()" class="px-5 py-2 rounded-xl bg-sabbia-950 hover:bg-sabbia-900 text-white font-bold text-xs transition">
+          Ho Compreso
+        </button>
+      </div>
+
     </div>
   </div>
 
@@ -2413,6 +2554,41 @@
       chiudiEliminaModal();
       render();
       alert(`🗑️ Il ricordo "${titolo}" è stato eliminato definitivamente.\nLa chiave di accesso è stata distrutta per sempre.`);
+    }
+
+    function apriNoteLegaliModal(scheda = 'natura') {
+      cambiaTabLegale(scheda);
+      document.getElementById('modal-note-legali').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function chiudiNoteLegaliModal() {
+      document.getElementById('modal-note-legali').classList.add('hidden');
+    }
+
+    function cambiaTabLegale(scheda) {
+      const schede = ['natura', 'privacy', 'chiavi'];
+      schede.forEach(s => {
+        const btn = document.getElementById(`tab-legale-${s}`);
+        const box = document.getElementById(`sezione-legale-${s}`);
+        const isSel = (s === scheda);
+
+        if (btn) {
+          if (isSel) {
+            btn.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-oro-400/60 flex items-center gap-1.5 shrink-0";
+          } else {
+            btn.className = "px-3 py-1.5 rounded-xl text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition border border-transparent flex items-center gap-1.5 shrink-0";
+          }
+        }
+        if (box) {
+          if (isSel) {
+            box.classList.remove('hidden');
+          } else {
+            box.classList.add('hidden');
+          }
+        }
+      });
+      lucide.createIcons();
     }
 
     function apriCerimoniaSblocco(index) {
