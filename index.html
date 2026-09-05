@@ -273,21 +273,43 @@
       </div>
 
       <!-- Campi Dettaglio Post/Memoria (Titolo, Destinatario, Codice Fiscale e Data Sblocco) -->
-      <div id="studio-meta-fields" class="p-4 sm:p-5 bg-white border-t border-sabbia-200 flex flex-col gap-3">
+      <div id="studio-meta-fields" class="p-4 sm:p-6 bg-white border-t border-sabbia-200 flex flex-col gap-3">
         <div class="flex flex-col sm:flex-row gap-3">
-          <input type="text" id="video-titolo" placeholder="Dai un titolo a questo momento (es. Il mio pensiero per te...)" class="flex-1 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
-          <input type="text" id="video-autore-dest" placeholder="Nome dell'Erede (es. Giulia Moretti)" class="sm:w-64 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+          <input type="text" id="video-titolo" placeholder="Titolo del contenuto (es. Disposizione personale per il 18° compleanno)" class="flex-1 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+          <input type="text" id="video-autore-dest" placeholder="Nome e Cognome dell'Avente Diritto" class="sm:w-64 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
         </div>
         
-        <!-- Campi specifici per la custodia privata: Codice Fiscale & Data Sblocco -->
-        <div id="studio-campi-privati" class="flex flex-col sm:flex-row gap-3 pt-2 border-t border-sabbia-100">
-          <div class="flex-1">
-            <label class="block text-[11px] font-bold text-sabbia-800 mb-1">Codice Fiscale Erede (Verifica Anagrafe ANPR)</label>
-            <input type="text" id="video-cf-erede" placeholder="Es. MRTEGL08M41H501Z" class="w-full text-xs font-mono uppercase bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
+        <!-- Protocollo di Sicurezza a Doppio Fattore (Privato) -->
+        <div id="studio-campi-privati" class="pt-3 border-t border-sabbia-100 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-sabbia-900 uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="shield-check" class="w-4 h-4 text-oro-600"></i> Protocollo di Sicurezza a Doppio Fattore
+            </span>
+            <span class="text-[10px] font-mono text-sabbia-600 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200">
+              Crittografia Irrevocabile
+            </span>
           </div>
-          <div class="sm:w-64">
-            <label class="block text-[11px] font-bold text-sabbia-800 mb-1">Data Sblocco (18° Compleanno / Traguardo)</label>
-            <input type="date" id="video-data-sblocco" class="w-full text-xs bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <!-- Fattore 1: Tempo -->
+            <div class="p-3 rounded-2xl bg-sabbia-50 border border-sabbia-200">
+              <label class="block text-[11px] font-bold text-sabbia-900 mb-0.5 flex items-center justify-between">
+                <span>1° Fattore: Vincolo Temporale</span>
+                <span class="text-[10px] text-oro-700 font-mono">Data Certa</span>
+              </label>
+              <p class="text-[10px] text-sabbia-600 mb-1.5 leading-tight">Il contenuto rimane inaccessibile a chiunque fino a questo giorno.</p>
+              <input type="date" id="video-data-sblocco" value="2034-05-14" class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+            </div>
+
+            <!-- Fattore 2: Identità -->
+            <div class="p-3 rounded-2xl bg-sabbia-50 border border-sabbia-200">
+              <label class="block text-[11px] font-bold text-sabbia-900 mb-0.5 flex items-center justify-between">
+                <span>2° Fattore: Identità Anagrafica</span>
+                <span class="text-[10px] text-oro-700 font-mono">ANPR / CIE</span>
+              </label>
+              <p class="text-[10px] text-sabbia-600 mb-1.5 leading-tight">Solo la persona con questo Codice Fiscale potrà autenticarsi e aprire il file.</p>
+              <input type="text" id="video-cf-erede" value="MRTEGL08M41H501Z" placeholder="Codice Fiscale avente diritto..." class="w-full text-xs font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
+            </div>
           </div>
         </div>
       </div>
@@ -339,23 +361,23 @@
           </div>
         </div>
 
-        <!-- Il Cofanetto Fisico d'Autore (Card di Anteprima) -->
+        <!-- Supporto Fisico con Chiave di Sicurezza Incisa -->
         <div class="rounded-2xl bg-gradient-to-br from-sabbia-100 to-sabbia-200/60 border border-oro-400/40 p-4 sm:p-5 flex items-start gap-4">
           <div class="w-12 h-12 rounded-xl bg-oro-500/20 border border-oro-400/50 text-oro-700 flex items-center justify-center shrink-0 mt-0.5">
-            <i data-lucide="gift" class="w-6 h-6"></i>
+            <i data-lucide="key" class="w-6 h-6"></i>
           </div>
           <div class="flex-1">
             <div class="flex items-center gap-2">
-              <h4 class="text-xs font-bold text-sabbia-950 uppercase tracking-wide">Il Cofanetto Fisico in Legno d'Ulivo</h4>
-              <span class="text-[10px] bg-oro-500 text-sabbia-950 font-bold px-2 py-0.5 rounded-full">Consigliato</span>
+              <h4 class="text-xs font-bold text-sabbia-950 uppercase tracking-wide">Supporto Fisico con Chiave di Sicurezza Incisa</h4>
+              <span class="text-[10px] bg-oro-500 text-sabbia-950 font-bold px-2 py-0.5 rounded-full">Hardware Key</span>
             </div>
             <p class="text-xs text-sabbia-700 mt-1 leading-relaxed">
-              Realizzato a mano con la <strong>Chiave in Ottone Massiccio</strong> incisa a laser. Da conservare in cassaforte a casa o consegnare di persona.
+              Custodia solida contenente la <strong>Chiave metallica con identificativo crittografico laser</strong>. Da conservare in cassaforte personale o consegnare all'avente diritto.
             </p>
             <div class="mt-2.5 flex items-center justify-between">
               <span class="text-xs font-bold text-sabbia-900">89 € <span class="text-[10px] font-normal text-sabbia-600">(spedizione inclusa)</span></span>
-              <button onclick="alert('Cofanetto prenotato con successo! Verrà inciso con l\'impronta notarile e spedito al tuo indirizzo.')" class="text-xs font-bold bg-sabbia-950 hover:bg-sabbia-900 text-white px-3.5 py-1.5 rounded-xl transition shadow-sm">
-                Ordina Cofanetto
+              <button onclick="alert('Supporto fisico prenotato. Verrà inciso con l\'impronta crittografica univoca e spedito all\'indirizzo indicato.')" class="text-xs font-bold bg-sabbia-950 hover:bg-sabbia-900 text-white px-3.5 py-1.5 rounded-xl transition shadow-sm">
+                Richiedi Supporto Fisico
               </button>
             </div>
           </div>
@@ -364,7 +386,7 @@
         <!-- Tasto di Prova Cerimonia Sblocco -->
         <button onclick="apriCerimoniaSbloccoAttuale()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 via-oro-500 to-oro-600 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-xl shadow-oro-500/25 transition hover:scale-105 border border-oro-300/60">
           <i data-lucide="key" class="w-4 h-4 text-sabbia-950"></i>
-          <span>Simula la Cerimonia di Sblocco dell'Erede</span>
+          <span>Simula Protocollo di Sblocco dell'Erede</span>
         </button>
 
       </div>
@@ -383,9 +405,9 @@
         <div class="w-14 h-14 rounded-full bg-sabbia-100 border border-oro-400/40 text-oro-600 mx-auto flex items-center justify-center mb-3">
           <i data-lucide="hourglass" class="w-7 h-7"></i>
         </div>
-        <span class="text-[10px] font-mono tracking-widest text-oro-700 font-bold uppercase">La Porta del Futuro</span>
-        <h3 class="font-serif text-xl sm:text-2xl font-bold text-sabbia-950 mt-0.5">La Cerimonia di Sblocco</h3>
-        <p class="text-xs text-sabbia-700 mt-1">Stai vivendo l'esperienza esatta di chi riceverà il tuo dono.</p>
+        <span class="text-[10px] font-mono tracking-widest text-oro-700 font-bold uppercase">Verifica di Sicurezza</span>
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-sabbia-950 mt-0.5">Protocollo di Sblocco a Due Fattori</h3>
+        <p class="text-xs text-sabbia-700 mt-1">Simulazione della procedura di decrittazione da parte dell'avente diritto.</p>
       </div>
 
       <div class="p-6 space-y-5">
@@ -397,10 +419,10 @@
           </span>
           <div class="grid grid-cols-2 gap-2">
             <button id="sim-btn-prima" onclick="impostaSimulazione('prima')" class="p-2 rounded-xl bg-white border border-oro-400 text-oro-800 font-bold text-left text-[11px] shadow-sm">
-              ⏳ Prima della Data (Bambino a 10 anni)
+              ⏳ Prima della Scadenza (Accesso Negato)
             </button>
             <button id="sim-btn-dopo" onclick="impostaSimulazione('dopo')" class="p-2 rounded-xl bg-sabbia-200/80 text-sabbia-700 font-medium text-left text-[11px]">
-              ✨ Data Raggiunta (18° Compleanno)
+              ✨ Scadenza Raggiunta (18° Anno)
             </button>
           </div>
         </div>
@@ -408,8 +430,8 @@
         <!-- Inserimento Codice Fiscale / CIE -->
         <div class="space-y-2">
           <label class="block text-xs font-bold text-sabbia-900 flex items-center justify-between">
-            <span>Codice Fiscale dell'Erede</span>
-            <span class="text-[10px] text-oro-700 font-normal">Verifica Anagrafe ANPR</span>
+            <span>Codice Fiscale dell'Avente Diritto</span>
+            <span class="text-[10px] text-oro-700 font-normal">Autenticazione ANPR / CIE</span>
           </label>
           <input type="text" id="sim-input-cf" placeholder="Inserisci il Codice Fiscale..." class="w-full text-xs font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
           <button onclick="autocompilaCIE()" class="text-[11px] text-oro-700 hover:underline font-medium flex items-center gap-1">
@@ -420,7 +442,7 @@
         <!-- Tasto Verifica -->
         <button onclick="eseguiVerificaSblocco()" class="w-full py-3 rounded-2xl bg-sabbia-900 hover:bg-sabbia-800 text-white font-bold text-xs tracking-wider uppercase transition shadow-md flex items-center justify-center gap-2">
           <i data-lucide="unlock" class="w-4 h-4 text-oro-400"></i>
-          <span>Verifica e Dischiudi</span>
+          <span>Verifica e Decritta</span>
         </button>
 
         <!-- Risultato A: Scrigno Protetto dal Tempo (Se prima della data) -->
@@ -428,22 +450,22 @@
           <div class="w-12 h-12 rounded-full bg-oro-500/20 text-oro-400 border border-oro-400/30 flex items-center justify-center mx-auto">
             <i data-lucide="lock" class="w-6 h-6"></i>
           </div>
-          <h4 class="font-serif text-lg font-bold text-oro-300">Questo Scrigno è Protetto dal Tempo</h4>
-          <p class="text-xs text-sabbia-200 leading-relaxed italic max-w-sm mx-auto">
-            "Questo scrigno custodisce le parole di chi ti ama ed è protetto dal tempo. Si dischiuderà il <strong id="risultato-data-futura" class="text-oro-300 font-mono">14 Maggio 2034</strong> per i tuoi 18 anni. Custodiscilo con amore."
+          <h4 class="font-serif text-lg font-bold text-oro-300">Vincolo Temporale Attivo</h4>
+          <p class="text-xs text-sabbia-200 leading-relaxed max-w-sm mx-auto">
+            Questo archivio è protetto da un blocco temporale irrevocabile. Sarà decrittabile a partire dal <strong id="risultato-data-futura" class="text-oro-300 font-mono">14 Maggio 2034</strong>, esclusivamente previa verifica dell'identità con Carta d'Identità (CIE).
           </p>
           <div class="inline-block px-3 py-1 rounded-full bg-stone-800 text-[10px] font-mono text-oro-400 border border-white/10">
-            Doppio Lucchetto Attivo • Nessuna Violazione Possibile
+            Crittografia a Chiave Cifrata • Decrittazione Impossibile prima della Data
           </div>
         </div>
 
         <!-- Risultato B: Sigillo Spezzato e Video Dischiuso (Se data raggiunta) -->
         <div id="risultato-sbloccato" class="p-5 rounded-2xl bg-white border-2 border-oro-400 text-center space-y-3 hidden fade-in shadow-xl">
           <div class="w-12 h-12 rounded-full bg-gradient-to-br from-oro-400 to-oro-600 text-sabbia-950 flex items-center justify-center mx-auto shadow-lg glow-pulse-oro">
-            <i data-lucide="sparkles" class="w-6 h-6"></i>
+            <i data-lucide="check-check" class="w-6 h-6"></i>
           </div>
-          <h4 class="font-serif text-lg font-bold text-sabbia-950">Identità Confermata dall'Anagrafe</h4>
-          <p class="text-xs text-sabbia-700">Il sigillo si è dischiuso. Ecco il momento custodito per te:</p>
+          <h4 class="font-serif text-lg font-bold text-sabbia-950">Autenticazione e Vincolo Convalidati</h4>
+          <p class="text-xs text-sabbia-700">Identità anagrafica confermata e data raggiunta. Ecco il contenuto autorizzato:</p>
           <div id="video-sbloccato-container" class="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-[260px] mx-auto border-2 border-oro-400/60 shadow-lg bg-black">
             <video id="video-sbloccato-player" controls class="w-full h-full object-cover"></video>
             <div id="testo-sbloccato-display" class="hidden p-4 text-xs text-sabbia-800 bg-sabbia-50 h-full overflow-y-auto text-left"></div>
