@@ -369,7 +369,7 @@
     </div>
   </div>
 
-  <!-- MODALE CONSEGNA SOLENNE & COFANETTO FISICO -->
+  <!-- MODALE ATTO UFFICIALE DI CUSTODIA & CERTIFICATO -->
   <div id="modal-consegna-solenne" class="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-xl flex items-center justify-center p-4 hidden overflow-y-auto">
     <div class="max-w-xl w-full bg-sabbia-50 rounded-3xl border border-oro-400/50 shadow-2xl overflow-hidden my-auto fade-in">
       
@@ -382,8 +382,8 @@
           <i data-lucide="shield-check" class="w-8 h-8 stroke-[2]"></i>
         </div>
         <span class="text-[11px] font-mono tracking-widest text-oro-700 font-bold uppercase">Atto Ufficiale di Custodia</span>
-        <h3 class="font-serif text-2xl font-bold text-sabbia-950 mt-1">La Tua Memoria è Sigillata nel Tempo</h3>
-        <p class="text-xs text-sabbia-700 mt-1 max-w-md mx-auto">Protetto da crittografia inviolabile e vincolato ai registri di stato civile dell'erede.</p>
+        <h3 class="font-serif text-2xl font-bold text-sabbia-950 mt-1">Il Tuo Archivio è Sigillato nel Tempo</h3>
+        <p class="text-xs text-sabbia-700 mt-1 max-w-md mx-auto">Protetto da crittografia inviolabile e vincolato alle condizioni di sblocco prestabilite.</p>
       </div>
 
       <!-- Corpo del Certificato -->
@@ -413,25 +413,23 @@
           </div>
         </div>
 
-        <!-- Supporto Fisico con Chiave di Sicurezza Incisa -->
-        <div class="rounded-2xl bg-gradient-to-br from-sabbia-100 to-sabbia-200/60 border border-oro-400/40 p-4 sm:p-5 flex items-start gap-4">
-          <div class="w-12 h-12 rounded-xl bg-oro-500/20 border border-oro-400/50 text-oro-700 flex items-center justify-center shrink-0 mt-0.5">
-            <i data-lucide="key" class="w-6 h-6"></i>
+        <!-- Opzioni di Salvataggio e Custodia Personale -->
+        <div class="rounded-2xl bg-white border border-sabbia-200 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-sabbia-100 border border-sabbia-300 text-sabbia-800 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="file-check" class="w-5 h-5 text-oro-700"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-sabbia-950 uppercase tracking-wide">Certificato Ufficiale di Custodia</h4>
+              <p class="text-xs text-sabbia-600 mt-0.5 leading-relaxed">
+                Stampa o salva il documento con l'impronta SHA-256 e le istruzioni di sblocco da riporre tra i documenti importanti di famiglia o consegnare all'avente diritto.
+              </p>
+            </div>
           </div>
-          <div class="flex-1">
-            <div class="flex items-center gap-2">
-              <h4 class="text-xs font-bold text-sabbia-950 uppercase tracking-wide">Supporto Fisico con Chiave di Sicurezza Incisa</h4>
-              <span class="text-[10px] bg-oro-500 text-sabbia-950 font-bold px-2 py-0.5 rounded-full">Hardware Key</span>
-            </div>
-            <p class="text-xs text-sabbia-700 mt-1 leading-relaxed">
-              Custodia solida contenente la <strong>Chiave metallica con identificativo crittografico laser</strong>. Da conservare in cassaforte personale o consegnare all'avente diritto.
-            </p>
-            <div class="mt-2.5 flex items-center justify-between">
-              <span class="text-xs font-bold text-sabbia-900">89 € <span class="text-[10px] font-normal text-sabbia-600">(spedizione inclusa)</span></span>
-              <button onclick="alert('Supporto fisico prenotato. Verrà inciso con l\'impronta crittografica univoca e spedito all\'indirizzo indicato.')" class="text-xs font-bold bg-sabbia-950 hover:bg-sabbia-900 text-white px-3.5 py-1.5 rounded-xl transition shadow-sm">
-                Richiedi Supporto Fisico
-              </button>
-            </div>
+          <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+            <button onclick="window.print()" class="text-xs font-bold bg-sabbia-950 hover:bg-sabbia-900 text-white px-4 py-2.5 rounded-xl transition shadow-sm flex items-center gap-1.5">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i> Stampa / Salva PDF
+            </button>
           </div>
         </div>
 
