@@ -564,6 +564,18 @@
             </div>
           </div>
 
+          <!-- Assunzione di Responsabilità Legale (Obbligatoria) -->
+          <div class="p-3.5 rounded-2xl bg-sabbia-100/90 border border-sabbia-300 flex items-start gap-3 shadow-xs">
+            <input type="checkbox" id="chk-assunzione-responsabilita" class="mt-0.5 w-4 h-4 text-oro-600 rounded border-sabbia-400 focus:ring-oro-500 cursor-pointer shrink-0" checked />
+            <label for="chk-assunzione-responsabilita" class="text-[11px] text-sabbia-800 cursor-pointer select-none leading-relaxed">
+              <strong class="text-sabbia-950 font-bold block mb-0.5 flex items-center gap-1.5">
+                <i data-lucide="scale" class="w-3.5 h-3.5 text-oro-700"></i>
+                Dichiarazione di Piena Responsabilità Personale
+              </strong>
+              Dichiaro sotto la mia esclusiva responsabilità che il ricordo o documento custodito rispetta le leggi vigenti, non lede diritti di terzi e non contiene materiale illecito o diffamatorio. Assumo la piena titolarità del contenuto e manlevo l'infrastruttura di Lascito (Art. 14-17 Direttiva E-Commerce & DSA).
+            </label>
+          </div>
+
         </div>
 
         <!-- Barra Inferiore Passo 2 -->
@@ -2433,6 +2445,12 @@
           return;
         }
         cfErede = document.getElementById('studio-dest-cf').value.trim().toUpperCase() || 'MRTEGL08M41H501Z';
+      }
+
+      const chkResp = document.getElementById('chk-assunzione-responsabilita');
+      if (chkResp && !chkResp.checked) {
+        alert("È necessario confermare la dichiarazione di responsabilità personale sul contenuto per procedere.");
+        return;
       }
 
       // Mostra sigillo ufficiale animato
