@@ -165,10 +165,10 @@
   <!-- FOOTER -->
   <footer class="border-t border-sabbia-200 py-6 text-xs text-sabbia-700 bg-[#f7f2ea] z-10 relative">
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p>© 2026 <strong>Lascito Protocol</strong> — "Celebrazione Eterna della Vita Umana"</p>
+      <p>© 2026 <strong>Lascito</strong> — "Custodi della Memoria dell'Umanità"</p>
       <div class="flex items-center gap-4 text-oro-700 font-medium">
-        <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-oro-600"></i> Crittografia Zero-Knowledge</span>
-        <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-3.5 h-3.5 text-oro-600"></i> 1 Capsula Gratuita per Tutti</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-oro-600"></i> Massima Riservatezza Privata</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-3.5 h-3.5 text-oro-600"></i> 1 Memoria Gratuita per Tutti</span>
       </div>
     </div>
   </footer>
@@ -357,7 +357,7 @@
               <span id="studio-testo-contatore" class="text-[11px] font-mono text-sabbia-500 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200">0 caratteri</span>
             </div>
             <textarea id="studio-testo-input" oninput="aggiornaContatoreTestoStudio()" rows="7" placeholder="Scrivi qui la tua memoria, disposizioni personali, lezioni o il racconto di vita da custodire nel tempo..." class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl p-4 text-sabbia-950 focus:outline-none focus:border-oro-500 leading-relaxed font-serif resize-none"></textarea>
-            <p class="text-[11px] text-sabbia-500 italic">Il testo verrà cifrato localmente sul tuo dispositivo con chiave simmetrica prima di essere archiviato.</p>
+            <p class="text-[11px] text-sabbia-500 italic">Il tuo testo viene protetto in modo privato: nessuno potrà mai leggerlo prima del giorno stabilito.</p>
           </div>
 
           <!-- FORMATO 4: FOTO / IMMAGINE -->
@@ -404,7 +404,7 @@
                 </div>
                 <div class="overflow-hidden">
                   <h6 id="doc-preview-nome" class="text-xs font-bold font-mono text-sabbia-950 truncate">documento.pdf</h6>
-                  <p id="doc-preview-dimensione" class="text-[10px] text-sabbia-600 font-mono">0.0 MB • Firma SHA-256 Pronta</p>
+                  <p id="doc-preview-dimensione" class="text-[10px] text-sabbia-600 font-mono">0.0 MB • Pronto per la custodia</p>
                 </div>
               </div>
               <button onclick="document.getElementById('upload-doc-input').click()" class="text-xs text-oro-700 hover:underline font-bold shrink-0">
@@ -419,8 +419,8 @@
         <div class="p-3.5 sm:px-6 bg-white border-t border-sabbia-200 flex items-center justify-between gap-3 shrink-0">
           <span class="text-[11px] text-sabbia-600 flex items-center gap-1.5">
             <i data-lucide="shield-check" class="w-4 h-4 text-oro-600"></i>
-            <span class="hidden sm:inline">Cifratura Zero-Knowledge locale</span>
-            <span class="sm:hidden">Zero-Knowledge</span>
+            <span class="hidden sm:inline">Massima Riservatezza</span>
+            <span class="sm:hidden">Riservato</span>
           </span>
           <button type="button" onclick="vaiAlPasso2Studio()" class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs uppercase tracking-wide flex items-center gap-2 shadow-lg shadow-oro-500/25 transition hover:scale-105 border border-oro-400/40">
             <span>Passo 2: Regole di Custodia</span>
@@ -558,11 +558,11 @@
         <div class="p-3.5 sm:px-6 bg-white border-t border-sabbia-200 flex items-center justify-between gap-3 shrink-0">
           <span class="text-[11px] text-sabbia-600 flex items-center gap-1.5">
             <i data-lucide="lock" class="w-4 h-4 text-oro-600"></i>
-            <span>Firma SHA-256 Immutabile</span>
+            <span>Protetto da Segreto Privato</span>
           </span>
           <button type="button" onclick="sigillaRegistrazione()" class="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs uppercase tracking-wide flex items-center gap-2 shadow-lg shadow-oro-500/25 transition hover:scale-105 border border-oro-400/40">
             <i data-lucide="shield-check" class="w-4 h-4"></i>
-            <span>Cifra in Locale e Sigilla nel Tempo</span>
+            <span>Custodisci e Sigilla nel Tempo</span>
           </button>
         </div>
 
@@ -574,7 +574,7 @@
           <i data-lucide="shield-check" class="w-10 h-10 stroke-[2]"></i>
         </div>
         <h4 class="font-serif text-xl font-bold text-oro-300">Sigillo di Custodia Apposto</h4>
-        <p id="seal-hash-display" class="font-mono text-[11px] text-sabbia-300 mt-1">Hash SHA-256 Immutabile</p>
+        <p id="seal-hash-display" class="text-xs text-sabbia-300 mt-1">Il tuo ricordo è al sicuro nel tempo</p>
       </div>
 
     </div>
@@ -619,7 +619,7 @@
             <span id="consegna-data" class="text-xs font-bold text-sabbia-900">18° Compleanno (14 Maggio 2034)</span>
           </div>
           <div class="flex items-center justify-between pt-1">
-            <span class="text-[11px] text-sabbia-500 font-mono">Impronta SHA-256:</span>
+            <span class="text-[11px] text-sabbia-500 font-mono">Codice Univoco di Custodia:</span>
             <span id="consegna-hash" class="text-[11px] font-mono text-sabbia-600">0x8a92...f71c</span>
           </div>
         </div>
@@ -633,7 +633,7 @@
             <div>
               <h4 class="text-xs font-bold text-sabbia-950 uppercase tracking-wide">Certificato Ufficiale di Custodia</h4>
               <p class="text-xs text-sabbia-600 mt-0.5 leading-relaxed">
-                Stampa o salva il documento con l'impronta SHA-256 e le istruzioni di sblocco da riporre tra i documenti importanti di famiglia o consegnare all'avente diritto.
+                Stampa o salva il certificato con le istruzioni per i tuoi cari o da conservare tra i documenti importanti di famiglia.
               </p>
             </div>
           </div>
@@ -1435,7 +1435,7 @@
               </button>
             </div>
             <h2 class="font-serif text-2xl font-bold text-sabbia-950 mt-2">Redigi una Disposizione o Memoria Scritta</h2>
-            <p class="text-sabbia-700 text-xs mt-1">Il documento viene cifrato in locale (AES-256) e vincolato alla condizione temporale o anagrafica scelta.</p>
+            <p class="text-sabbia-700 text-xs mt-1">Il documento viene protetto in modo sicuro e vincolato alla data o alla persona scelta.</p>
 
             <form id="form-capsula" onsubmit="salvaNuovaCapsula(event)" class="mt-6 space-y-5">
               <div>
@@ -1485,7 +1485,7 @@
                   <span>Codice Fiscale dell'Avente Diritto</span>
                   <span class="text-[10px] text-oro-700 font-mono">Verifica ANPR / CIE</span>
                 </label>
-                <p class="text-[10px] text-sabbia-600 mb-1 leading-tight">Alla scadenza della data, solo chi possiede questo Codice Fiscale potrà decrittare il documento.</p>
+                <p class="text-[10px] text-sabbia-600 mb-1 leading-tight">Alla scadenza della data, solo chi possiede questo Codice Fiscale potrà accedere al documento.</p>
                 <input type="text" id="capsula-cf" value="MRTEGL08M41H501Z" placeholder="Codice Fiscale dell'avente diritto..." class="w-full text-xs sm:text-sm font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-4 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
               </div>
 
@@ -1499,7 +1499,7 @@
                   <i data-lucide="key" class="w-4 h-4 text-oro-600"></i> Domanda di Sicurezza Personale (Passphrase di Ripristino)
                 </div>
                 <p class="text-[11px] text-sabbia-800 leading-normal">
-                  Imposta una risposta riservata per confermare la cifratura locale dei tuoi dati:
+                  Imposta una risposta riservata per proteggere l'accesso ai tuoi dati:
                 </p>
                 <select id="capsula-domanda" class="w-full text-xs bg-white border border-sabbia-200 rounded-xl p-2 text-sabbia-900">
                   <option>Qual è la città di nascita del tuo antenato più anziano?</option>
@@ -1510,7 +1510,7 @@
               </div>
 
               <button type="submit" id="btn-sigilla" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-sm shadow-lg shadow-oro-600/20 flex items-center justify-center gap-2 transition border border-oro-400/40">
-                <i data-lucide="lock" class="w-4 h-4 text-sabbia-950"></i> Cifra in Locale e Sigilla nel Tempo
+                <i data-lucide="lock" class="w-4 h-4 text-sabbia-950"></i> Custodisci e Sigilla nel Tempo
               </button>
             </form>
           </div>
@@ -1521,7 +1521,7 @@
     async function salvaNuovaCapsula(e) {
       e.preventDefault();
       const btn = document.getElementById('btn-sigilla');
-      btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-sabbia-950"></i> Cifratura Zero-Knowledge in corso...`;
+      btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-sabbia-950"></i> Sigillo e custodia in corso...`;
       lucide.createIcons();
 
       const titolo = document.getElementById('capsula-titolo').value.trim() || "Disposizione personale";
@@ -1945,7 +1945,7 @@
       reader.onload = (evt) => {
         docBase64 = evt.target.result;
         document.getElementById('doc-preview-nome').innerText = docNomeFile;
-        document.getElementById('doc-preview-dimensione').innerText = `${docDimensione} • Impronta SHA-256 Pronta`;
+        document.getElementById('doc-preview-dimensione').innerText = `${docDimensione} • Pronto per la custodia`;
         document.getElementById('doc-upload-prompt').classList.add('hidden');
         document.getElementById('doc-preview-box').classList.remove('hidden');
       };
@@ -2257,7 +2257,7 @@
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashHex = '0x' + hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 16) + '...';
 
-      document.getElementById('seal-hash-display').innerText = `Sigillo di Custodia: ${hashHex}`;
+      document.getElementById('seal-hash-display').innerText = "Il tuo ricordo è al sicuro nel tempo";
 
       setTimeout(() => {
         const videoBlobUrl = (tipoFormatoStudio === 'video' && recordedBlob) ? URL.createObjectURL(recordedBlob) : null;
