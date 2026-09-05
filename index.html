@@ -173,197 +173,407 @@
     </div>
   </footer>
 
-  <!-- STUDIO VIDEO CINEMATOGRAFICO (MODALE CON FOTOCAMERA REALE & PILLOLA FLUTTUANTE) -->
-  <div id="studio-video-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-xl flex items-center justify-center p-4 hidden">
-    <div class="max-w-3xl w-full bg-sabbia-50 rounded-3xl border border-oro-400/40 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+  <!-- STUDIO DI CUSTODIA (WIZARD A 2 PASSAGGI CON 5 FORMATI & REGOLE DI SBLOCCO) -->
+  <div id="studio-video-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-xl flex items-center justify-center p-3 sm:p-4 hidden overflow-y-auto">
+    <div class="max-w-3xl w-full bg-sabbia-50 rounded-3xl border border-oro-400/40 shadow-2xl overflow-hidden flex flex-col my-auto max-h-[95vh]">
       
       <!-- Intestazione Studio -->
-      <div class="p-4 sm:px-6 border-b border-sabbia-200 flex flex-wrap items-center justify-between gap-3 bg-white">
+      <div class="p-3.5 sm:px-6 border-b border-sabbia-200 flex flex-wrap items-center justify-between gap-3 bg-white shrink-0">
         <div class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-oro-500 to-oro-700 flex items-center justify-center text-sabbia-950 font-bold shadow-sm">
             <i id="studio-header-icon" data-lucide="shield-check" class="w-4 h-4"></i>
           </div>
           <div>
             <h3 id="studio-titolo" class="text-sm font-bold text-sabbia-950">Studio di Custodia</h3>
-            <p id="studio-sottotitolo" class="text-[11px] text-sabbia-700">Custodia riservata di memorie e disposizioni personali</p>
+            <p id="studio-sottotitolo" class="text-[11px] text-sabbia-700">Passo 1 di 2: Registra o carica il contenuto da custodire</p>
           </div>
         </div>
 
-        <!-- Selettore Formato: Video vs Testo Scritto -->
-        <div class="flex items-center gap-2">
-          <div class="flex items-center bg-sabbia-100 p-1 rounded-xl border border-sabbia-200">
-            <button type="button" id="tab-studio-video" onclick="selezionaFormatoStudio('video')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-sabbia-300">
-              <i data-lucide="video" class="w-3.5 h-3.5 text-oro-600"></i> Video
+        <!-- Selettore dei 5 Formati (Visibile solo nel Passo 1) -->
+        <div id="studio-selettore-formati" class="flex items-center gap-2">
+          <div class="flex items-center gap-1 bg-sabbia-100 p-1 rounded-xl border border-sabbia-200 overflow-x-auto max-w-[280px] sm:max-w-none">
+            <button type="button" id="tab-studio-video" onclick="selezionaFormatoStudio('video')" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-sabbia-300 shrink-0">
+              <i data-lucide="video" class="w-3.5 h-3.5 text-oro-600"></i> <span>Video</span>
             </button>
-            <button type="button" id="tab-studio-testo" onclick="selezionaFormatoStudio('testo')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition">
-              <i data-lucide="file-text" class="w-3.5 h-3.5 text-oro-600"></i> Testo Scritto
+            <button type="button" id="tab-studio-audio" onclick="selezionaFormatoStudio('audio')" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition shrink-0">
+              <i data-lucide="mic" class="w-3.5 h-3.5 text-oro-600"></i> <span>Audio</span>
+            </button>
+            <button type="button" id="tab-studio-testo" onclick="selezionaFormatoStudio('testo')" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition shrink-0">
+              <i data-lucide="file-text" class="w-3.5 h-3.5 text-oro-600"></i> <span>Testo</span>
+            </button>
+            <button type="button" id="tab-studio-foto" onclick="selezionaFormatoStudio('foto')" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition shrink-0">
+              <i data-lucide="image" class="w-3.5 h-3.5 text-oro-600"></i> <span>Foto</span>
+            </button>
+            <button type="button" id="tab-studio-doc" onclick="selezionaFormatoStudio('documento')" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition shrink-0">
+              <i data-lucide="folder-lock" class="w-3.5 h-3.5 text-oro-600"></i> <span>File</span>
             </button>
           </div>
-          <button onclick="chiudiStudioVideo()" class="w-8 h-8 rounded-full bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-800 flex items-center justify-center transition">
+          <button onclick="chiudiStudioVideo()" class="w-8 h-8 rounded-full bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-800 flex items-center justify-center transition shrink-0">
             <i data-lucide="x" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
 
-      <!-- Barra Ispirazioni Tematiche -->
-      <div id="studio-barra-ispirazione" class="bg-sabbia-100/70 border-b border-sabbia-200 p-3 px-4 sm:px-6 flex items-center justify-between gap-3 text-xs">
-        <div class="flex items-center gap-2 text-sabbia-800 overflow-hidden">
-          <span class="text-oro-700 font-bold flex items-center gap-1 shrink-0"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Spunto Guida:</span>
-          <span id="prompt-ispirazione" class="italic truncate text-sabbia-900 font-medium">"Racconta l'origine della tua visione o un insegnamento fondamentale per il futuro..."</span>
-        </div>
-        <button onclick="cambiaIspirazione()" class="shrink-0 text-[11px] text-oro-700 hover:text-oro-800 font-bold underline">
-          Cambia spunto ↻
-        </button>
-      </div>
-
-      <!-- Area di Acquisizione (Video o Testo) -->
-      <div class="p-3 sm:p-6 flex-1 flex flex-col items-center justify-center bg-stone-950/90 relative overflow-y-auto min-h-[360px]">
+      <!-- ================= PASSO 1: ACQUISIZIONE CONTENUTO ================= -->
+      <div id="studio-passo-1" class="flex flex-col flex-1 overflow-hidden">
         
-        <!-- Vista 1: Cornice Ritratto Adattiva (Video) -->
-        <div id="studio-frame-video" class="relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-[380px] aspect-[9/16] sm:aspect-[4/5] rounded-[2rem] overflow-hidden studio-glow border-2 border-oro-400/60 bg-black flex items-center justify-center shadow-2xl transition-all duration-300">
+        <!-- Barra Ispirazioni Tematiche -->
+        <div id="studio-barra-ispirazione" class="bg-sabbia-100/70 border-b border-sabbia-200 p-2.5 px-4 sm:px-6 flex items-center justify-between gap-3 text-xs shrink-0">
+          <div class="flex items-center gap-2 text-sabbia-800 overflow-hidden">
+            <span class="text-oro-700 font-bold flex items-center gap-1 shrink-0"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Spunto Guida:</span>
+            <span id="prompt-ispirazione" class="italic truncate text-sabbia-900 font-medium">"Racconta l'origine della tua visione o un insegnamento fondamentale per il futuro..."</span>
+          </div>
+          <button onclick="cambiaIspirazione()" class="shrink-0 text-[11px] text-oro-700 hover:text-oro-800 font-bold underline">
+            Cambia spunto ↻
+          </button>
+        </div>
+
+        <!-- Area Centrale di Acquisizione (5 Formati) -->
+        <div class="p-3 sm:p-6 flex-1 flex flex-col items-center justify-center bg-stone-950/90 relative overflow-y-auto min-h-[340px] sm:min-h-[380px]">
           
-          <!-- Live Video Stream (Specchiato & Adattivo) -->
-          <video id="live-video" autoplay playsinline muted class="mirror-video absolute inset-0 w-full h-full object-cover"></video>
-          
-          <!-- Replay Video Registrato -->
-          <video id="playback-video" controls playsinline class="hidden absolute inset-0 w-full h-full object-cover"></video>
-
-          <!-- Conto alla rovescia 3-2-1 -->
-          <div id="countdown-overlay" class="absolute inset-0 flex items-center justify-center bg-stone-950/60 backdrop-blur-sm hidden z-20">
-            <span id="countdown-number" class="text-7xl sm:text-8xl font-serif font-bold text-oro-300 animate-ping">3</span>
-          </div>
-
-          <!-- Badge REC attivo in alto a sinistra -->
-          <div id="rec-badge" class="absolute top-4 left-4 flex items-center gap-2 bg-red-600/90 text-white text-[11px] font-mono font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-md hidden z-20">
-            <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-            <span>REC • <span id="rec-timer">00:00</span></span>
-          </div>
-
-          <!-- Sigillo Digitale Animato (Ceralacca Notarile) -->
-          <div id="seal-stamp-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-stone-950/80 backdrop-blur-md p-6 text-center hidden z-30 fade-in">
-            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-oro-400 via-oro-500 to-amber-600 border-4 border-white shadow-2xl flex items-center justify-center text-sabbia-950 glow-pulse-oro mb-3">
-              <i data-lucide="shield-check" class="w-10 h-10 stroke-[2]"></i>
-            </div>
-            <h4 class="font-serif text-xl font-bold text-oro-300">Sigillo di Custodia Apposto</h4>
-            <p id="seal-hash-display" class="font-mono text-[11px] text-sabbia-300 mt-1">Hash SHA-256 Immutabile</p>
-          </div>
-
-          <!-- PILLOLA FLUTTUANTE GLASSMORPHISM (Video) -->
-          <div class="absolute bottom-4 z-20 flex items-center gap-2 bg-stone-950/85 backdrop-blur-md border border-white/20 p-1.5 px-4 rounded-full shadow-2xl max-w-[90%]">
+          <!-- FORMATO 1: VIDEO (Live Webcam o File Upload) -->
+          <div id="studio-frame-video" class="relative w-full max-w-[280px] sm:max-w-[340px] aspect-[9/16] sm:aspect-[4/5] rounded-[2rem] overflow-hidden studio-glow border-2 border-oro-400/60 bg-black flex items-center justify-center shadow-2xl transition-all duration-300">
+            <!-- Live Video Stream -->
+            <video id="live-video" autoplay playsinline muted class="mirror-video absolute inset-0 w-full h-full object-cover"></video>
             
-            <!-- Stato 1: Pronto per Registrare -->
-            <div id="controls-idle" class="flex items-center gap-2">
-              <button onclick="avviaContoAllaRovescia()" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 text-white font-bold text-xs tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-red-600/30 transition hover:scale-105">
-                <span class="w-2.5 h-2.5 rounded-full bg-white animate-pulse"></span>
-                <span>Registra</span>
-              </button>
+            <!-- Replay Video Registrato / Caricato -->
+            <video id="playback-video" controls playsinline class="hidden absolute inset-0 w-full h-full object-cover"></video>
+
+            <!-- Conto alla rovescia 3-2-1 -->
+            <div id="countdown-overlay" class="absolute inset-0 flex items-center justify-center bg-stone-950/60 backdrop-blur-sm hidden z-20">
+              <span id="countdown-number" class="text-7xl sm:text-8xl font-serif font-bold text-oro-300 animate-ping">3</span>
             </div>
 
-            <!-- Stato 2: In Registrazione -->
-            <div id="controls-recording" class="hidden flex items-center gap-2">
-              <button onclick="fermaRegistrazione()" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-stone-800 to-stone-900 border border-white/30 text-white hover:bg-stone-800 font-bold text-xs tracking-wider uppercase flex items-center gap-2 shadow-lg transition hover:scale-105">
-                <i data-lucide="square" class="w-3 h-3 fill-current text-red-500"></i>
-                <span>Ferma</span>
-              </button>
+            <!-- Badge REC attivo in alto a sinistra -->
+            <div id="rec-badge" class="absolute top-4 left-4 flex items-center gap-2 bg-red-600/90 text-white text-[11px] font-mono font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-md hidden z-20">
+              <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+              <span>REC • <span id="rec-timer">00:00</span></span>
             </div>
 
-            <!-- Stato 3: Revisione Video (Rifai o Sigilla) -->
-            <div id="controls-review" class="hidden flex items-center gap-2">
-              <button onclick="rifaiRegistrazione()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold flex items-center transition" title="Rifai da capo">
-                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-              </button>
-              <button onclick="sigillaRegistrazione()" class="px-4 py-2 rounded-full bg-gradient-to-r from-oro-500 via-oro-400 to-amber-500 text-sabbia-950 font-bold text-xs tracking-wide flex items-center gap-1.5 shadow-xl shadow-oro-500/25 transition hover:scale-105">
-                <i data-lucide="lock" class="w-3.5 h-3.5 text-sabbia-950"></i>
-                <span>Sigilla</span>
-              </button>
+            <!-- Pillola Controlli Video -->
+            <div class="absolute bottom-4 z-20 flex items-center gap-2 bg-stone-950/85 backdrop-blur-md border border-white/20 p-1.5 px-3 rounded-full shadow-2xl max-w-[92%]">
+              <!-- Stato Pronto -->
+              <div id="controls-idle" class="flex items-center gap-2">
+                <button onclick="avviaContoAllaRovescia()" class="px-4 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 text-white font-bold text-xs uppercase flex items-center gap-1.5 shadow-lg shadow-red-600/30 transition hover:scale-105">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white animate-pulse"></span>
+                  <span>Registra</span>
+                </button>
+                <label for="upload-video-input" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold cursor-pointer transition flex items-center gap-1" title="Carica file video (MP4, WEBM)">
+                  <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                  <span class="text-[10px] hidden sm:inline">File</span>
+                </label>
+                <input type="file" id="upload-video-input" accept="video/*" class="hidden" onchange="caricaFileVideo(event)" />
+              </div>
+
+              <!-- Stato In Registrazione -->
+              <div id="controls-recording" class="hidden flex items-center gap-2">
+                <button onclick="fermaRegistrazione()" class="px-4 py-2 rounded-full bg-gradient-to-r from-stone-800 to-stone-900 border border-white/30 text-white hover:bg-stone-800 font-bold text-xs uppercase flex items-center gap-1.5 shadow-lg transition hover:scale-105">
+                  <i data-lucide="square" class="w-3 h-3 fill-current text-red-500"></i>
+                  <span>Ferma</span>
+                </button>
+              </div>
+
+              <!-- Stato Revisione -->
+              <div id="controls-review" class="hidden flex items-center gap-2">
+                <button onclick="rifaiRegistrazione()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold flex items-center gap-1 transition" title="Rifai">
+                  <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                  <span class="text-[10px]">Rifai</span>
+                </button>
+                <span class="text-[11px] font-medium text-emerald-400 flex items-center gap-1 px-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5"></i> Pronto
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FORMATO 2: AUDIO VOCALE -->
+          <div id="studio-frame-audio" class="hidden w-full max-w-md bg-stone-900 rounded-3xl border border-oro-400/40 p-6 shadow-2xl flex flex-col items-center text-center gap-4 fade-in">
+            <div id="audio-icon-pulse" class="w-20 h-20 rounded-full bg-oro-500/20 text-oro-400 border-2 border-oro-500/40 flex items-center justify-center shadow-lg transition-all duration-300">
+              <i data-lucide="mic" class="w-9 h-9"></i>
+            </div>
+            
+            <div>
+              <h4 class="font-serif text-lg font-bold text-oro-300">Messaggio Vocale Intimo</h4>
+              <p class="text-xs text-sabbia-400 mt-1">Registra la tua voce con il microfono oppure carica una registrazione audio esistente.</p>
             </div>
 
+            <!-- Timer Audio & Onde Sonore Simulate -->
+            <div id="audio-visualizer-box" class="w-full bg-stone-950/80 rounded-2xl p-4 border border-white/10 flex flex-col items-center gap-2">
+              <div id="audio-waves" class="flex items-center gap-1.5 h-8">
+                <span class="w-1.5 h-3 bg-oro-500 rounded-full"></span>
+                <span class="w-1.5 h-6 bg-oro-400 rounded-full"></span>
+                <span class="w-1.5 h-4 bg-oro-500 rounded-full"></span>
+                <span class="w-1.5 h-7 bg-oro-300 rounded-full"></span>
+                <span class="w-1.5 h-5 bg-oro-400 rounded-full"></span>
+                <span class="w-1.5 h-8 bg-oro-500 rounded-full"></span>
+                <span class="w-1.5 h-3 bg-oro-400 rounded-full"></span>
+              </div>
+              <span id="audio-rec-timer" class="font-mono text-sm font-bold text-oro-300">00:00</span>
+            </div>
+
+            <!-- Player di Riascolto -->
+            <audio id="playback-audio" controls class="hidden w-full max-w-xs mt-1"></audio>
+
+            <!-- Controlli Audio -->
+            <div class="flex items-center gap-2 mt-2">
+              <div id="audio-controls-idle" class="flex items-center gap-2">
+                <button onclick="avviaRegistrazioneAudio()" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 text-white font-bold text-xs uppercase flex items-center gap-2 shadow-lg transition hover:scale-105">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white animate-pulse"></span>
+                  <span>Registra Voce</span>
+                </button>
+                <label for="upload-audio-input" class="px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold cursor-pointer transition flex items-center gap-1.5">
+                  <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                  <span>Carica Audio (MP3)</span>
+                </label>
+                <input type="file" id="upload-audio-input" accept="audio/*" class="hidden" onchange="caricaFileAudio(event)" />
+              </div>
+
+              <div id="audio-controls-recording" class="hidden flex items-center gap-2">
+                <button onclick="fermaRegistrazioneAudio()" class="px-5 py-2.5 rounded-full bg-stone-800 border border-white/30 text-white hover:bg-stone-700 font-bold text-xs uppercase flex items-center gap-2 shadow-lg transition hover:scale-105">
+                  <i data-lucide="square" class="w-3.5 h-3.5 fill-current text-red-500"></i>
+                  <span>Ferma Registrazione</span>
+                </button>
+              </div>
+
+              <div id="audio-controls-review" class="hidden flex items-center gap-2">
+                <button onclick="rifaiAudio()" class="px-3.5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold flex items-center gap-1.5 transition">
+                  <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                  <span>Rifai</span>
+                </button>
+                <span class="text-xs font-medium text-emerald-400 flex items-center gap-1 px-3">
+                  <i data-lucide="check" class="w-4 h-4"></i> Audio Acquisito
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FORMATO 3: TESTO SCRITTO -->
+          <div id="studio-frame-testo" class="hidden w-full max-w-xl bg-white rounded-3xl border border-oro-400/40 p-5 sm:p-6 shadow-2xl flex flex-col gap-3 my-auto fade-in">
+            <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
+              <span class="text-xs font-bold text-sabbia-900 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="file-text" class="w-4 h-4 text-oro-600"></i> Disposizione o Lettera Scritta
+              </span>
+              <span id="studio-testo-contatore" class="text-[11px] font-mono text-sabbia-500 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200">0 caratteri</span>
+            </div>
+            <textarea id="studio-testo-input" oninput="aggiornaContatoreTestoStudio()" rows="7" placeholder="Scrivi qui la tua memoria, disposizioni personali, lezioni o il racconto di vita da custodire nel tempo..." class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl p-4 text-sabbia-950 focus:outline-none focus:border-oro-500 leading-relaxed font-serif resize-none"></textarea>
+            <p class="text-[11px] text-sabbia-500 italic">Il testo verrà cifrato localmente sul tuo dispositivo con chiave simmetrica prima di essere archiviato.</p>
+          </div>
+
+          <!-- FORMATO 4: FOTO / IMMAGINE -->
+          <div id="studio-frame-foto" class="hidden w-full max-w-lg bg-white rounded-3xl border border-oro-400/40 p-5 sm:p-6 shadow-2xl flex flex-col items-center gap-4 my-auto fade-in">
+            <!-- Dropzone / Caricamento Foto -->
+            <div id="foto-upload-prompt" class="w-full border-2 border-dashed border-sabbia-300 rounded-2xl p-8 text-center bg-sabbia-50 hover:bg-sabbia-100/70 transition cursor-pointer flex flex-col items-center justify-center" onclick="document.getElementById('upload-foto-input').click()">
+              <div class="w-14 h-14 rounded-full bg-oro-500/10 text-oro-600 flex items-center justify-center mb-3">
+                <i data-lucide="image-plus" class="w-7 h-7"></i>
+              </div>
+              <h5 class="text-xs font-bold text-sabbia-950">Carica una Fotografia o Scansione</h5>
+              <p class="text-[11px] text-sabbia-600 mt-1">Trascina qui la tua foto o clicca per sfogliare (JPG, PNG, WEBP)</p>
+            </div>
+            <input type="file" id="upload-foto-input" accept="image/*" class="hidden" onchange="caricaFileFoto(event)" />
+
+            <!-- Anteprima Foto Caricata -->
+            <div id="foto-preview-box" class="hidden w-full flex flex-col items-center gap-3">
+              <div class="relative max-h-64 rounded-2xl overflow-hidden border border-sabbia-300 shadow-md">
+                <img id="foto-preview-img" src="" alt="Anteprima" class="max-h-64 w-auto object-contain bg-black/5" />
+              </div>
+              <input type="text" id="foto-caption-input" placeholder="Didascalia o breve memoria su questa immagine (opzionale)..." class="w-full text-xs bg-sabbia-50 border border-sabbia-200 rounded-xl px-3.5 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+              <button onclick="document.getElementById('upload-foto-input').click()" class="text-xs text-oro-700 hover:underline font-bold flex items-center gap-1">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Sostituisci fotografia
+              </button>
+            </div>
+          </div>
+
+          <!-- FORMATO 5: DOCUMENTI / FILE (PDF, ZIP, ATTI) -->
+          <div id="studio-frame-doc" class="hidden w-full max-w-lg bg-white rounded-3xl border border-oro-400/40 p-5 sm:p-6 shadow-2xl flex flex-col items-center gap-4 my-auto fade-in">
+            <!-- Dropzone / Caricamento Documento -->
+            <div id="doc-upload-prompt" class="w-full border-2 border-dashed border-sabbia-300 rounded-2xl p-8 text-center bg-sabbia-50 hover:bg-sabbia-100/70 transition cursor-pointer flex flex-col items-center justify-center" onclick="document.getElementById('upload-doc-input').click()">
+              <div class="w-14 h-14 rounded-full bg-oro-500/10 text-oro-600 flex items-center justify-center mb-3">
+                <i data-lucide="file-up" class="w-7 h-7"></i>
+              </div>
+              <h5 class="text-xs font-bold text-sabbia-950">Carica Fascicolo o Documento</h5>
+              <p class="text-[11px] text-sabbia-600 mt-1">Carica atti notturni, contratti, perizie, ricette o diari (PDF, ZIP, DOCX)</p>
+            </div>
+            <input type="file" id="upload-doc-input" accept=".pdf,.doc,.docx,.zip,.txt" class="hidden" onchange="caricaFileDoc(event)" />
+
+            <!-- Anteprima Documento Caricato -->
+            <div id="doc-preview-box" class="hidden w-full p-4 rounded-2xl bg-sabbia-50 border border-sabbia-200 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 overflow-hidden">
+                <div class="w-11 h-11 rounded-xl bg-white border border-oro-400/50 text-oro-700 flex items-center justify-center shrink-0 shadow-sm">
+                  <i data-lucide="file-check" class="w-6 h-6"></i>
+                </div>
+                <div class="overflow-hidden">
+                  <h6 id="doc-preview-nome" class="text-xs font-bold font-mono text-sabbia-950 truncate">documento.pdf</h6>
+                  <p id="doc-preview-dimensione" class="text-[10px] text-sabbia-600 font-mono">0.0 MB • Firma SHA-256 Pronta</p>
+                </div>
+              </div>
+              <button onclick="document.getElementById('upload-doc-input').click()" class="text-xs text-oro-700 hover:underline font-bold shrink-0">
+                Cambia file
+              </button>
+            </div>
           </div>
 
         </div>
 
-        <!-- Vista 2: Editor di Testo / Disposizione Scritta -->
-        <div id="studio-frame-testo" class="hidden w-full max-w-xl bg-white rounded-3xl border border-oro-400/40 p-5 sm:p-6 shadow-2xl flex flex-col gap-3.5 my-auto fade-in">
-          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
-            <span class="text-xs font-bold text-sabbia-900 uppercase tracking-wider flex items-center gap-1.5">
-              <i data-lucide="file-text" class="w-4 h-4 text-oro-600"></i> Disposizione o Memoria Scritta
-            </span>
-            <span id="studio-testo-contatore" class="text-[11px] font-mono text-sabbia-500 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200">0 caratteri</span>
-          </div>
-          <textarea id="studio-testo-input" oninput="aggiornaContatoreTestoStudio()" rows="7" placeholder="Scrivi qui il tuo messaggio, le tue disposizioni personali o il documento da custodire nel tempo..." class="w-full text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-2xl p-4 text-sabbia-950 focus:outline-none focus:border-oro-500 leading-relaxed font-serif resize-none"></textarea>
-          <div class="flex items-center justify-between pt-1">
-            <span class="text-[11px] text-sabbia-600 flex items-center gap-1">
-              <i data-lucide="shield" class="w-3.5 h-3.5 text-oro-600"></i> Cifratura Zero-Knowledge locale
-            </span>
-            <button onclick="sigillaRegistrazione()" class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs uppercase tracking-wide flex items-center gap-1.5 shadow-lg shadow-oro-500/25 transition hover:scale-105 border border-oro-400/40">
-              <i data-lucide="lock" class="w-4 h-4 text-sabbia-950"></i> Sigilla Testo
-            </button>
-          </div>
+        <!-- Barra Inferiore Passo 1 -->
+        <div class="p-3.5 sm:px-6 bg-white border-t border-sabbia-200 flex items-center justify-between gap-3 shrink-0">
+          <span class="text-[11px] text-sabbia-600 flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-oro-600"></i>
+            <span class="hidden sm:inline">Cifratura Zero-Knowledge locale</span>
+            <span class="sm:hidden">Zero-Knowledge</span>
+          </span>
+          <button type="button" onclick="vaiAlPasso2Studio()" class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs uppercase tracking-wide flex items-center gap-2 shadow-lg shadow-oro-500/25 transition hover:scale-105 border border-oro-400/40">
+            <span>Passo 2: Regole di Custodia</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
         </div>
 
       </div>
 
-      <!-- Campi Dettaglio Post/Memoria (Titolo, Destinatario, Condizioni di Sblocco) -->
-      <div id="studio-meta-fields" class="p-4 sm:p-6 bg-white border-t border-sabbia-200 flex flex-col gap-3">
-        <div class="flex flex-col sm:flex-row gap-3">
-          <input type="text" id="video-titolo" placeholder="Titolo del contenuto (es. Disposizione personale per il 2035)" class="flex-1 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
-          <input type="text" id="video-autore-dest" placeholder="Nome dell'Avente Diritto o Destinatario" class="sm:w-64 text-xs sm:text-sm bg-sabbia-50 border border-sabbia-200 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500" />
-        </div>
+      <!-- ================= PASSO 2: CONFIGURAZIONE REGOLE DI SBLOCCO ================= -->
+      <div id="studio-passo-2" class="hidden flex flex-col flex-1 overflow-hidden">
         
-        <!-- Protocollo di Sblocco (Privato) -->
-        <div id="studio-campi-privati" class="pt-3 border-t border-sabbia-100 space-y-3">
+        <!-- Intestazione Passo 2 con Tasto Ritorno -->
+        <div class="p-3 sm:px-6 bg-sabbia-100/90 border-b border-sabbia-200 flex items-center justify-between gap-3 shrink-0">
+          <button type="button" onclick="tornaAlPasso1Studio()" class="text-xs font-bold text-sabbia-800 hover:text-sabbia-950 flex items-center gap-1.5 transition">
+            <i data-lucide="arrow-left" class="w-4 h-4 text-oro-600"></i>
+            <span>Torna a modifica contenuto</span>
+          </button>
+          <div id="studio-passo2-riepilogo" class="text-[11px] font-medium bg-white px-3 py-1 rounded-full border border-sabbia-300 text-sabbia-900 flex items-center gap-1.5 shadow-sm">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-oro-600"></i>
+            <span id="passo2-tipo-label">Contenuto Pronto</span>
+          </div>
+        </div>
+
+        <!-- Corpo di Configurazione (Scrollabile) -->
+        <div class="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1 bg-sabbia-50/60">
           
-          <!-- Selettore della Modalità di Sblocco -->
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-sabbia-100/90 p-2.5 rounded-2xl border border-sabbia-300">
-            <span class="text-xs font-bold text-sabbia-900 flex items-center gap-1.5">
-              <i data-lucide="key" class="w-4 h-4 text-oro-600"></i> Condizione di Sblocco:
-            </span>
-            <div class="grid grid-cols-2 gap-1.5">
-              <button type="button" id="btn-sblocco-tempo" onclick="impostaTipoSblocco('tempo')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-oro-500 flex items-center justify-center gap-1.5">
-                <i data-lucide="clock" class="w-3.5 h-3.5 text-oro-600"></i> Solo Data e Ora
-              </button>
-              <button type="button" id="btn-sblocco-doppio" onclick="impostaTipoSblocco('doppio')" class="px-3 py-1.5 rounded-xl text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition border border-transparent flex items-center justify-center gap-1.5">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-sabbia-500"></i> Data + CIE (Doppio Fattore)
-              </button>
-            </div>
-          </div>
-
-          <!-- Campi Vincolo Temporale (Data e Ora) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div class="p-3 rounded-2xl bg-sabbia-50 border border-sabbia-200">
-              <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center justify-between">
-                <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5 text-oro-600"></i> Data di Sblocco</span>
-                <span class="text-[10px] text-oro-700 font-mono">Giorno Certo</span>
-              </label>
-              <input type="date" id="video-data-sblocco" value="2034-05-14" class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
-            </div>
-
-            <div class="p-3 rounded-2xl bg-sabbia-50 border border-sabbia-200">
-              <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center justify-between">
-                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-oro-600"></i> Ora di Sblocco</span>
-                <span class="text-[10px] text-oro-700 font-mono">Ora Certa</span>
-              </label>
-              <input type="time" id="video-ora-sblocco" value="12:00" class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
-            </div>
-          </div>
-
-          <!-- Campo Identità Anagrafica (Visibile solo se Doppio Fattore) -->
-          <div id="box-campo-cf" class="p-3 rounded-2xl bg-sabbia-50 border border-sabbia-200 hidden">
-            <label class="block text-[11px] font-bold text-sabbia-900 mb-0.5 flex items-center justify-between">
-              <span>2° Fattore: Codice Fiscale dell'Avente Diritto</span>
-              <span class="text-[10px] text-oro-700 font-mono">ANPR / CIE</span>
+          <!-- Titolo del Contenuto -->
+          <div>
+            <label class="block text-xs font-bold text-sabbia-900 mb-1 flex items-center justify-between">
+              <span>Titolo dell'Archivio o Memoria *</span>
+              <span class="text-[10px] text-oro-700 font-medium">Nome Identificativo</span>
             </label>
-            <p class="text-[10px] text-sabbia-600 mb-1.5 leading-tight">Solo la persona con questo Codice Fiscale potrà autenticarsi e sbloccare il contenuto dopo la data fissata.</p>
-            <input type="text" id="video-cf-erede" value="MRTEGL08M41H501Z" placeholder="Codice Fiscale avente diritto..." class="w-full text-xs font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
+            <input type="text" id="studio-titolo-memoria" placeholder="Es. Per il 18° compleanno di mio figlio / Disposizioni 2035..." class="w-full text-xs sm:text-sm bg-white border border-sabbia-300 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium shadow-sm" />
           </div>
 
-          <!-- Spiegazione dinamica dello sblocco -->
-          <div id="box-spiegazione-sblocco" class="p-2.5 rounded-xl bg-sabbia-100 border border-sabbia-200 text-[11px] text-sabbia-800 flex items-start gap-2">
-            <i data-lucide="info" class="w-4 h-4 text-oro-600 shrink-0 mt-0.5"></i>
-            <span id="testo-spiegazione-sblocco"><strong>Sblocco Diretto a Tempo:</strong> Il file rimane crittografato e inaccessibile fino alla data e ora indicata. Raggiunta la scadenza, chi possiede la chiave crittografica potrà aprirlo senza dover mostrare documenti o codice fiscale.</span>
+          <!-- Selezione Regola di Sblocco: 2 Scelte Chiare -->
+          <div class="space-y-2.5">
+            <label class="block text-xs font-bold text-sabbia-900">Scegli la Modalità di Custodia:</label>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              
+              <!-- Opzione 1: Sblocco Libero a Data e Ora -->
+              <div id="card-regola-tempo" onclick="selezionaRegolaCustodia('tempo')" class="p-3.5 sm:p-4 rounded-2xl border-2 border-oro-500 bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <div class="flex items-center gap-2 font-bold text-xs text-sabbia-950">
+                      <input type="radio" name="regola-custodia" id="radio-regola-tempo" value="tempo" checked class="text-oro-600 focus:ring-oro-500">
+                      <span>⏳ Sblocco Libero a Data e Ora</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-oro-700 bg-oro-50 px-2 py-0.5 rounded border border-oro-200">Capsula nel Tempo</span>
+                  </div>
+                  <p class="text-[11px] text-sabbia-600 leading-relaxed">
+                    Accessibile con 1 click alla data stabilita. <strong>Non richiede documenti d'identità o codice fiscale</strong>.
+                  </p>
+                </div>
+                <div class="mt-2.5 pt-2.5 border-t border-sabbia-100 flex items-center gap-1.5 text-[10px] text-sabbia-700">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-oro-600 shrink-0"></i>
+                  <span>Apertura immediata alla scadenza</span>
+                </div>
+              </div>
+
+              <!-- Opzione 2: Riservato a Persona Specifica -->
+              <div id="card-regola-destinatario" onclick="selezionaRegolaCustodia('destinatario')" class="p-3.5 sm:p-4 rounded-2xl border-2 border-sabbia-200 bg-sabbia-50 hover:bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <div class="flex items-center gap-2 font-bold text-xs text-sabbia-950">
+                      <input type="radio" name="regola-custodia" id="radio-regola-destinatario" value="destinatario" class="text-oro-600 focus:ring-oro-500">
+                      <span>🛡️ Riservato a Persona Specifica</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-stone-700 bg-stone-100 px-2 py-0.5 rounded border border-stone-200">100% Privato</span>
+                  </div>
+                  <p class="text-[11px] text-sabbia-600 leading-relaxed">
+                    Sblocco vincolato all'erede designato. <strong>Richiede Codice Fiscale o Carta d'Identità (CIE)</strong>. Mai visibile sui social.
+                  </p>
+                </div>
+                <div class="mt-2.5 pt-2.5 border-t border-sabbia-100 flex items-center gap-1.5 text-[10px] text-sabbia-700">
+                  <i data-lucide="lock" class="w-3.5 h-3.5 text-oro-600 shrink-0"></i>
+                  <span>Blindato: Segreto familiare garantito</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Campi Data e Ora di Sblocco -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 bg-white rounded-2xl border border-sabbia-200 shadow-sm">
+            <div>
+              <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-oro-600"></i> Data di Sblocco
+              </label>
+              <input type="date" id="studio-data-sblocco" value="2034-05-14" class="w-full text-xs bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center gap-1">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-oro-600"></i> Ora di Sblocco
+              </label>
+              <input type="time" id="studio-ora-sblocco" value="12:00" class="w-full text-xs bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+            </div>
+          </div>
+
+          <!-- Sotto-opzione 1: Checkbox Piazza dei Saperi (Solo per Tempo) -->
+          <div id="box-opzione-tempo-social" class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 flex items-start gap-3">
+            <input type="checkbox" id="chk-permetti-piazza" class="mt-0.5 w-4 h-4 text-oro-600 rounded border-sabbia-300 focus:ring-oro-500 cursor-pointer" />
+            <label for="chk-permetti-piazza" class="text-xs text-sabbia-800 cursor-pointer select-none">
+              <strong class="text-sabbia-950 block">Rendi pubblicabile nella Piazza dei Saperi come Capsula Storica</strong>
+              <span class="text-[11px] text-sabbia-600 leading-tight block mt-0.5">Allo scadere della data, avrai l'opzione con 1 click di condividere questo ricordo con l'intera comunità o mantenerlo privato.</span>
+            </label>
+          </div>
+
+          <!-- Sotto-opzione 2: Destinatario & Codice Fiscale (Solo per Riservato) -->
+          <div id="box-opzione-destinatario-campi" class="hidden p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-sabbia-900 mb-1">Nome e Cognome Destinatario (Erede) *</label>
+                <input type="text" id="studio-dest-nome" placeholder="Es. Marco Rossi" class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center justify-between">
+                  <span>Codice Fiscale Erede</span>
+                  <span class="text-[10px] text-oro-700 font-mono">CIE / ANPR</span>
+                </label>
+                <input type="text" id="studio-dest-cf" value="MRTEGL08M41H501Z" placeholder="Codice Fiscale per verifica..." class="w-full text-xs font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white border border-stone-200 text-[11px] text-stone-700 flex items-start gap-2">
+              <i data-lucide="shield-alert" class="w-4 h-4 text-oro-600 shrink-0 mt-0.5"></i>
+              <span><strong>Protezione Totale della Privacy:</strong> Essendo intestato a una persona specifica con dati anagrafici, non potrà MAI essere mostrato sui social o nella Piazza pubblica.</span>
+            </div>
           </div>
 
         </div>
+
+        <!-- Barra Inferiore Passo 2 -->
+        <div class="p-3.5 sm:px-6 bg-white border-t border-sabbia-200 flex items-center justify-between gap-3 shrink-0">
+          <span class="text-[11px] text-sabbia-600 flex items-center gap-1.5">
+            <i data-lucide="lock" class="w-4 h-4 text-oro-600"></i>
+            <span>Firma SHA-256 Immutabile</span>
+          </span>
+          <button type="button" onclick="sigillaRegistrazione()" class="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs uppercase tracking-wide flex items-center gap-2 shadow-lg shadow-oro-500/25 transition hover:scale-105 border border-oro-400/40">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Cifra in Locale e Sigilla nel Tempo</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Sigillo Digitale Animato (Ceralacca Notarile Sovrimpressa) -->
+      <div id="seal-stamp-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-stone-950/85 backdrop-blur-md p-6 text-center hidden z-40 fade-in">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-oro-400 via-oro-500 to-amber-600 border-4 border-white shadow-2xl flex items-center justify-center text-sabbia-950 glow-pulse-oro mb-3">
+          <i data-lucide="shield-check" class="w-10 h-10 stroke-[2]"></i>
+        </div>
+        <h4 class="font-serif text-xl font-bold text-oro-300">Sigillo di Custodia Apposto</h4>
+        <p id="seal-hash-display" class="font-mono text-[11px] text-sabbia-300 mt-1">Hash SHA-256 Immutabile</p>
       </div>
 
     </div>
@@ -521,17 +731,66 @@
           </div>
         </div>
 
-        <!-- Risultato B: Sigillo Spezzato e Video Dischiuso (Se data raggiunta) -->
-        <div id="risultato-sbloccato" class="p-5 rounded-2xl bg-white border-2 border-oro-400 text-center space-y-3 hidden fade-in shadow-xl">
+        <!-- Risultato B: Sigillo Spezzato e Contenuto Dischiuso (Se data raggiunta) -->
+        <div id="risultato-sbloccato" class="p-5 rounded-2xl bg-white border-2 border-oro-400 text-center space-y-3.5 hidden fade-in shadow-xl">
           <div class="w-12 h-12 rounded-full bg-gradient-to-br from-oro-400 to-oro-600 text-sabbia-950 flex items-center justify-center mx-auto shadow-lg glow-pulse-oro">
             <i data-lucide="check-check" class="w-6 h-6"></i>
           </div>
           <h4 class="font-serif text-lg font-bold text-sabbia-950">Autenticazione e Vincolo Convalidati</h4>
-          <p class="text-xs text-sabbia-700">Identità anagrafica confermata e data raggiunta. Ecco il contenuto autorizzato:</p>
-          <div id="video-sbloccato-container" class="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-[260px] mx-auto border-2 border-oro-400/60 shadow-lg bg-black">
-            <video id="video-sbloccato-player" controls class="w-full h-full object-cover"></video>
-            <div id="testo-sbloccato-display" class="hidden p-4 text-xs text-sabbia-800 bg-sabbia-50 h-full overflow-y-auto text-left"></div>
+          <p class="text-xs text-sabbia-700">Contenuto decrittato con successo dalla crittografia locale:</p>
+          
+          <div id="contenuto-sbloccato-box" class="relative rounded-2xl overflow-hidden max-w-[340px] mx-auto border-2 border-oro-400/60 shadow-lg bg-black">
+            <!-- 1. Video -->
+            <video id="video-sbloccato-player" controls class="w-full aspect-[4/5] object-cover hidden"></video>
+
+            <!-- 2. Audio Vocale -->
+            <div id="audio-sbloccato-container" class="hidden p-6 bg-stone-900 text-white flex flex-col items-center gap-3">
+              <div class="w-14 h-14 rounded-full bg-oro-500/20 text-oro-400 border border-oro-500/40 flex items-center justify-center">
+                <i data-lucide="volume-2" class="w-7 h-7"></i>
+              </div>
+              <span class="text-xs font-mono text-sabbia-300">Messaggio Vocale Decrittato</span>
+              <audio id="audio-sbloccato-player" controls class="w-full mt-2"></audio>
+            </div>
+
+            <!-- 3. Testo Scritto -->
+            <div id="testo-sbloccato-display" class="hidden p-5 text-xs text-sabbia-800 bg-sabbia-50 max-h-72 overflow-y-auto text-left font-serif leading-relaxed"></div>
+
+            <!-- 4. Foto / Immagine -->
+            <div id="foto-sbloccata-container" class="hidden bg-stone-900 p-2 text-center">
+              <img id="foto-sbloccata-img" src="" alt="Foto Decrittata" class="w-full rounded-xl object-contain max-h-72 mx-auto" />
+              <p id="foto-sbloccata-caption" class="text-xs text-sabbia-200 mt-2 p-1 italic"></p>
+            </div>
+
+            <!-- 5. Documenti / File -->
+            <div id="doc-sbloccato-container" class="hidden p-6 bg-white flex flex-col items-center gap-3 text-sabbia-950">
+              <div class="w-14 h-14 rounded-2xl bg-sabbia-100 border border-oro-400 text-oro-700 flex items-center justify-center">
+                <i data-lucide="file-check" class="w-7 h-7"></i>
+              </div>
+              <h5 id="doc-sbloccato-nome" class="text-xs font-bold font-mono">documento.pdf</h5>
+              <p id="doc-sbloccato-info" class="text-[11px] text-sabbia-600 font-mono">Fascicolo Integro • Impronta SHA-256 Valida</p>
+              <a id="doc-sbloccato-link" href="#" download="documento_custodito" class="inline-flex items-center gap-2 bg-oro-500 hover:bg-oro-600 text-sabbia-950 text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm">
+                <i data-lucide="download" class="w-4 h-4"></i> Scarica File Decrittato
+              </a>
+            </div>
           </div>
+
+          <!-- Azione Post-Sblocco A: Condivisione Piazza dei Saperi (Se abilitata per Capsula nel Tempo) -->
+          <div id="sblocco-azione-pubblica" class="hidden pt-3 border-t border-sabbia-200 space-y-2">
+            <button onclick="pubblicaCapsulaSuPiazza()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-oro-600 to-oro-500 hover:from-oro-500 text-sabbia-950 font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition hover:scale-102">
+              <i data-lucide="globe" class="w-4 h-4"></i>
+              <span>Dona e Pubblica nella Piazza dei Saperi (Capsula Storica)</span>
+            </button>
+            <p class="text-[10px] text-sabbia-600">Avendo impostato lo sblocco libero, puoi ora rendere pubblico questo insegnamento per le future generazioni.</p>
+          </div>
+
+          <!-- Azione Post-Sblocco B: Blindatura Privata (Per Archivio Riservato a Destinatario) -->
+          <div id="sblocco-badge-privato" class="hidden pt-3 border-t border-sabbia-200">
+            <div class="p-2.5 rounded-xl bg-stone-100 border border-stone-300 text-[11px] text-stone-700 flex items-center justify-center gap-1.5 font-medium">
+              <i data-lucide="shield" class="w-4 h-4 text-stone-600"></i>
+              <span>Archivio Riservato: Protetto da Segreto Familiare (Nessuna pubblicazione consentita)</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1057,13 +1316,18 @@
               <div class="p-5 rounded-2xl bg-white border border-sabbia-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
                   <div class="w-12 h-12 rounded-2xl bg-sabbia-100 border border-oro-400/40 text-oro-700 flex items-center justify-center shrink-0 shadow-sm">
-                    <i data-lucide="${c.tipo === 'video' ? 'video' : 'file-text'}" class="w-6 h-6"></i>
+                    <i data-lucide="${getIconaFormato(c.tipo)}" class="w-6 h-6"></i>
                   </div>
                   <div>
                     <h4 class="text-sm font-bold text-sabbia-950">${c.titolo}</h4>
                     <p class="text-xs text-sabbia-700 mt-0.5">
-                      Erede: <strong class="text-sabbia-950">${c.destinatario}</strong> 
-                      <span class="ml-1.5 px-2 py-0.5 rounded text-[10px] font-mono bg-sabbia-100 border border-sabbia-300 font-bold text-oro-700">${c.codiceFiscale || 'ANPR ATTIVA'}</span>
+                      ${c.regola === 'tempo' || !c.codiceFiscale ? `
+                        Destinazione: <strong class="text-sabbia-950">${c.permettiPiazza ? 'Capsula Storica (Piazza)' : 'Capsula Personale'}</strong>
+                        <span class="ml-1.5 px-2 py-0.5 rounded text-[10px] font-mono bg-amber-50 border border-amber-200 font-bold text-amber-800">SBLOCCO LIBERO A TEMPO</span>
+                      ` : `
+                        Erede: <strong class="text-sabbia-950">${c.destinatario}</strong> 
+                        <span class="ml-1.5 px-2 py-0.5 rounded text-[10px] font-mono bg-sabbia-100 border border-sabbia-300 font-bold text-oro-700">${c.codiceFiscale || 'ANPR ATTIVA'}</span>
+                      `}
                     </p>
                     <p class="text-[11px] text-sabbia-600 mt-0.5">
                       ⏳ Sblocco: <span class="font-bold text-sabbia-900">${c.condizione || c.dataSblocco || 'Al Traguardo Stabilito'}</span>
@@ -1392,18 +1656,38 @@
     }
 
     // -------------------------------------------------------------
-    // MOTORE STUDIO VIDEO CON FOTOCAMERA REALE, PILLOLA E SIGILLO
+    // MOTORE STUDIO DI CUSTODIA (WIZARD 2 PASSAGGI & 5 FORMATI)
     // -------------------------------------------------------------
-    let studioDestinazione = 'pubblico'; // 'pubblico' (Piazza) | 'privato' (Caveau)
-    let tipoFormatoStudio = 'video'; // 'video' | 'testo'
-    let tipoSbloccoStudio = 'tempo'; // 'tempo' | 'doppio'
-    let tipoSbloccoCapsula = 'tempo'; // 'tempo' | 'doppio'
+    let studioPasso = 1; // 1 | 2
+    let studioDestinazione = 'privato'; // 'pubblico' (Piazza) | 'privato' (Caveau)
+    let tipoFormatoStudio = 'video'; // 'video' | 'audio' | 'testo' | 'foto' | 'documento'
+    let modalitaCustodiaScelta = 'tempo'; // 'tempo' | 'destinatario'
+    let tipoSbloccoCapsula = 'tempo';
+
+    // Stato Video
     let mediaStream = null;
     let mediaRecorder = null;
     let recordedChunks = [];
     let recordedBlob = null;
     let recordTimerInterval = null;
     let recordSeconds = 0;
+
+    // Stato Audio
+    let audioStream = null;
+    let audioRecorder = null;
+    let audioRecordedChunks = [];
+    let audioRecordedBlob = null;
+    let audioTimerInterval = null;
+    let audioSeconds = 0;
+
+    // Stato Foto
+    let fotoBase64 = null;
+    let fotoNomeFile = null;
+
+    // Stato Documento
+    let docBase64 = null;
+    let docNomeFile = null;
+    let docDimensione = null;
 
     const ispirazioniStoryWorth = [
       "Condividi una competenza tecnica, un mestiere o una lezione fondamentale...",
@@ -1414,6 +1698,17 @@
     ];
     let promptIndex = 0;
 
+    function getIconaFormato(tipo) {
+      switch(tipo) {
+        case 'video': return 'video';
+        case 'audio': return 'mic';
+        case 'testo': return 'file-text';
+        case 'foto': return 'image';
+        case 'documento': return 'file-check';
+        default: return 'shield-check';
+      }
+    }
+
     function cambiaIspirazione() {
       promptIndex = (promptIndex + 1) % ispirazioniStoryWorth.length;
       document.getElementById('prompt-ispirazione').innerText = `"${ispirazioniStoryWorth[promptIndex]}"`;
@@ -1421,27 +1716,44 @@
 
     function selezionaFormatoStudio(formato) {
       tipoFormatoStudio = formato;
-      const btnVideo = document.getElementById('tab-studio-video');
-      const btnTesto = document.getElementById('tab-studio-testo');
-      const frameVideo = document.getElementById('studio-frame-video');
-      const frameTesto = document.getElementById('studio-frame-testo');
-      const barraIspirazione = document.getElementById('studio-barra-ispirazione');
-      const headerIcon = document.getElementById('studio-header-icon');
+      const formati = ['video', 'audio', 'testo', 'foto', 'doc'];
 
-      if (formato === 'video') {
-        btnVideo.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-sabbia-300";
-        btnTesto.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition";
-        frameVideo.classList.remove('hidden');
-        frameTesto.classList.add('hidden');
-        if (barraIspirazione) barraIspirazione.classList.remove('hidden');
-        if (headerIcon) headerIcon.setAttribute('data-lucide', 'video');
-      } else {
-        btnTesto.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-sabbia-300";
-        btnVideo.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition";
-        frameTesto.classList.remove('hidden');
-        frameVideo.classList.add('hidden');
-        if (headerIcon) headerIcon.setAttribute('data-lucide', 'file-text');
+      formati.forEach(f => {
+        const btn = document.getElementById(`tab-studio-${f}`);
+        const frame = document.getElementById(`studio-frame-${f}`);
+        const isSelected = (f === formato || (f === 'doc' && formato === 'documento'));
+
+        if (btn) {
+          if (isSelected) {
+            btn.className = "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-sabbia-300 shrink-0";
+          } else {
+            btn.className = "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition shrink-0";
+          }
+        }
+        if (frame) {
+          if (isSelected) {
+            frame.classList.remove('hidden');
+          } else {
+            frame.classList.add('hidden');
+          }
+        }
+      });
+
+      const barraIspirazione = document.getElementById('studio-barra-ispirazione');
+      if (barraIspirazione) {
+        if (formato === 'video' || formato === 'audio' || formato === 'testo') {
+          barraIspirazione.classList.remove('hidden');
+        } else {
+          barraIspirazione.classList.add('hidden');
+        }
       }
+
+      // Se non siamo in video, fermiamo l'anteprima webcam per risparmiare risorse
+      if (formato !== 'video' && mediaStream) {
+        mediaStream.getTracks().forEach(track => track.stop());
+        mediaStream = null;
+      }
+
       lucide.createIcons();
     }
 
@@ -1452,70 +1764,233 @@
       document.getElementById('studio-testo-contatore').innerText = `${words} parole • ${len} caratteri`;
     }
 
-    function impostaTipoSblocco(tipo) {
-      tipoSbloccoStudio = tipo;
-      const btnTempo = document.getElementById('btn-sblocco-tempo');
-      const btnDoppio = document.getElementById('btn-sblocco-doppio');
-      const boxCf = document.getElementById('box-campo-cf');
-      const spiegazione = document.getElementById('testo-spiegazione-sblocco');
+    // Gestione File Video Caricato
+    function caricaFileVideo(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      recordedBlob = file;
+      document.getElementById('live-video').classList.add('hidden');
+      const pb = document.getElementById('playback-video');
+      pb.src = URL.createObjectURL(file);
+      pb.classList.remove('hidden');
+      pb.play();
+      document.getElementById('controls-idle').classList.add('hidden');
+      document.getElementById('controls-review').classList.remove('hidden');
+    }
+
+    // Gestione Registrazione Audio Microfono
+    async function avviaRegistrazioneAudio() {
+      try {
+        audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioRecorder = new MediaRecorder(audioStream);
+        audioRecordedChunks = [];
+        audioSeconds = 0;
+
+        audioRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) audioRecordedChunks.push(e.data);
+        };
+
+        audioRecorder.onstop = () => {
+          audioRecordedBlob = new Blob(audioRecordedChunks, { type: 'audio/webm' });
+          const pb = document.getElementById('playback-audio');
+          pb.src = URL.createObjectURL(audioRecordedBlob);
+          pb.classList.remove('hidden');
+          pb.play();
+        };
+
+        audioRecorder.start();
+        document.getElementById('audio-controls-idle').classList.add('hidden');
+        document.getElementById('audio-controls-recording').classList.remove('hidden');
+        document.getElementById('audio-icon-pulse').classList.add('animate-pulse');
+
+        audioTimerInterval = setInterval(() => {
+          audioSeconds++;
+          const mins = String(Math.floor(audioSeconds / 60)).padStart(2, '0');
+          const secs = String(audioSeconds % 60).padStart(2, '0');
+          document.getElementById('audio-rec-timer').innerText = `${mins}:${secs}`;
+        }, 1000);
+      } catch (err) {
+        alert("Impossibile accedere al microfono. Assicurati di aver concesso i permessi o carica un file audio esistente.");
+      }
+    }
+
+    function fermaRegistrazioneAudio() {
+      if (audioTimerInterval) clearInterval(audioTimerInterval);
+      if (audioRecorder && audioRecorder.state === 'recording') {
+        audioRecorder.stop();
+      }
+      if (audioStream) {
+        audioStream.getTracks().forEach(t => t.stop());
+        audioStream = null;
+      }
+      document.getElementById('audio-controls-recording').classList.add('hidden');
+      document.getElementById('audio-controls-review').classList.remove('hidden');
+      document.getElementById('audio-icon-pulse').classList.remove('animate-pulse');
+    }
+
+    function rifaiAudio() {
+      audioRecordedBlob = null;
+      audioSeconds = 0;
+      document.getElementById('audio-rec-timer').innerText = "00:00";
+      const pb = document.getElementById('playback-audio');
+      pb.pause();
+      pb.classList.add('hidden');
+      pb.src = '';
+      document.getElementById('audio-controls-review').classList.add('hidden');
+      document.getElementById('audio-controls-idle').classList.remove('hidden');
+    }
+
+    function caricaFileAudio(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      audioRecordedBlob = file;
+      const pb = document.getElementById('playback-audio');
+      pb.src = URL.createObjectURL(file);
+      pb.classList.remove('hidden');
+      pb.play();
+      document.getElementById('audio-controls-idle').classList.add('hidden');
+      document.getElementById('audio-controls-review').classList.remove('hidden');
+    }
+
+    // Gestione Caricamento Foto
+    function caricaFileFoto(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      fotoNomeFile = file.name;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        fotoBase64 = evt.target.result;
+        document.getElementById('foto-preview-img').src = fotoBase64;
+        document.getElementById('foto-upload-prompt').classList.add('hidden');
+        document.getElementById('foto-preview-box').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Gestione Caricamento Documenti
+    function caricaFileDoc(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      docNomeFile = file.name;
+      docDimensione = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        docBase64 = evt.target.result;
+        document.getElementById('doc-preview-nome').innerText = docNomeFile;
+        document.getElementById('doc-preview-dimensione').innerText = `${docDimensione} • Impronta SHA-256 Pronta`;
+        document.getElementById('doc-upload-prompt').classList.add('hidden');
+        document.getElementById('doc-preview-box').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Navigazione Wizard: Passo 1 -> Passo 2
+    function vaiAlPasso2Studio() {
+      // Convalida della presenza del contenuto
+      if (tipoFormatoStudio === 'video' && !recordedBlob) {
+        alert("Registra un video o carica un file prima di procedere al Passo 2!");
+        return;
+      }
+      if (tipoFormatoStudio === 'audio' && !audioRecordedBlob) {
+        alert("Registra un messaggio vocale o carica un file audio prima di procedere al Passo 2!");
+        return;
+      }
+      if (tipoFormatoStudio === 'testo' && !document.getElementById('studio-testo-input').value.trim()) {
+        alert("Inserisci il testo della tua memoria o disposizione prima di procedere al Passo 2!");
+        return;
+      }
+      if (tipoFormatoStudio === 'foto' && !fotoBase64) {
+        alert("Seleziona e carica una fotografia o scansione prima di procedere al Passo 2!");
+        return;
+      }
+      if (tipoFormatoStudio === 'documento' && !docBase64) {
+        alert("Carica un fascicolo o documento prima di procedere al Passo 2!");
+        return;
+      }
+
+      // Prepara etichetta di riepilogo
+      const labelEl = document.getElementById('passo2-tipo-label');
+      if (tipoFormatoStudio === 'video') {
+        labelEl.innerText = `📹 Video Pronto (${recordSeconds > 0 ? recordSeconds + 's' : 'File'})`;
+      } else if (tipoFormatoStudio === 'audio') {
+        labelEl.innerText = `🎙️ Audio Vocale Pronto (${audioSeconds > 0 ? audioSeconds + 's' : 'File'})`;
+      } else if (tipoFormatoStudio === 'testo') {
+        const parole = document.getElementById('studio-testo-input').value.trim().split(/\s+/).length;
+        labelEl.innerText = `✍️ Lettera Scritta (${parole} parole)`;
+      } else if (tipoFormatoStudio === 'foto') {
+        labelEl.innerText = `🖼️ Foto Caricata (${fotoNomeFile || 'Immagine'})`;
+      } else if (tipoFormatoStudio === 'documento') {
+        labelEl.innerText = `📄 Documento (${docNomeFile || 'File'} • ${docDimensione || ''})`;
+      }
+
+      studioPasso = 2;
+      document.getElementById('studio-passo-1').classList.add('hidden');
+      document.getElementById('studio-passo-2').classList.remove('hidden');
+      document.getElementById('studio-selettore-formati').classList.add('hidden');
+      document.getElementById('studio-sottotitolo').innerText = "Passo 2 di 2: Imposta le regole e sigilla nel tempo";
+
+      // Suggerisci titolo predefinito se vuoto
+      const titoloInput = document.getElementById('studio-titolo-memoria');
+      if (!titoloInput.value.trim()) {
+        if (tipoFormatoStudio === 'video') titoloInput.value = "Disposizione Video Personale";
+        else if (tipoFormatoStudio === 'audio') titoloInput.value = "Messaggio Vocale Riservato";
+        else if (tipoFormatoStudio === 'testo') titoloInput.value = "Lettera e Disposizioni di Vita";
+        else if (tipoFormatoStudio === 'foto') titoloInput.value = "Fotografia e Memoria di Famiglia";
+        else if (tipoFormatoStudio === 'documento') titoloInput.value = docNomeFile ? `Documento: ${docNomeFile}` : "Fascicolo Riservato";
+      }
+
+      lucide.createIcons();
+    }
+
+    function tornaAlPasso1Studio() {
+      studioPasso = 1;
+      document.getElementById('studio-passo-2').classList.add('hidden');
+      document.getElementById('studio-passo-1').classList.remove('hidden');
+      document.getElementById('studio-selettore-formati').classList.remove('hidden');
+      document.getElementById('studio-sottotitolo').innerText = "Passo 1 di 2: Registra o carica il contenuto da custodire";
+      lucide.createIcons();
+    }
+
+    function selezionaRegolaCustodia(tipo) {
+      modalitaCustodiaScelta = tipo;
+      const cardTempo = document.getElementById('card-regola-tempo');
+      const cardDest = document.getElementById('card-regola-destinatario');
+      const radioTempo = document.getElementById('radio-regola-tempo');
+      const radioDest = document.getElementById('radio-regola-destinatario');
+      const boxSocial = document.getElementById('box-opzione-tempo-social');
+      const boxDestCampi = document.getElementById('box-opzione-destinatario-campi');
 
       if (tipo === 'tempo') {
-        btnTempo.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-oro-500 flex items-center justify-center gap-1.5";
-        btnDoppio.className = "px-3 py-1.5 rounded-xl text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition border border-transparent flex items-center justify-center gap-1.5";
-        if (boxCf) boxCf.classList.add('hidden');
-        if (spiegazione) spiegazione.innerHTML = "<strong>Sblocco Diretto a Tempo:</strong> Il file rimane crittografato e inaccessibile fino alla data e ora indicata. Raggiunta la scadenza, chi possiede la chiave crittografica potrà aprirlo senza dover mostrare documenti o codice fiscale.";
+        radioTempo.checked = true;
+        cardTempo.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-oro-500 bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
+        cardDest.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-sabbia-200 bg-sabbia-50 hover:bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
+        boxSocial.classList.remove('hidden');
+        boxDestCampi.classList.add('hidden');
       } else {
-        btnDoppio.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-oro-500 flex items-center justify-center gap-1.5";
-        btnTempo.className = "px-3 py-1.5 rounded-xl text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition border border-transparent flex items-center justify-center gap-1.5";
-        if (boxCf) boxCf.classList.remove('hidden');
-        if (spiegazione) spiegazione.innerHTML = "<strong>Doppio Fattore di Sicurezza:</strong> Il file richiede sia la maturazione della data/ora prestabilita, sia la verifica anagrafica dell'avente diritto tramite Carta d'Identità Elettronica (CIE / ANPR).";
+        radioDest.checked = true;
+        cardDest.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-oro-500 bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
+        cardTempo.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-sabbia-200 bg-sabbia-50 hover:bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
+        boxSocial.classList.add('hidden');
+        boxDestCampi.classList.remove('hidden');
       }
       lucide.createIcons();
     }
 
-    function impostaCapsulaTipoSblocco(tipo) {
-      tipoSbloccoCapsula = tipo;
-      const btnTempo = document.getElementById('btn-capsula-tempo');
-      const btnDoppio = document.getElementById('btn-capsula-doppio');
-      const boxCf = document.getElementById('capsula-box-cf');
-
-      if (tipo === 'tempo') {
-        btnTempo.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-oro-500 flex items-center justify-center gap-1.5";
-        btnDoppio.className = "px-3 py-1.5 rounded-xl text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition border border-transparent flex items-center justify-center gap-1.5";
-        if (boxCf) boxCf.classList.add('hidden');
-      } else {
-        btnDoppio.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-sabbia-950 shadow-sm border border-oro-500 flex items-center justify-center gap-1.5";
-        btnTempo.className = "px-3 py-1.5 rounded-xl text-xs font-medium text-sabbia-700 hover:text-sabbia-950 transition border border-transparent flex items-center justify-center gap-1.5";
-        if (boxCf) boxCf.classList.remove('hidden');
-      }
-      lucide.createIcons();
-    }
-
-    async function apriStudioVideo(destinazione = 'pubblico') {
+    async function apriStudioVideo(destinazione = 'privato') {
       studioDestinazione = destinazione;
       const modal = document.getElementById('studio-video-modal');
       const titoloEl = document.getElementById('studio-titolo');
-      const sottotitoloEl = document.getElementById('studio-sottotitolo');
-      const autoreDestInput = document.getElementById('video-autore-dest');
 
       if (destinazione === 'pubblico') {
-        titoloEl.innerText = "Studio dei Saperi (Pubblico)";
-        sottotitoloEl.innerText = "Registra una lezione o un'idea per ispirare il mondo";
-        autoreDestInput.placeholder = "Tuo Nome & Qualifica (es. Marco - Laureato in Fisica)";
-        const campiPriv = document.getElementById('studio-campi-privati');
-        if (campiPriv) campiPriv.classList.add('hidden');
+        titoloEl.innerText = "Studio dei Saperi (Piazza Pubblica)";
       } else {
         titoloEl.innerText = "Studio di Custodia (Privato)";
-        sottotitoloEl.innerText = "Custodia riservata di memorie e disposizioni personali";
-        autoreDestInput.placeholder = "Nome dell'Avente Diritto o Destinatario";
-        const campiPriv = document.getElementById('studio-campi-privati');
-        if (campiPriv) campiPriv.classList.remove('hidden');
       }
 
       modal.classList.remove('hidden');
       resetStudioUI();
 
-      // Attivazione webcam reale se in modalità video
+      // Webcam reale se formato video
       const liveVideo = document.getElementById('live-video');
       try {
         mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -1535,13 +2010,25 @@
         mediaStream.getTracks().forEach(track => track.stop());
         mediaStream = null;
       }
+      if (audioStream) {
+        audioStream.getTracks().forEach(track => track.stop());
+        audioStream = null;
+      }
       if (recordTimerInterval) clearInterval(recordTimerInterval);
+      if (audioTimerInterval) clearInterval(audioTimerInterval);
       document.getElementById('studio-video-modal').classList.add('hidden');
     }
 
     function resetStudioUI() {
+      studioPasso = 1;
+      document.getElementById('studio-passo-1').classList.remove('hidden');
+      document.getElementById('studio-passo-2').classList.add('hidden');
+      document.getElementById('studio-selettore-formati').classList.remove('hidden');
+      document.getElementById('studio-sottotitolo').innerText = "Passo 1 di 2: Registra o carica il contenuto da custodire";
+
       selezionaFormatoStudio('video');
-      impostaTipoSblocco('tempo');
+      selezionaRegolaCustodia('tempo');
+
       document.getElementById('live-video').classList.remove('hidden');
       document.getElementById('playback-video').classList.add('hidden');
       document.getElementById('countdown-overlay').classList.add('hidden');
@@ -1553,7 +2040,20 @@
       document.getElementById('controls-review').classList.add('hidden');
 
       recordSeconds = 0;
+      recordedBlob = null;
       document.getElementById('rec-timer').innerText = "00:00";
+
+      rifaiAudio();
+      fotoBase64 = null;
+      fotoNomeFile = null;
+      document.getElementById('foto-upload-prompt').classList.remove('hidden');
+      document.getElementById('foto-preview-box').classList.add('hidden');
+
+      docBase64 = null;
+      docNomeFile = null;
+      docDimensione = null;
+      document.getElementById('doc-upload-prompt').classList.remove('hidden');
+      document.getElementById('doc-preview-box').classList.add('hidden');
     }
 
     function avviaContoAllaRovescia() {
@@ -1608,7 +2108,7 @@
           };
           mediaRecorder.start();
         } catch (e) {
-          console.log("MediaRecorder simulation fallback:", e);
+          console.log("MediaRecorder fallback:", e);
         }
       }
     }
@@ -1622,7 +2122,6 @@
       if (mediaRecorder && mediaRecorder.state === 'recording') {
         mediaRecorder.stop();
       } else {
-        // Simulazione preview se fotocamera assente
         document.getElementById('live-video').classList.add('hidden');
         const playbackVideo = document.getElementById('playback-video');
         playbackVideo.classList.remove('hidden');
@@ -1634,28 +2133,30 @@
     }
 
     async function sigillaRegistrazione() {
-      const titoloInput = document.getElementById('video-titolo');
-      const autoreDestInput = document.getElementById('video-autore-dest');
+      const titolo = document.getElementById('studio-titolo-memoria').value.trim() || "Memoria Custodita nel Tempo";
+      const dataSblocco = document.getElementById('studio-data-sblocco').value || '2034-05-14';
+      const oraSblocco = document.getElementById('studio-ora-sblocco').value || '12:00';
+      const permettiPiazza = document.getElementById('chk-permetti-piazza').checked;
 
-      const titolo = titoloInput.value.trim() || (studioDestinazione === 'pubblico' ? "Sapere Condiviso" : (tipoFormatoStudio === 'video' ? "Disposizione Video" : "Disposizione Personale"));
-      const autoreDest = autoreDestInput.value.trim() || (studioDestinazione === 'pubblico' ? "Tu (Autore Verificato)" : "Chi possiede la chiave");
+      let nomeDest = 'Chi possiede la chiave';
+      let cfErede = null;
 
-      let testoContenuto = "";
-      if (tipoFormatoStudio === 'testo') {
-        testoContenuto = document.getElementById('studio-testo-input').value.trim();
-        if (!testoContenuto) {
-          alert("Inserisci il testo della tua memoria o disposizione prima di sigillarla!");
+      if (modalitaCustodiaScelta === 'destinatario') {
+        nomeDest = document.getElementById('studio-dest-nome').value.trim();
+        if (!nomeDest) {
+          alert("Inserisci il nome e cognome dell'erede o destinatario!");
           return;
         }
+        cfErede = document.getElementById('studio-dest-cf').value.trim().toUpperCase() || 'MRTEGL08M41H501Z';
       }
 
-      // Mostra sigillo ufficiale
+      // Mostra sigillo ufficiale animato
       const sealOverlay = document.getElementById('seal-stamp-overlay');
       sealOverlay.classList.remove('hidden');
 
-      // Calcola hash notarile
+      // Calcola hash notarile crittografico
       const encoder = new TextEncoder();
-      const randomSeed = titolo + autoreDest + Date.now();
+      const randomSeed = titolo + nomeDest + Date.now();
       const hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(randomSeed));
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashHex = '0x' + hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 16) + '...';
@@ -1663,61 +2164,42 @@
       document.getElementById('seal-hash-display').innerText = `Sigillo di Custodia: ${hashHex}`;
 
       setTimeout(() => {
-        if (studioDestinazione === 'pubblico') {
-          // Aggiungi a Lascia il Segno
-          postsSegno.unshift({
-            id: Date.now(),
-            author: autoreDest,
-            role: "Cittadino & Autore",
-            avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80",
-            title: titolo,
-            category: "Sapere Condiviso",
-            categoryColor: "bg-sabbia-100 text-sabbia-900 border-sabbia-300",
-            duration: tipoFormatoStudio === 'video' ? `00:${String(recordSeconds).padStart(2, '0')} min` : "Testo",
-            views: 1,
-            tipsReceived: 0,
-            content: tipoFormatoStudio === 'video' ? `Video registrato nello Studio di Lascito.` : testoContenuto,
-            discussions: []
-          });
-          chiudiStudioVideo();
-          goToPiazza();
-          alert(`✨ Il tuo contributo è stato sigillato con successo!\n\nImpronta crittografica: ${hashHex}\nOra è visibile nella Piazza dei Saperi!`);
-        } else {
-          // Aggiungi a Imprimi nel Tempo (Vault)
-          const dataSblocco = (document.getElementById('video-data-sblocco') && document.getElementById('video-data-sblocco').value) || '2034-05-14';
-          const oraSblocco = (document.getElementById('video-ora-sblocco') && document.getElementById('video-ora-sblocco').value) || '12:00';
-          const cfErede = (tipoSbloccoStudio === 'doppio' && document.getElementById('video-cf-erede'))
-            ? document.getElementById('video-cf-erede').value.trim().toUpperCase()
-            : null;
+        const videoBlobUrl = (tipoFormatoStudio === 'video' && recordedBlob) ? URL.createObjectURL(recordedBlob) : null;
+        const audioBlobUrl = (tipoFormatoStudio === 'audio' && audioRecordedBlob) ? URL.createObjectURL(audioRecordedBlob) : null;
+        const testoContenuto = (tipoFormatoStudio === 'testo') ? document.getElementById('studio-testo-input').value.trim() : null;
+        const fotoCaption = (tipoFormatoStudio === 'foto') ? document.getElementById('foto-caption-input').value.trim() : null;
 
-          const videoBlobUrl = (tipoFormatoStudio === 'video' && recordedBlob) ? URL.createObjectURL(recordedBlob) : '';
-          const b64Cifrato = tipoFormatoStudio === 'testo' ? btoa(unescape(encodeURIComponent(testoContenuto))) : "VIDEO_RECORDING_ENCRYPTED_AES256";
+        const nuovaMemoria = {
+          id: Date.now(),
+          titolo: titolo,
+          tipo: tipoFormatoStudio,
+          regola: modalitaCustodiaScelta,
+          destinatario: nomeDest,
+          codiceFiscale: cfErede,
+          dataSblocco: dataSblocco,
+          oraSblocco: oraSblocco,
+          condizione: modalitaCustodiaScelta === 'destinatario'
+            ? `${dataSblocco} ore ${oraSblocco} + CIE (${cfErede})`
+            : `Data e Ora: ${dataSblocco} ore ${oraSblocco}`,
+          permettiPiazza: (modalitaCustodiaScelta === 'tempo' && permettiPiazza),
+          videoUrl: videoBlobUrl,
+          audioUrl: audioBlobUrl,
+          testo: testoContenuto,
+          fotoUrl: fotoBase64,
+          fotoCaption: fotoCaption,
+          docUrl: docBase64,
+          docNome: docNomeFile,
+          docDimensione: docDimensione,
+          hashNotarile: hashHex,
+          dataCreazione: new Date().toLocaleDateString('it-IT')
+        };
 
-          const nuovaMemoria = {
-            id: Date.now(),
-            titolo: titolo,
-            destinatario: autoreDest,
-            tipoSblocco: tipoSbloccoStudio,
-            codiceFiscale: cfErede,
-            dataSblocco: dataSblocco,
-            oraSblocco: oraSblocco,
-            condizione: tipoSbloccoStudio === 'doppio'
-              ? `${dataSblocco} ore ${oraSblocco} + CIE (${cfErede})`
-              : `Data e Ora: ${dataSblocco} ore ${oraSblocco}`,
-            tipo: tipoFormatoStudio,
-            videoUrl: videoBlobUrl,
-            hashNotarile: hashHex,
-            payloadCifrato: b64Cifrato,
-            dataCreazione: new Date().toLocaleDateString('it-IT')
-          };
-
-          userVault.unshift(nuovaMemoria);
-          localStorage.setItem('lascito_vault', JSON.stringify(userVault));
-          chiudiStudioVideo();
-          goToCaveau();
-          apriConsegnaSolenne(nuovaMemoria);
-        }
-      }, 1400);
+        userVault.unshift(nuovaMemoria);
+        localStorage.setItem('lascito_vault', JSON.stringify(userVault));
+        chiudiStudioVideo();
+        goToCaveau();
+        apriConsegnaSolenne(nuovaMemoria);
+      }, 1300);
     }
 
     // -------------------------------------------------------------
@@ -1732,8 +2214,8 @@
       document.getElementById('consegna-erede').innerText = memoria.destinatario || 'Chi possiede la chiave';
       
       const cfEl = document.getElementById('consegna-cf');
-      if (memoria.tipoSblocco === 'tempo' || !memoria.codiceFiscale) {
-        cfEl.innerText = "Non richiesto (Sblocco Diretto a Tempo)";
+      if (memoria.regola === 'tempo' || !memoria.codiceFiscale) {
+        cfEl.innerText = "Non richiesto (Sblocco Libero a Data e Ora)";
         cfEl.className = "text-xs font-mono font-medium text-sabbia-700 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200";
       } else {
         cfEl.innerText = memoria.codiceFiscale;
@@ -1765,7 +2247,7 @@
         memoriaSelezionata = userVault[0] || {
           titolo: "Disposizione Personale",
           destinatario: "Chi possiede la chiave",
-          tipoSblocco: "tempo",
+          regola: "tempo",
           codiceFiscale: null,
           dataSblocco: "2034-05-14",
           oraSblocco: "12:00",
@@ -1774,17 +2256,17 @@
         };
       }
 
-      const isSoloTempo = (memoriaSelezionata.tipoSblocco === 'tempo' || !memoriaSelezionata.codiceFiscale);
+      const isSoloTempo = (memoriaSelezionata.regola === 'tempo' || !memoriaSelezionata.codiceFiscale);
       const txtModalita = document.getElementById('sim-txt-modalita');
       const boxCf = document.getElementById('sim-box-cf');
       const notaTempo = document.getElementById('sim-nota-tempo');
 
       if (isSoloTempo) {
-        if (txtModalita) txtModalita.innerText = "Solo Data e Ora (Sblocco Diretto)";
+        if (txtModalita) txtModalita.innerText = "Solo Data e Ora (Sblocco Libero)";
         if (boxCf) boxCf.classList.add('hidden');
         if (notaTempo) notaTempo.classList.remove('hidden');
       } else {
-        if (txtModalita) txtModalita.innerText = "Doppio Fattore: Data + CIE";
+        if (txtModalita) txtModalita.innerText = "Riservato a Persona: Data + CIE";
         if (boxCf) boxCf.classList.remove('hidden');
         if (notaTempo) notaTempo.classList.add('hidden');
       }
@@ -1798,8 +2280,10 @@
     }
 
     function chiudiCerimoniaSblocco() {
-      const player = document.getElementById('video-sbloccato-player');
-      if (player) player.pause();
+      const vPlayer = document.getElementById('video-sbloccato-player');
+      if (vPlayer) vPlayer.pause();
+      const aPlayer = document.getElementById('audio-sbloccato-player');
+      if (aPlayer) aPlayer.pause();
       document.getElementById('modal-cerimonia-sblocco').classList.add('hidden');
     }
 
@@ -1826,12 +2310,12 @@
     }
 
     function eseguiVerificaSblocco() {
-      const isSoloTempo = (memoriaSelezionata && (memoriaSelezionata.tipoSblocco === 'tempo' || !memoriaSelezionata.codiceFiscale));
+      const isSoloTempo = (memoriaSelezionata && (memoriaSelezionata.regola === 'tempo' || !memoriaSelezionata.codiceFiscale));
       const resBloccato = document.getElementById('risultato-bloccato');
       const resSbloccato = document.getElementById('risultato-sbloccato');
       const dataOraFutura = `${(memoriaSelezionata && memoriaSelezionata.dataSblocco) || '14 Maggio 2034'} alle ore ${(memoriaSelezionata && memoriaSelezionata.oraSblocco) || '12:00'}`;
 
-      // Se doppio fattore, controlla il Codice Fiscale
+      // Se riservato a destinatario, verifica Codice Fiscale
       if (!isSoloTempo) {
         const inputCF = document.getElementById('sim-input-cf').value.trim().toUpperCase();
         const cfAtteso = (memoriaSelezionata && memoriaSelezionata.codiceFiscale) ? memoriaSelezionata.codiceFiscale.toUpperCase() : 'MRTEGL08M41H501Z';
@@ -1856,30 +2340,85 @@
         // Sbloccato con successo!
         resBloccato.classList.add('hidden');
         resSbloccato.classList.remove('hidden');
-        
-        const player = document.getElementById('video-sbloccato-player');
-        const testoContainer = document.getElementById('testo-sbloccato-display');
-        
-        if (memoriaSelezionata && memoriaSelezionata.videoUrl) {
-          player.src = memoriaSelezionata.videoUrl;
-          player.classList.remove('hidden');
-          testoContainer.classList.add('hidden');
-          player.play();
-        } else if (memoriaSelezionata && memoriaSelezionata.tipo === 'testo') {
-          player.classList.add('hidden');
-          testoContainer.classList.remove('hidden');
-          try {
-            testoContainer.innerText = decodeURIComponent(escape(atob(memoriaSelezionata.payloadCifrato || '')));
-          } catch(e) {
-            testoContainer.innerText = "Disposizione personale decrittata con successo.";
+
+        // Nascondi tutti i container dei formati
+        const vPlayer = document.getElementById('video-sbloccato-player');
+        const aBox = document.getElementById('audio-sbloccato-container');
+        const aPlayer = document.getElementById('audio-sbloccato-player');
+        const tBox = document.getElementById('testo-sbloccato-display');
+        const fBox = document.getElementById('foto-sbloccata-container');
+        const fImg = document.getElementById('foto-sbloccata-img');
+        const fCap = document.getElementById('foto-sbloccata-caption');
+        const dBox = document.getElementById('doc-sbloccato-container');
+        const dNome = document.getElementById('doc-sbloccato-nome');
+        const dLink = document.getElementById('doc-sbloccato-link');
+
+        vPlayer.classList.add('hidden');
+        aBox.classList.add('hidden');
+        tBox.classList.add('hidden');
+        fBox.classList.add('hidden');
+        dBox.classList.add('hidden');
+
+        const tipo = memoriaSelezionata ? memoriaSelezionata.tipo : 'video';
+
+        if (tipo === 'video') {
+          vPlayer.classList.remove('hidden');
+          vPlayer.src = memoriaSelezionata.videoUrl || '';
+          vPlayer.play();
+        } else if (tipo === 'audio') {
+          aBox.classList.remove('hidden');
+          aPlayer.src = memoriaSelezionata.audioUrl || '';
+          aPlayer.play();
+        } else if (tipo === 'testo') {
+          tBox.classList.remove('hidden');
+          tBox.innerText = memoriaSelezionata.testo || "Disposizione personale decrittata con successo.";
+        } else if (tipo === 'foto') {
+          fBox.classList.remove('hidden');
+          fImg.src = memoriaSelezionata.fotoUrl || '';
+          fCap.innerText = memoriaSelezionata.fotoCaption || '';
+        } else if (tipo === 'documento') {
+          dBox.classList.remove('hidden');
+          dNome.innerText = memoriaSelezionata.docNome || 'documento.pdf';
+          if (memoriaSelezionata.docUrl) {
+            dLink.href = memoriaSelezionata.docUrl;
+            dLink.download = memoriaSelezionata.docNome || 'documento_custodito';
           }
+        }
+
+        // Gestione Azione Post-Sblocco (Piazza dei Saperi vs Archivio Riservato)
+        const boxPubblica = document.getElementById('sblocco-azione-pubblica');
+        const boxPrivato = document.getElementById('sblocco-badge-privato');
+
+        if (memoriaSelezionata && memoriaSelezionata.regola === 'tempo' && memoriaSelezionata.permettiPiazza) {
+          boxPubblica.classList.remove('hidden');
+          boxPrivato.classList.add('hidden');
         } else {
-          player.classList.add('hidden');
-          testoContainer.classList.remove('hidden');
-          testoContainer.innerText = "Disposizione personale protetta nel tempo. Il vincolo temporale impostato è giunto a compimento ed il contenuto è ora liberamente accessibile.";
+          boxPrivato.classList.remove('hidden');
+          boxPubblica.classList.add('hidden');
         }
       }
       lucide.createIcons();
+    }
+
+    function pubblicaCapsulaSuPiazza() {
+      if (!memoriaSelezionata) return;
+      postsSegno.unshift({
+        id: Date.now(),
+        author: memoriaSelezionata.destinatario !== 'Chi possiede la chiave' ? memoriaSelezionata.destinatario : "Custode del Tempo",
+        role: "Capsula Storica Sbloccata",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+        title: `Capsula Storica: ${memoriaSelezionata.titolo}`,
+        category: "Capsula del Tempo",
+        categoryColor: "bg-amber-100 text-amber-900 border-amber-300",
+        duration: memoriaSelezionata.tipo.toUpperCase(),
+        views: 1,
+        tipsReceived: 0,
+        content: memoriaSelezionata.testo || (memoriaSelezionata.fotoCaption ? `[Foto d'archivio]: ${memoriaSelezionata.fotoCaption}` : `Contenuto multimediale (${memoriaSelezionata.tipo}) custodito nel tempo e condiviso con la comunità.`),
+        discussions: []
+      });
+      chiudiCerimoniaSblocco();
+      goToPiazza();
+      alert(`✨ La capsula del tempo "${memoriaSelezionata.titolo}" è stata donata e pubblicata con successo nella Piazza dei Saperi!`);
     }
 
     // -------------------------------------------------------------
