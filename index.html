@@ -466,7 +466,19 @@
               <span>Titolo dell'Archivio o Memoria *</span>
               <span class="text-[10px] text-oro-700 font-medium">Nome Identificativo</span>
             </label>
-            <input type="text" id="studio-titolo-memoria" placeholder="Es. Per il 18° compleanno di mio figlio / Disposizioni 2035..." class="w-full text-xs sm:text-sm bg-white border border-sabbia-300 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium shadow-sm" />
+            <input type="text" id="studio-titolo-memoria" placeholder="Es. Per il 18° compleanno di mia figlia / Disposizioni di Vita..." class="w-full text-xs sm:text-sm bg-white border border-sabbia-300 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium shadow-sm" />
+          </div>
+
+          <!-- Dedica Personale per l'Erede (Facoltativa) -->
+          <div>
+            <label class="block text-xs font-bold text-sabbia-900 mb-1 flex items-center justify-between">
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="feather" class="w-3.5 h-3.5 text-oro-700"></i>
+                <span>Dedica Personale per l'Erede (Facoltativa)</span>
+              </span>
+              <span class="text-[10px] text-sabbia-500 font-normal">Accoglierà l'erede al momento dello sblocco</span>
+            </label>
+            <input type="text" id="studio-dedica-busta" placeholder="Es. Per mia figlia Giulia, da aprire con tutto il mio amore..." class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-4 py-2.5 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium shadow-xs" />
           </div>
 
           <!-- Selezione Regola di Sblocco: 2 Scelte Chiare -->
@@ -475,93 +487,112 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               
-              <!-- Opzione 1: Sblocco Libero a Data e Ora -->
+              <!-- Opzione 1: Sblocco a Data e Ora Stabilita -->
               <div id="card-regola-tempo" onclick="selezionaRegolaCustodia('tempo')" class="p-3.5 sm:p-4 rounded-2xl border-2 border-oro-500 bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between">
                 <div>
                   <div class="flex items-center justify-between mb-1.5">
                     <div class="flex items-center gap-2 font-bold text-xs text-sabbia-950">
                       <input type="radio" name="regola-custodia" id="radio-regola-tempo" value="tempo" checked class="text-oro-600 focus:ring-oro-500">
-                      <span>⏳ Sblocco Libero a Data e Ora</span>
+                      <span>⏳ A Data e Ora Stabilita</span>
                     </div>
                     <span class="text-[10px] font-bold text-oro-700 bg-oro-50 px-2 py-0.5 rounded border border-oro-200">Capsula nel Tempo</span>
                   </div>
                   <p class="text-[11px] text-sabbia-600 leading-relaxed">
-                    Accessibile con 1 click alla data stabilita. <strong>Non richiede documenti d'identità o codice fiscale</strong>.
+                    Ideale per <strong>compleanni, 18 anni, lauree o matrimoni</strong>. Il sistema recapiterà la chiave al destinatario alla data esatta.
                   </p>
                 </div>
                 <div class="mt-2.5 pt-2.5 border-t border-sabbia-100 flex items-center gap-1.5 text-[10px] text-sabbia-700">
                   <i data-lucide="clock" class="w-3.5 h-3.5 text-oro-600 shrink-0"></i>
-                  <span>Apertura immediata alla scadenza</span>
+                  <span>Consegna automatica alla scadenza</span>
                 </div>
               </div>
 
-              <!-- Opzione 2: Riservato a Persona Specifica -->
+              <!-- Opzione 2: Al Momento del Passaggio (Post-Mortem) -->
               <div id="card-regola-destinatario" onclick="selezionaRegolaCustodia('destinatario')" class="p-3.5 sm:p-4 rounded-2xl border-2 border-sabbia-200 bg-sabbia-50 hover:bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between">
                 <div>
                   <div class="flex items-center justify-between mb-1.5">
                     <div class="flex items-center gap-2 font-bold text-xs text-sabbia-950">
                       <input type="radio" name="regola-custodia" id="radio-regola-destinatario" value="destinatario" class="text-oro-600 focus:ring-oro-500">
-                      <span>🛡️ Riservato a Persona Specifica</span>
+                      <span>🕊️ Al Momento del Passaggio (Post-Mortem)</span>
                     </div>
-                    <span class="text-[10px] font-bold text-stone-700 bg-stone-100 px-2 py-0.5 rounded border border-stone-200">100% Privato</span>
+                    <span class="text-[10px] font-bold text-stone-700 bg-stone-100 px-2 py-0.5 rounded border border-stone-200">Lascito di Vita</span>
                   </div>
                   <p class="text-[11px] text-sabbia-600 leading-relaxed">
-                    Sblocco vincolato all'erede designato. <strong>Richiede Codice Fiscale o Carta d'Identità (CIE)</strong>. Mai visibile sui social.
+                    Sblocco vincolato all'evento del decesso. Rilascio sicuro verificato tramite <strong>Guardiano di Fiducia, Registro ANPR o Notaio</strong>.
                   </p>
                 </div>
                 <div class="mt-2.5 pt-2.5 border-t border-sabbia-100 flex items-center gap-1.5 text-[10px] text-sabbia-700">
-                  <i data-lucide="lock" class="w-3.5 h-3.5 text-oro-600 shrink-0"></i>
-                  <span>Blindato: Segreto familiare garantito</span>
+                  <i data-lucide="shield-check" class="w-3.5 h-3.5 text-oro-600 shrink-0"></i>
+                  <span>Doppio lucchetto e verifica anagrafica</span>
                 </div>
               </div>
 
             </div>
           </div>
 
-          <!-- Campi Data e Ora di Sblocco -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 bg-white rounded-2xl border border-sabbia-200 shadow-sm">
-            <div>
-              <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center gap-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-oro-600"></i> Data di Sblocco
-              </label>
-              <input type="date" id="studio-data-sblocco" value="2034-05-14" class="w-full text-xs bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+          <!-- Campi Data e Ora di Sblocco (Visibili solo se modalità Tempo) -->
+          <div id="box-tempo-data-ora" class="p-3.5 bg-white rounded-2xl border border-sabbia-200 shadow-sm space-y-2.5">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <span class="text-[11px] font-bold text-sabbia-900 flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-oro-600"></i> Data e Ora di Sblocco
+              </span>
+              <!-- Scorciatoie Rapide -->
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="impostaDataRapida(5)" class="text-[10px] bg-sabbia-100 hover:bg-oro-100 text-sabbia-800 font-bold px-2 py-0.5 rounded-lg border border-sabbia-300 transition">+5 Anni</button>
+                <button type="button" onclick="impostaDataRapida(10)" class="text-[10px] bg-sabbia-100 hover:bg-oro-100 text-sabbia-800 font-bold px-2 py-0.5 rounded-lg border border-sabbia-300 transition">+10 Anni</button>
+                <button type="button" onclick="impostaDataRapida(18)" class="text-[10px] bg-sabbia-100 hover:bg-oro-100 text-sabbia-800 font-bold px-2 py-0.5 rounded-lg border border-sabbia-300 transition">+18 Anni</button>
+              </div>
             </div>
-            <div>
-              <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center gap-1">
-                <i data-lucide="clock" class="w-3.5 h-3.5 text-oro-600"></i> Ora di Sblocco
-              </label>
-              <input type="time" id="studio-ora-sblocco" value="12:00" class="w-full text-xs bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[10px] text-sabbia-600 mb-1">Giorno di Apertura</label>
+                <input type="date" id="studio-data-sblocco" value="2034-05-14" class="w-full text-xs bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+              </div>
+              <div>
+                <label class="block text-[10px] text-sabbia-600 mb-1">Orario</label>
+                <input type="time" id="studio-ora-sblocco" value="12:00" class="w-full text-xs bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+              </div>
             </div>
           </div>
 
-          <!-- Sotto-opzione 1: Checkbox Piazza dei Saperi (Solo per Tempo) -->
+          <!-- Recapito Silenzioso dell'Erede (Valido per entrambe le modalità) -->
+          <div class="p-4 rounded-2xl bg-white border border-sabbia-200 space-y-3 shadow-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-sabbia-900 mb-1">Nome e Cognome Destinatario (Erede) *</label>
+                <input type="text" id="studio-dest-nome" placeholder="Es. Giulia Moretti" class="w-full text-xs bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center justify-between">
+                  <span>Recapito per Consegna Futura *</span>
+                  <span class="text-[10px] text-oro-700 font-mono">Email o WhatsApp</span>
+                </label>
+                <input type="text" id="studio-dest-contatto" placeholder="Es. giulia@email.com o +39 340..." class="w-full text-xs bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-medium" />
+              </div>
+            </div>
+
+            <!-- Codice Fiscale Erede (Visibile per Post-Mortem) -->
+            <div id="box-dest-cf-blocco" class="hidden">
+              <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center justify-between">
+                <span>Codice Fiscale Erede (Verifica con CIE / SPID al decesso)</span>
+                <span class="text-[10px] text-oro-700 font-mono">ANPR / ATTO DI MORTE</span>
+              </label>
+              <input type="text" id="studio-dest-cf" value="MRTEGL08M41H501Z" placeholder="Codice Fiscale per verifica..." class="w-full text-xs font-mono uppercase bg-sabbia-50 border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
+            </div>
+
+            <p class="text-[10px] text-sabbia-600 flex items-center gap-1.5 pt-0.5">
+              <i data-lucide="lock" class="w-3.5 h-3.5 text-oro-600 shrink-0"></i>
+              <span><strong>Consegna Silenziosa Garantita:</strong> Nessun messaggio verrà inviato oggi. L'avviso partirà esclusivamente al verificarsi delle condizioni di sblocco.</span>
+            </p>
+          </div>
+
+          <!-- Sotto-opzione Piazza dei Saperi (Solo per Tempo) -->
           <div id="box-opzione-tempo-social" class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 flex items-start gap-3">
             <input type="checkbox" id="chk-permetti-piazza" class="mt-0.5 w-4 h-4 text-oro-600 rounded border-sabbia-300 focus:ring-oro-500 cursor-pointer" />
             <label for="chk-permetti-piazza" class="text-xs text-sabbia-800 cursor-pointer select-none">
               <strong class="text-sabbia-950 block">Rendi pubblicabile nella Piazza dei Saperi come Capsula Storica</strong>
               <span class="text-[11px] text-sabbia-600 leading-tight block mt-0.5">Allo scadere della data, avrai l'opzione con 1 click di condividere questo ricordo con l'intera comunità o mantenerlo privato.</span>
             </label>
-          </div>
-
-          <!-- Sotto-opzione 2: Destinatario & Codice Fiscale (Solo per Riservato) -->
-          <div id="box-opzione-destinatario-campi" class="hidden p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-[11px] font-bold text-sabbia-900 mb-1">Nome e Cognome Destinatario (Erede) *</label>
-                <input type="text" id="studio-dest-nome" placeholder="Es. Marco Rossi" class="w-full text-xs bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-sabbia-900 mb-1 flex items-center justify-between">
-                  <span>Codice Fiscale Erede</span>
-                  <span class="text-[10px] text-oro-700 font-mono">CIE / ANPR</span>
-                </label>
-                <input type="text" id="studio-dest-cf" value="MRTEGL08M41H501Z" placeholder="Codice Fiscale per verifica..." class="w-full text-xs font-mono uppercase bg-white border border-sabbia-300 rounded-xl px-3 py-2 text-sabbia-950 focus:outline-none focus:border-oro-500 font-bold" />
-              </div>
-            </div>
-            <div class="p-2.5 rounded-xl bg-white border border-stone-200 text-[11px] text-stone-700 flex items-start gap-2">
-              <i data-lucide="shield-alert" class="w-4 h-4 text-oro-600 shrink-0 mt-0.5"></i>
-              <span><strong>Protezione Totale della Privacy:</strong> Essendo intestato a una persona specifica con dati anagrafici, non potrà MAI essere mostrato sui social o nella Piazza pubblica.</span>
-            </div>
           </div>
 
           <!-- Assunzione di Responsabilità Legale (Obbligatoria) -->
@@ -632,17 +663,25 @@
             <span class="text-sabbia-600 font-medium">Archivio Custodito:</span>
             <strong id="consegna-titolo" class="text-sabbia-950 font-bold text-right">Titolo</strong>
           </div>
+          <div id="consegna-box-dedica" class="hidden flex items-start justify-between border-b border-sabbia-100 pb-2">
+            <span class="text-sabbia-600 font-medium shrink-0">Dedica Personale:</span>
+            <span id="consegna-dedica" class="font-serif italic text-oro-800 text-right text-xs max-w-[240px]">"..."</span>
+          </div>
           <div class="flex items-center justify-between border-b border-sabbia-100 pb-2">
             <span class="text-sabbia-600 font-medium">Destinatario Designato:</span>
             <strong id="consegna-erede" class="text-sabbia-950 font-bold text-right">Giulia Moretti</strong>
           </div>
-          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2">
-            <span class="text-sabbia-600 font-medium">Verifica Identità:</span>
-            <span id="consegna-cf" class="font-mono text-sabbia-800 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200 text-[11px]">MRTEGL08M41H501Z</span>
+          <div id="consegna-box-recapito" class="flex items-center justify-between border-b border-sabbia-100 pb-2">
+            <span class="text-sabbia-600 font-medium">Recapito di Consegna:</span>
+            <span id="consegna-recapito" class="font-mono text-sabbia-800 text-[11px] text-right">Silenzioso fino allo sblocco</span>
           </div>
           <div class="flex items-center justify-between border-b border-sabbia-100 pb-2">
-            <span class="text-sabbia-600 font-medium">Data e Ora di Sblocco:</span>
+            <span class="text-sabbia-600 font-medium">Condizione di Sblocco:</span>
             <span id="consegna-data" class="font-bold text-sabbia-900 text-right">14 Maggio 2034 alle 12:00</span>
+          </div>
+          <div id="consegna-box-cf" class="flex items-center justify-between border-b border-sabbia-100 pb-2">
+            <span class="text-sabbia-600 font-medium">Verifica Identità:</span>
+            <span id="consegna-cf" class="font-mono text-sabbia-800 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200 text-[11px]">MRTEGL08M41H501Z</span>
           </div>
           <div class="flex items-center justify-between pt-0.5">
             <span class="text-[11px] text-sabbia-500 font-mono">Impronta Crittografica:</span>
@@ -658,7 +697,7 @@
           <div class="flex-1 text-xs">
             <h4 class="font-bold text-sabbia-950">Custodia Silenziosa Attiva</h4>
             <p class="text-[11px] text-sabbia-600 mt-0.5 leading-relaxed">
-              Il contenuto riposa protetto nel caveau. Nessuna notifica viene inviata all'esterno: l'accesso sarà consentito esclusivamente al compimento della data stabilita.
+              Il contenuto riposa protetto nel caveau. Nessun messaggio viene inviato oggi: l'avviso e la chiave verranno recapitati all'erede esclusivamente al verificarsi delle condizioni di sblocco stabilite.
             </p>
           </div>
         </div>
@@ -679,37 +718,6 @@
             <i data-lucide="key" class="w-3.5 h-3.5 text-oro-700"></i>
             <span>Prova di Sblocco</span>
           </button>
-        </div>
-
-        <!-- Dedica Opzionale (Apertura Discreta) -->
-        <div class="pt-2 border-t border-sabbia-200/80 text-center">
-          <button type="button" onclick="toggleDedicaAffettiva()" class="text-[11px] text-oro-700 hover:text-oro-900 font-medium inline-flex items-center gap-1.5 transition py-1">
-            <i data-lucide="heart" class="w-3.5 h-3.5"></i>
-            <span>Desideri inviare una dedica affettiva oggi? (Opzionale)</span>
-            <i id="icona-freccia-dedica" data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-200"></i>
-          </button>
-          
-          <!-- Sezione Espandibile Dedica -->
-          <div id="box-dedica-affettiva" class="hidden mt-3 p-4 rounded-2xl bg-white border border-sabbia-300 text-left space-y-2.5 fade-in">
-            <p class="text-[11px] text-sabbia-600 leading-relaxed">
-              Consigliato per ricorrenze liete (compleanni, nascite, lauree). Invia un pensiero caldo e complice che anticipa la sorpresa:
-            </p>
-            <div class="flex flex-wrap items-center gap-2 pt-1">
-              <button type="button" onclick="inviaAvvisoWhatsApp()" class="px-3 py-2 rounded-xl bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-800 font-bold text-xs border border-sabbia-300 flex items-center gap-1.5 transition">
-                <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-600"></i> WhatsApp
-              </button>
-              <button type="button" onclick="inviaAvvisoEmail()" class="px-3 py-2 rounded-xl bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-800 font-bold text-xs border border-sabbia-300 flex items-center gap-1.5 transition">
-                <i data-lucide="mail" class="w-3.5 h-3.5 text-oro-700"></i> Email
-              </button>
-              <button type="button" id="btn-copia-avviso" onclick="copiaAvvisoTesto()" class="px-3 py-2 rounded-xl bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-800 font-bold text-xs border border-sabbia-300 flex items-center gap-1.5 transition">
-                <i data-lucide="copy" class="w-3.5 h-3.5 text-sabbia-600"></i>
-                <span id="txt-copia-avviso">Copia Messaggio</span>
-              </button>
-            </div>
-            <div id="badge-copiato-conferma" class="hidden text-center text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg py-1 fade-in">
-              ✓ Messaggio affettivo copiato negli appunti!
-            </div>
-          </div>
         </div>
 
         <!-- Nota Legale Discreta -->
@@ -2358,22 +2366,36 @@
       const radioTempo = document.getElementById('radio-regola-tempo');
       const radioDest = document.getElementById('radio-regola-destinatario');
       const boxSocial = document.getElementById('box-opzione-tempo-social');
-      const boxDestCampi = document.getElementById('box-opzione-destinatario-campi');
+      const boxTempoDataOra = document.getElementById('box-tempo-data-ora');
+      const boxDestCf = document.getElementById('box-dest-cf-blocco');
 
       if (tipo === 'tempo') {
-        radioTempo.checked = true;
-        cardTempo.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-oro-500 bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
-        cardDest.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-sabbia-200 bg-sabbia-50 hover:bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
-        boxSocial.classList.remove('hidden');
-        boxDestCampi.classList.add('hidden');
+        if (radioTempo) radioTempo.checked = true;
+        if (cardTempo) cardTempo.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-oro-500 bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
+        if (cardDest) cardDest.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-sabbia-200 bg-sabbia-50 hover:bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
+        if (boxTempoDataOra) boxTempoDataOra.classList.remove('hidden');
+        if (boxSocial) boxSocial.classList.remove('hidden');
+        if (boxDestCf) boxDestCf.classList.add('hidden');
       } else {
-        radioDest.checked = true;
-        cardDest.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-oro-500 bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
-        cardTempo.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-sabbia-200 bg-sabbia-50 hover:bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
-        boxSocial.classList.add('hidden');
-        boxDestCampi.classList.remove('hidden');
+        if (radioDest) radioDest.checked = true;
+        if (cardDest) cardDest.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-oro-500 bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
+        if (cardTempo) cardTempo.className = "p-3.5 sm:p-4 rounded-2xl border-2 border-sabbia-200 bg-sabbia-50 hover:bg-white shadow-sm cursor-pointer transition relative flex flex-col justify-between";
+        if (boxTempoDataOra) boxTempoDataOra.classList.add('hidden');
+        if (boxSocial) boxSocial.classList.add('hidden');
+        if (boxDestCf) boxDestCf.classList.remove('hidden');
       }
       lucide.createIcons();
+    }
+
+    function impostaDataRapida(anni) {
+      const dataEl = document.getElementById('studio-data-sblocco');
+      if (!dataEl) return;
+      const oggi = new Date();
+      oggi.setFullYear(oggi.getFullYear() + anni);
+      const yyyy = oggi.getFullYear();
+      const mm = String(oggi.getMonth() + 1).padStart(2, '0');
+      const dd = String(oggi.getDate()).padStart(2, '0');
+      dataEl.value = `${yyyy}-${mm}-${dd}`;
     }
 
     async function apriStudioVideo(destinazione = 'privato', formatoIniziale = 'video') {
@@ -2546,19 +2568,16 @@
 
     async function sigillaRegistrazione() {
       const titolo = document.getElementById('studio-titolo-memoria').value.trim() || "Memoria Custodita nel Tempo";
+      const dedica = document.getElementById('studio-dedica-busta').value.trim() || null;
       const dataSblocco = document.getElementById('studio-data-sblocco').value || '2034-05-14';
       const oraSblocco = document.getElementById('studio-ora-sblocco').value || '12:00';
       const permettiPiazza = document.getElementById('chk-permetti-piazza').checked;
 
-      let nomeDest = 'Chi possiede la chiave';
+      const nomeDest = document.getElementById('studio-dest-nome').value.trim() || 'Erede Designato';
+      const recapitoDest = document.getElementById('studio-dest-contatto').value.trim() || null;
       let cfErede = null;
 
       if (modalitaCustodiaScelta === 'destinatario') {
-        nomeDest = document.getElementById('studio-dest-nome').value.trim();
-        if (!nomeDest) {
-          alert("Inserisci il nome e cognome dell'erede o destinatario!");
-          return;
-        }
         cfErede = document.getElementById('studio-dest-cf').value.trim().toUpperCase() || 'MRTEGL08M41H501Z';
       }
 
@@ -2590,14 +2609,16 @@
         const nuovaMemoria = {
           id: Date.now(),
           titolo: titolo,
+          dedica: dedica,
           tipo: tipoFormatoStudio,
           regola: modalitaCustodiaScelta,
           destinatario: nomeDest,
+          recapito: recapitoDest,
           codiceFiscale: cfErede,
           dataSblocco: dataSblocco,
           oraSblocco: oraSblocco,
           condizione: modalitaCustodiaScelta === 'destinatario'
-            ? `${dataSblocco} ore ${oraSblocco} + CIE (${cfErede})`
+            ? 'Al Momento del Passaggio (Post-Mortem: ANPR / Atto di Morte)'
             : `Data e Ora: ${dataSblocco} ore ${oraSblocco}`,
           permettiPiazza: (modalitaCustodiaScelta === 'tempo' && permettiPiazza),
           videoUrl: videoBlobUrl,
@@ -2631,16 +2652,33 @@
       document.getElementById('consegna-titolo').innerText = memoria.titolo;
       document.getElementById('consegna-erede').innerText = memoria.destinatario || 'Chi possiede la chiave';
       
-      const cfEl = document.getElementById('consegna-cf');
-      if (memoria.regola === 'tempo' || !memoria.codiceFiscale) {
-        cfEl.innerText = "Non richiesto (Sblocco Libero a Data e Ora)";
-        cfEl.className = "text-xs font-mono font-medium text-sabbia-700 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200";
+      const boxDedica = document.getElementById('consegna-box-dedica');
+      const elDedica = document.getElementById('consegna-dedica');
+      if (memoria.dedica) {
+        if (boxDedica) boxDedica.classList.remove('hidden');
+        if (elDedica) elDedica.innerText = `"${memoria.dedica}"`;
       } else {
-        cfEl.innerText = memoria.codiceFiscale;
-        cfEl.className = "text-xs font-mono font-bold text-oro-700 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-300";
+        if (boxDedica) boxDedica.classList.add('hidden');
       }
 
-      document.getElementById('consegna-data').innerText = `${memoria.dataSblocco || '2034-05-14'} alle ore ${memoria.oraSblocco || '12:00'}`;
+      const elRecapito = document.getElementById('consegna-recapito');
+      if (elRecapito) {
+        elRecapito.innerText = memoria.recapito || 'Silenzioso fino allo sblocco';
+      }
+
+      const boxCf = document.getElementById('consegna-box-cf');
+      const cfEl = document.getElementById('consegna-cf');
+      if (memoria.regola === 'tempo' || !memoria.codiceFiscale) {
+        if (boxCf) boxCf.classList.add('hidden');
+      } else {
+        if (boxCf) boxCf.classList.remove('hidden');
+        if (cfEl) {
+          cfEl.innerText = memoria.codiceFiscale;
+          cfEl.className = "text-xs font-mono font-bold text-oro-700 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-300";
+        }
+      }
+
+      document.getElementById('consegna-data').innerText = memoria.condizione || `${memoria.dataSblocco || '2034-05-14'} alle ore ${memoria.oraSblocco || '12:00'}`;
       document.getElementById('consegna-hash').innerText = memoria.hashNotarile;
       document.getElementById('modal-consegna-solenne').classList.remove('hidden');
       lucide.createIcons();
