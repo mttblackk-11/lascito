@@ -1688,13 +1688,19 @@
                   </div>
                   <div>
                     <h4 class="text-sm font-bold text-sabbia-950">${c.titolo}</h4>
+                    ${c.dedica ? `
+                      <p class="text-[11px] font-serif italic text-oro-800 mt-0.5 flex items-center gap-1">
+                        <i data-lucide="feather" class="w-3 h-3 text-oro-600 shrink-0"></i>
+                        <span>"${c.dedica}"</span>
+                      </p>
+                    ` : ''}
                     <p class="text-xs text-sabbia-700 mt-0.5">
                       ${c.regola === 'tempo' || !c.codiceFiscale ? `
-                        Destinazione: <strong class="text-sabbia-950">${c.permettiPiazza ? 'Capsula Storica (Piazza)' : 'Capsula Personale'}</strong>
-                        <span class="ml-1.5 px-2 py-0.5 rounded text-[10px] font-mono bg-amber-50 border border-amber-200 font-bold text-amber-800">SBLOCCO LIBERO A TEMPO</span>
+                        Destinazione: <strong class="text-sabbia-950">${c.destinatario && c.destinatario !== 'Erede Designato' ? c.destinatario : (c.permettiPiazza ? 'Capsula Storica (Piazza)' : 'Capsula Personale')}</strong>
+                        <span class="ml-1.5 px-2 py-0.5 rounded text-[10px] font-mono bg-amber-50 border border-amber-200 font-bold text-amber-800">A TEMPO</span>
                       ` : `
                         Erede: <strong class="text-sabbia-950">${c.destinatario}</strong> 
-                        <span class="ml-1.5 px-2 py-0.5 rounded text-[10px] font-mono bg-sabbia-100 border border-sabbia-300 font-bold text-oro-700">${c.codiceFiscale || 'ANPR ATTIVA'}</span>
+                        <span class="ml-1.5 px-2 py-0.5 rounded text-[10px] font-mono bg-sabbia-100 border border-sabbia-300 font-bold text-oro-700">POST-MORTEM</span>
                       `}
                     </p>
                     <p class="text-[11px] text-sabbia-600 mt-0.5">
