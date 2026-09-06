@@ -605,82 +605,117 @@
   </div>
 
   <!-- MODALE ATTO UFFICIALE DI CUSTODIA & CERTIFICATO -->
-  <div id="modal-consegna-solenne" class="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-xl flex items-center justify-center p-4 hidden overflow-y-auto">
-    <div class="max-w-xl w-full bg-sabbia-50 rounded-3xl border border-oro-400/50 shadow-2xl overflow-hidden my-auto fade-in">
+  <div id="modal-consegna-solenne" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="max-w-lg w-full bg-sabbia-50 rounded-3xl border border-sabbia-300 shadow-2xl overflow-hidden my-auto fade-in">
       
-      <!-- Intestazione Solenne -->
-      <div class="bg-gradient-to-b from-sabbia-100 to-sabbia-50 p-6 text-center border-b border-sabbia-200 relative">
-        <button onclick="chiudiConsegnaSolenne()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white text-sabbia-800 hover:bg-sabbia-200 flex items-center justify-center">
+      <!-- Intestazione Minimale & Raffinata -->
+      <div class="p-6 text-center border-b border-sabbia-200/80 bg-white relative">
+        <button onclick="chiudiConsegnaSolenne()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-sabbia-100 text-sabbia-700 hover:bg-sabbia-200 flex items-center justify-center transition">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
-        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-oro-400 via-oro-500 to-amber-600 border-2 border-white shadow-xl mx-auto flex items-center justify-center text-sabbia-950 glow-pulse-oro mb-3">
-          <i data-lucide="shield-check" class="w-8 h-8 stroke-[2]"></i>
+        <div class="w-12 h-12 rounded-2xl bg-sabbia-100 border border-oro-400/40 mx-auto flex items-center justify-center text-oro-700 shadow-sm mb-3">
+          <i data-lucide="shield-check" class="w-6 h-6 stroke-[1.5]"></i>
         </div>
-        <span class="text-[11px] font-mono tracking-widest text-oro-700 font-bold uppercase">Atto Ufficiale di Custodia</span>
-        <h3 class="font-serif text-2xl font-bold text-sabbia-950 mt-1">Il Tuo Archivio è Sigillato nel Tempo</h3>
-        <p class="text-xs text-sabbia-700 mt-1 max-w-md mx-auto">Protetto da crittografia inviolabile e vincolato alle condizioni di sblocco prestabilite.</p>
+        <span class="text-[10px] font-mono tracking-[0.25em] text-oro-700 font-bold uppercase">Attestato di Deposito</span>
+        <h3 class="font-serif text-2xl font-bold text-sabbia-950 mt-1">Archivio Sigillato nel Tempo</h3>
+        <p class="text-xs text-sabbia-600 mt-1 max-w-sm mx-auto font-light leading-relaxed">
+          Il tuo contenuto è protetto da crittografia privata e vincolato alle condizioni stabilite.
+        </p>
       </div>
 
-      <!-- Corpo del Certificato -->
-      <div class="p-6 space-y-5">
+      <!-- Corpo Centrale -->
+      <div class="p-6 space-y-4">
         
-        <!-- Pergamena con Dati Anagrafici Incorruttibili -->
-        <div class="bg-white rounded-2xl border border-sabbia-200 p-5 shadow-sm space-y-3">
-          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
-            <span class="text-xs text-sabbia-600 font-medium">Momento Custodito:</span>
-            <strong id="consegna-titolo" class="text-xs text-sabbia-950 font-bold">Titolo</strong>
+        <!-- Scheda Riepilogo Dati di Deposito -->
+        <div class="bg-white rounded-2xl border border-sabbia-200 p-4 sm:p-5 shadow-xs space-y-2.5 text-xs">
+          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2">
+            <span class="text-sabbia-600 font-medium">Archivio Custodito:</span>
+            <strong id="consegna-titolo" class="text-sabbia-950 font-bold text-right">Titolo</strong>
           </div>
-          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
-            <span class="text-xs text-sabbia-600 font-medium">Destinatario (Erede):</span>
-            <strong id="consegna-erede" class="text-xs text-sabbia-950 font-bold">Giulia Moretti</strong>
+          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2">
+            <span class="text-sabbia-600 font-medium">Destinatario Designato:</span>
+            <strong id="consegna-erede" class="text-sabbia-950 font-bold text-right">Giulia Moretti</strong>
           </div>
-          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
-            <span class="text-xs text-sabbia-600 font-medium">Codice Fiscale Erede (ANPR):</span>
-            <span id="consegna-cf" class="text-xs font-mono font-bold text-oro-700 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-300">MRTEGL08M41H501Z</span>
+          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2">
+            <span class="text-sabbia-600 font-medium">Verifica Identità:</span>
+            <span id="consegna-cf" class="font-mono text-sabbia-800 bg-sabbia-100 px-2 py-0.5 rounded border border-sabbia-200 text-[11px]">MRTEGL08M41H501Z</span>
           </div>
-          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2.5">
-            <span class="text-xs text-sabbia-600 font-medium">Condizione di Sblocco:</span>
-            <span id="consegna-data" class="text-xs font-bold text-sabbia-900">18° Compleanno (14 Maggio 2034)</span>
+          <div class="flex items-center justify-between border-b border-sabbia-100 pb-2">
+            <span class="text-sabbia-600 font-medium">Data e Ora di Sblocco:</span>
+            <span id="consegna-data" class="font-bold text-sabbia-900 text-right">14 Maggio 2034 alle 12:00</span>
           </div>
-          <div class="flex items-center justify-between pt-1">
-            <span class="text-[11px] text-sabbia-500 font-mono">Codice Univoco di Custodia:</span>
+          <div class="flex items-center justify-between pt-0.5">
+            <span class="text-[11px] text-sabbia-500 font-mono">Impronta Crittografica:</span>
             <span id="consegna-hash" class="text-[11px] font-mono text-sabbia-600">0x8a92...f71c</span>
           </div>
         </div>
 
-        <!-- Opzioni di Salvataggio e Custodia Personale -->
-        <div class="rounded-2xl bg-white border border-sabbia-200 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
-          <div class="flex items-start gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-sabbia-100 border border-sabbia-300 text-sabbia-800 flex items-center justify-center shrink-0 mt-0.5">
-              <i data-lucide="file-check" class="w-5 h-5 text-oro-700"></i>
-            </div>
-            <div>
-              <h4 class="text-xs font-bold text-sabbia-950 uppercase tracking-wide">Certificato Ufficiale di Custodia</h4>
-              <p class="text-xs text-sabbia-600 mt-0.5 leading-relaxed">
-                Stampa o salva il certificato con le istruzioni per i tuoi cari o da conservare tra i documenti importanti di famiglia.
-              </p>
-            </div>
+        <!-- Notifica Primaria: Custodia Silenziosa & Protetta (La scelta naturale) -->
+        <div class="p-4 rounded-2xl bg-sabbia-100/70 border border-sabbia-300/80 flex items-start gap-3.5">
+          <div class="w-8 h-8 rounded-xl bg-white border border-sabbia-300 text-sabbia-800 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+            <i data-lucide="lock" class="w-4 h-4 text-oro-700"></i>
           </div>
-          <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
-            <button onclick="window.print()" class="text-xs font-bold bg-sabbia-950 hover:bg-sabbia-900 text-white px-4 py-2.5 rounded-xl transition shadow-sm flex items-center gap-1.5">
-              <i data-lucide="printer" class="w-3.5 h-3.5"></i> Stampa / Salva PDF
-            </button>
+          <div class="flex-1 text-xs">
+            <h4 class="font-bold text-sabbia-950">Custodia Silenziosa Attiva</h4>
+            <p class="text-[11px] text-sabbia-600 mt-0.5 leading-relaxed">
+              Il contenuto riposa protetto nel caveau. Nessuna notifica viene inviata all'esterno: l'accesso sarà consentito esclusivamente al compimento della data stabilita.
+            </p>
           </div>
         </div>
 
-        <!-- Nota di Conformità Giuridica (Art. 458 C.C.) -->
-        <div class="p-3.5 rounded-2xl bg-sabbia-100/80 border border-sabbia-200 text-[11px] text-sabbia-700 leading-relaxed">
-          <span class="font-bold text-sabbia-900 block mb-0.5 flex items-center gap-1.5">
-            <i data-lucide="scale" class="w-3.5 h-3.5 text-oro-600"></i> Validità Giuridica & Conformità al Codice Civile
-          </span>
-          Il presente certificato attesta la custodia del <strong>Lascito Morale, Affettivo e Testimoniale</strong>. Per disposizioni su beni patrimoniali, economici o immobiliari, si raccomanda l'adozione delle forme testamentarie previste dal Codice Civile (Art. 587 c.c.) o l'assistenza di un Notaio.
-        </div>
-
-        <!-- Tasto di Prova Sblocco -->
-        <button onclick="apriCerimoniaSbloccoAttuale()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 via-oro-500 to-oro-600 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-xl shadow-oro-500/25 transition hover:scale-105 border border-oro-300/60">
-          <i data-lucide="key" class="w-4 h-4 text-sabbia-950"></i>
-          <span>Accedi al Ricordo (Fai una Prova)</span>
+        <!-- Tasto Primario: Completa e Riponi nel Caveau -->
+        <button onclick="chiudiConsegnaSolenne()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-oro-600 via-oro-500 to-oro-600 hover:from-oro-500 text-sabbia-950 font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg shadow-oro-500/20 transition hover:scale-[1.01] border border-oro-300/60">
+          <i data-lucide="check" class="w-4 h-4"></i>
+          <span>Completa e Riponi nel Caveau</span>
         </button>
+
+        <!-- Azioni Discrete Secondarie (Stampa & Prova Sblocco) -->
+        <div class="grid grid-cols-2 gap-2.5 pt-1">
+          <button onclick="window.print()" class="py-2.5 px-3 rounded-xl bg-white hover:bg-sabbia-100 text-sabbia-800 font-medium text-xs border border-sabbia-300 flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="printer" class="w-3.5 h-3.5 text-oro-700"></i>
+            <span>Attestato PDF</span>
+          </button>
+          <button onclick="apriCerimoniaSbloccoAttuale()" class="py-2.5 px-3 rounded-xl bg-white hover:bg-sabbia-100 text-sabbia-800 font-medium text-xs border border-sabbia-300 flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="key" class="w-3.5 h-3.5 text-oro-700"></i>
+            <span>Prova di Sblocco</span>
+          </button>
+        </div>
+
+        <!-- Dedica Opzionale (Apertura Discreta) -->
+        <div class="pt-2 border-t border-sabbia-200/80 text-center">
+          <button type="button" onclick="toggleDedicaAffettiva()" class="text-[11px] text-oro-700 hover:text-oro-900 font-medium inline-flex items-center gap-1.5 transition py-1">
+            <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+            <span>Desideri inviare una dedica affettiva oggi? (Opzionale)</span>
+            <i id="icona-freccia-dedica" data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-200"></i>
+          </button>
+          
+          <!-- Sezione Espandibile Dedica -->
+          <div id="box-dedica-affettiva" class="hidden mt-3 p-4 rounded-2xl bg-white border border-sabbia-300 text-left space-y-2.5 fade-in">
+            <p class="text-[11px] text-sabbia-600 leading-relaxed">
+              Consigliato per ricorrenze liete (compleanni, nascite, lauree). Invia un pensiero caldo e complice che anticipa la sorpresa:
+            </p>
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <button type="button" onclick="inviaAvvisoWhatsApp()" class="px-3 py-2 rounded-xl bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-800 font-bold text-xs border border-sabbia-300 flex items-center gap-1.5 transition">
+                <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-600"></i> WhatsApp
+              </button>
+              <button type="button" onclick="inviaAvvisoEmail()" class="px-3 py-2 rounded-xl bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-800 font-bold text-xs border border-sabbia-300 flex items-center gap-1.5 transition">
+                <i data-lucide="mail" class="w-3.5 h-3.5 text-oro-700"></i> Email
+              </button>
+              <button type="button" id="btn-copia-avviso" onclick="copiaAvvisoTesto()" class="px-3 py-2 rounded-xl bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-800 font-bold text-xs border border-sabbia-300 flex items-center gap-1.5 transition">
+                <i data-lucide="copy" class="w-3.5 h-3.5 text-sabbia-600"></i>
+                <span id="txt-copia-avviso">Copia Messaggio</span>
+              </button>
+            </div>
+            <div id="badge-copiato-conferma" class="hidden text-center text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg py-1 fade-in">
+              ✓ Messaggio affettivo copiato negli appunti!
+            </div>
+          </div>
+        </div>
+
+        <!-- Nota Legale Discreta -->
+        <p class="text-[10px] text-sabbia-500 text-center font-light leading-relaxed pt-1">
+          Lascito attesta la custodia della memoria affettiva e morale (Art. 458 e 587 c.c.).
+        </p>
 
       </div>
     </div>
@@ -2613,6 +2648,73 @@
 
     function chiudiConsegnaSolenne() {
       document.getElementById('modal-consegna-solenne').classList.add('hidden');
+      const box = document.getElementById('box-dedica-affettiva');
+      if (box) box.classList.add('hidden');
+      const freccia = document.getElementById('icona-freccia-dedica');
+      if (freccia) freccia.classList.remove('rotate-180');
+    }
+
+    function toggleDedicaAffettiva() {
+      const box = document.getElementById('box-dedica-affettiva');
+      const freccia = document.getElementById('icona-freccia-dedica');
+      if (!box) return;
+      box.classList.toggle('hidden');
+      if (freccia) {
+        freccia.classList.toggle('rotate-180');
+      }
+      lucide.createIcons();
+    }
+
+    function generaTestoAvvisoSolenne() {
+      if (!memoriaSelezionata) return "";
+      const erede = (memoriaSelezionata.destinatario && memoriaSelezionata.destinatario !== 'Chi possiede la chiave')
+        ? memoriaSelezionata.destinatario
+        : "Cara/o";
+      const data = memoriaSelezionata.dataSblocco || "la data stabilita";
+      const ora = memoriaSelezionata.oraSblocco || "12:00";
+      const hash = memoriaSelezionata.hashNotarile || "0xLascito";
+      const titolo = memoriaSelezionata.titolo || "Un pensiero per il tuo futuro";
+      
+      return `✨ *LASCITO — Una sorpresa per il tuo futuro*\n\n` +
+        `Cara/o ${erede},\n\n` +
+        `Ho preparato un pensiero speciale per te, custodito al sicuro nel tempo su Lascito: "${titolo}".\n\n` +
+        `🔒 *Quando potrai aprirlo:* È programmato per rendersi accessibile il giorno *${data}* alle ore *${ora}*.\n` +
+        `📜 *Codice di Deposito:* ${hash}\n\n` +
+        `È un regalo che cresce insieme a te. Quando arriverà quel giorno, potrai accedere all'archivio e scoprire cosa ho custodito per te!\n\n` +
+        `_Lascito — Custodi della Memoria_`;
+    }
+
+    function inviaAvvisoWhatsApp() {
+      const testo = generaTestoAvvisoSolenne();
+      if (!testo) return;
+      const url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(testo);
+      window.open(url, '_blank');
+    }
+
+    function inviaAvvisoEmail() {
+      if (!memoriaSelezionata) return;
+      const subject = encodeURIComponent(`Atto di Custodia su Lascito per te: ${memoriaSelezionata.titolo}`);
+      const testo = generaTestoAvvisoSolenne();
+      window.location.href = `mailto:?subject=${subject}&body=${encodeURIComponent(testo)}`;
+    }
+
+    function copiaAvvisoTesto() {
+      const testo = generaTestoAvvisoSolenne();
+      if (!testo) return;
+      navigator.clipboard.writeText(testo).then(() => {
+        const badge = document.getElementById('badge-copiato-conferma');
+        const txt = document.getElementById('txt-copia-avviso');
+        if (badge) {
+          badge.classList.remove('hidden');
+          setTimeout(() => badge.classList.add('hidden'), 3500);
+        }
+        if (txt) {
+          txt.innerText = 'Copiato! ✓';
+          setTimeout(() => txt.innerText = 'Copia Messaggio', 3500);
+        }
+      }).catch(() => {
+        alert("Messaggio copiato!");
+      });
     }
 
     let memoriaDaEliminareIndex = null;
