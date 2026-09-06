@@ -1222,6 +1222,9 @@
       playElevenLabsVoice();
     }
 
+    let categoriaPiazzaAttiva = 'tutti';
+    let testoRicercaPiazza = '';
+
     let postsSegno = [
       {
         id: 1,
@@ -1373,6 +1376,23 @@
 
     // 2. LASCIA IL SEGNO (LA PIAZZA DEI SAPERI)
     function renderPiazza() {
+      const postsFiltrati = postsSegno.filter(post => {
+        const cat = post.category ? post.category.toLowerCase() : '';
+        const matchCat = categoriaPiazzaAttiva === 'tutti' || 
+          (categoriaPiazzaAttiva === 'lezione' && cat.includes('lezione')) ||
+          (categoriaPiazzaAttiva === 'mestieri' && cat.includes('mestieri')) ||
+          (categoriaPiazzaAttiva === 'filosofia' && cat.includes('filosofia')) ||
+          (categoriaPiazzaAttiva === 'capsula' && cat.includes('capsula'));
+        
+        const matchTesto = !testoRicercaPiazza ||
+          post.title.toLowerCase().includes(testoRicercaPiazza) ||
+          post.author.toLowerCase().includes(testoRicercaPiazza) ||
+          post.content.toLowerCase().includes(testoRicercaPiazza) ||
+          post.role.toLowerCase().includes(testoRicercaPiazza);
+
+        return matchCat && matchTesto;
+      });
+
       return `
         <div class="fade-in max-w-4xl mx-auto w-full py-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sabbia-200 pb-6 mb-6">
@@ -1388,15 +1408,54 @@
             </button>
           </div>
 
-          <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 text-xs no-scrollbar">
-            <button class="px-4 py-1.5 rounded-full bg-sabbia-900 text-white font-medium shadow-sm">Tutti i Saperi</button>
-            <button class="px-4 py-1.5 rounded-full bg-white text-sabbia-800 hover:text-oro-700 border border-sabbia-200">Lezioni & Università</button>
-            <button class="px-4 py-1.5 rounded-full bg-white text-sabbia-800 hover:text-oro-700 border border-sabbia-200">Mestieri & Fai-da-te</button>
-            <button class="px-4 py-1.5 rounded-full bg-white text-sabbia-800 hover:text-oro-700 border border-sabbia-200">Filosofia & Vita</button>
+          <!-- BARRA CATEGORIE & RICERCA DINAMICA -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
+            
+            <!-- Categorie Saperi -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 text-xs no-scrollbar">
+              <button onclick="impostaCategoriaPiazza('tutti')" class="px-3.5 py-1.5 rounded-full font-bold transition shadow-xs whitespace-nowrap ${categoriaPiazzaAttiva === 'tutti' ? 'bg-sabbia-900 text-white' : 'bg-white text-sabbia-800 border border-sabbia-300 hover:border-oro-400'}">
+                Tutti (${postsSegno.length})
+              </button>
+              <button onclick="impostaCategoriaPiazza('lezione')" class="px-3.5 py-1.5 rounded-full font-bold transition shadow-xs whitespace-nowrap ${categoriaPiazzaAttiva === 'lezione' ? 'bg-sabbia-900 text-white' : 'bg-white text-sabbia-800 border border-sabbia-300 hover:border-oro-400'}">
+                🎓 Lezioni
+              </button>
+              <button onclick="impostaCategoriaPiazza('mestieri')" class="px-3.5 py-1.5 rounded-full font-bold transition shadow-xs whitespace-nowrap ${categoriaPiazzaAttiva === 'mestieri' ? 'bg-sabbia-900 text-white' : 'bg-white text-sabbia-800 border border-sabbia-300 hover:border-oro-400'}">
+                🛠️ Mestieri
+              </button>
+              <button onclick="impostaCategoriaPiazza('filosofia')" class="px-3.5 py-1.5 rounded-full font-bold transition shadow-xs whitespace-nowrap ${categoriaPiazzaAttiva === 'filosofia' ? 'bg-sabbia-900 text-white' : 'bg-white text-sabbia-800 border border-sabbia-300 hover:border-oro-400'}">
+                📜 Filosofia
+              </button>
+              <button onclick="impostaCategoriaPiazza('capsula')" class="px-3.5 py-1.5 rounded-full font-bold transition shadow-xs whitespace-nowrap ${categoriaPiazzaAttiva === 'capsula' ? 'bg-sabbia-900 text-white' : 'bg-white text-sabbia-800 border border-sabbia-300 hover:border-oro-400'}">
+                ⏳ Capsule del Tempo
+              </button>
+            </div>
+
+            <!-- Campo Ricerca -->
+            <div class="relative w-full md:w-64 shrink-0">
+              <i data-lucide="search" class="w-4 h-4 text-sabbia-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+              <input type="text" id="input-cerca-piazza" value="${testoRicercaPiazza}" oninput="filtraPiazzaRicerca(this.value)" placeholder="Cerca autore o tema..." class="w-full pl-9 pr-8 py-2 text-xs bg-white border border-sabbia-300 rounded-full text-sabbia-950 focus:outline-none focus:border-oro-500 shadow-xs" />
+              ${testoRicercaPiazza ? `
+                <button onclick="azzeraFiltriPiazza()" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-sabbia-400 hover:text-sabbia-700">
+                  <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                </button>
+              ` : ''}
+            </div>
+
           </div>
 
           <div class="space-y-6">
-            ${postsSegno.map(post => `
+            ${postsFiltrati.length === 0 ? `
+              <div class="p-10 rounded-3xl bg-white border border-sabbia-200 text-center space-y-3 shadow-xs">
+                <div class="w-12 h-12 rounded-full bg-sabbia-100 text-oro-700 flex items-center justify-center mx-auto">
+                  <i data-lucide="search-x" class="w-6 h-6"></i>
+                </div>
+                <h4 class="font-serif text-base font-bold text-sabbia-950">Nessun sapere trovato</h4>
+                <p class="text-xs text-sabbia-600 max-w-sm mx-auto">Non ci sono testimonianze corrispondenti a questa ricerca. Puoi provare un'altra categoria o azzerare i filtri.</p>
+                <button onclick="azzeraFiltriPiazza()" class="px-4 py-2 rounded-xl bg-sabbia-100 hover:bg-sabbia-200 text-sabbia-900 text-xs font-bold transition">
+                  Mostra tutti i saperi
+                </button>
+              </div>
+            ` : postsFiltrati.map(post => `
               <article class="rounded-3xl bg-white border border-sabbia-200/90 p-6 sm:p-7 shadow-sm hover:shadow-md transition">
                 <div class="flex items-start justify-between gap-4">
                   <div class="flex items-center gap-3">
@@ -1916,6 +1975,27 @@
       const post = postsSegno.find(p => p.id === id);
       post.discussions.push({ name: "Tu (Cittadino Verificato)", text: input.value.trim() });
       input.value = '';
+      render();
+    }
+
+    function impostaCategoriaPiazza(cat) {
+      categoriaPiazzaAttiva = cat;
+      render();
+    }
+
+    function filtraPiazzaRicerca(val) {
+      testoRicercaPiazza = val.trim().toLowerCase();
+      render();
+      const inp = document.getElementById('input-cerca-piazza');
+      if (inp) {
+        inp.focus();
+        inp.selectionStart = inp.selectionEnd = inp.value.length;
+      }
+    }
+
+    function azzeraFiltriPiazza() {
+      categoriaPiazzaAttiva = 'tutti';
+      testoRicercaPiazza = '';
       render();
     }
 
